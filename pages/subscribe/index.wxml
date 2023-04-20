@@ -1,0 +1,3 @@
+<view class="container">
+  <button bindtap="handleSubscribe">订阅通知</button>
+</view>

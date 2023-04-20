@@ -1,0 +1,24 @@
+{
+  "entryPagePath": "pages/index/index",
+  "pages":[
+    "pages/index/index",
+    "pages/trade/my/orders/wxpay_pay",
+    "pages/profiled/my/addresses/index",
+    "pages/home/index",
+    "pages/service/index",
+    "pages/subscribe/index",
+    "pages/print/config/index",
+    "pages/print/execute/index"
+  ],
+  "requiredPrivateInfos": [
+    "chooseAddress"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh": false
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,32 @@
+page {
+  color: #333;
+}
+.devices_summary {
+  margin-top: 30px;
+  padding: 10px;
+  font-size: 16px;
+}
+.device_list {
+  height: 300px;
+  margin: 50px 5px;
+  margin-top: 0;
+  border: 1px solid #EEE;
+  border-radius: 5px;
+  width: auto;
+}
+.device_item {
+  display: flex;
+  border-bottom: 1px solid #EEE;
+  padding: 10px;
+  color: #666;
+}
+.device_item__left {
+  flex-grow: 1;
+}
+.device_item__right {
+  width: 20px;
+}
+.device_item_hover {
+  background-color: rgba(0, 0, 0, .1);
+}
+

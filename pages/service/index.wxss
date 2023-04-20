@@ -1,0 +1,9 @@
+button {
+  color: rgb(110, 150, 80);
+  background-color: rgb(57, 57, 57);
+}
+
+.container {
+  background-color: rgb(51, 51, 51);
+  justify-content: space-around;
+}
