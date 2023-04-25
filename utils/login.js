@@ -39,6 +39,7 @@ export const getPhoneNumber = (e, page) => {
       data: {
         iv: e.detail.iv,
         encryptedData: e.detail.encryptedData,
+        code: e.detail.code,
         auth_token: wx.getStorageSync('auth_token')
       },
       success: res => {
