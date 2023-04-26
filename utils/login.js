@@ -14,11 +14,8 @@ export const wxLogin = (page) => {
           },
           success: res => {
             wx.setStorageSync('auth_token', res.data.auth_token)
-            page.setData({ authToken: res.data.auth_token })
-            if (res.data.user) {
-              wx.setStorageSync('user', res.data.user)
-              page.setData({ userInfo: res.data.user })
-            }
+            wx.setStorageSync('user', res.data.user)
+            page.setData({ authToken: res.data.auth_token, userInfo: res.data.user })
           }
         })
       } else {
@@ -43,11 +40,7 @@ export const getPhoneNumber = (e, page) => {
         auth_token: wx.getStorageSync('auth_token')
       },
       success: res => {
-        if (res.data.user) {
-          page.setData({
-            userInfo: res.data.user
-          })
-        }
+        page.setData({ userInfo: res.data.user })
       }
     })
   } else {
