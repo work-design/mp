@@ -10,7 +10,7 @@ Page({
     avatarUrl: AVATAR
   },
   onLoad(query) {
-    console.debug('query:', query)
+    console.debug('onLoad query:', query)
     if (query.login === 'true') {
       wxLogin(this)
       if (!this.data.userInfo) {

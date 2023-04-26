@@ -29,26 +29,20 @@ export const wxLogin = (page) => {
 }
 
 export const getPhoneNumber = (e, page) => {
-  if (e.detail.iv) {
-    wx.request({
-      url: HOST + '/wechat/program_users/mobile',
-      method: 'POST',
-      data: {
-        iv: e.detail.iv,
-        encryptedData: e.detail.encryptedData,
-        code: e.detail.code,
-        auth_token: wx.getStorageSync('auth_token')
-      },
-      success: res => {
-        page.setData({ userInfo: res.data.user })
-      }
-    })
-  } else {
-    console.log('登录失败！' + e)
-  }
+  wx.request({
+    url: HOST + '/wechat/program_users/mobile',
+    method: 'POST',
+    data: {
+      detail: e.detail,
+      auth_token: wx.getStorageSync('auth_token')
+    },
+    success: res => {
+      page.setData({ userInfo: res.data.user })
+    }
+  })
 }
 
-export const wxInfo = () => {
+export const wxInfo = (e, page) => {
   // 获取用户信息
   wx.getSetting({
     success: res => {
