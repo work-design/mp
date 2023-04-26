@@ -16,7 +16,6 @@
     <view wx:else>
       <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信快捷登录</button>
       <navigator url="/pages/home/index" class="weui-btn">浏览服务</navigator>
-      <navigator url="/pages/print/config/index" class="weui-btn">打印机</navigator>
     </view>
   </view>
 </view>
