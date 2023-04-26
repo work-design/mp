@@ -24,12 +24,21 @@ button {
   margin-top: 1rem;
 }
 
-.userinfo-avatar {
+button.avatar-wrapper {
+  padding: 0;
+  width: fit-content;
+}
+
+.avatar {
   overflow: hidden;
   width: 128rpx;
   height: 128rpx;
   margin: 20rpx;
   border-radius: 50%;
+}
+
+.weui-input {
+  text-align: center;
 }
 
 .usermotto {

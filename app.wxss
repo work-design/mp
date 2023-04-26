@@ -5,6 +5,14 @@ page {
   height: 100%;
 }
 
+.pt-1 {
+  padding-top: 0.25rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .container {
   height: 100%;
   display: flex;

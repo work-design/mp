@@ -22,7 +22,7 @@ Page({
         userInfo: wx.getStorageSync('user')
       })
       if (!this.data.userInfo) {
-        wxLogin(this)
+        //wxLogin(this)
       }
     }
 

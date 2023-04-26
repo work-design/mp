@@ -5,11 +5,11 @@
 <web-view wx:if="{{userInfo}}" src="{{host}}{{path}}?auth_token={{authToken}}#wechat_redirect"></web-view>
 
 <view wx:else class="container">
-  <view class="userinfo-avatar">
+  <view class="userinfo">
     <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
       <image class="avatar" src="{{avatarUrl}}"></image>
     </button>
-    <input type="nickname" class="weui-input" placeholder="请输入昵称"/>
+    <input type="nickname" class="weui-input mt-1" placeholder="请输入昵称"/>
   </view>
   <view class="userinfo">
     <button wx:if="{{onlyLogin}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信快捷登录</button>
