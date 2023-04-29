@@ -18,11 +18,11 @@ Page({
       }
     } else {
       this.setData({
-        authToken: wx.getStorageSync('auth_token'),
-        userInfo: wx.getStorageSync('user')
+        authToken: wx.getStorageSync('authToken'),
+        programUser: wx.getStorageSync('programUser')
       })
-      if (!this.data.userInfo) {
-        //wxLogin(this)
+      if (!this.data.programUser) {
+        wxLogin(this)
       }
     }
 

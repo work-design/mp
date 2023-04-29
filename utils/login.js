@@ -13,9 +13,9 @@ export const wxLogin = (page) => {
             appid: APPID
           },
           success: res => {
-            wx.setStorageSync('auth_token', res.data.auth_token)
-            wx.setStorageSync('user', res.data.user)
-            page.setData({ authToken: res.data.auth_token, userInfo: res.data.user })
+            wx.setStorageSync('authToken', res.data.auth_token)
+            wx.setStorageSync('programUser', res.data.program_user)
+            page.setData({ authToken: res.data.auth_token, programUser: res.data.program_user })
           }
         })
       } else {
