@@ -2,7 +2,7 @@ import { setPath } from '../../../../utils/util'
 
 Page({
   data: {
-    authToken: wx.getStorageSync('auth_token')
+    authToken: wx.getStorageSync('authToken')
   },
   onLoad(query) {
     setPath(query, this)
@@ -10,7 +10,7 @@ Page({
       url: decodeURIComponent(query.url) + '.json',
       header: {
         'Content-Type': 'application/json',
-        'Authorization': wx.getStorageSync('auth_token')
+        'Authorization': wx.getStorageSync('authToken')
       },
       data: {
         appid: wx.getAccountInfoSync().miniProgram.appId

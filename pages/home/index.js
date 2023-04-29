@@ -3,7 +3,7 @@ import { HOST } from '../../config'
 Page({
   data: {
     host: HOST,
-    authToken: wx.getStorageSync('auth_token'),
+    authToken: wx.getStorageSync('authToken'),
     path: ''
   },
   onLoad(options) {

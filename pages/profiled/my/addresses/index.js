@@ -7,7 +7,7 @@ Page({
           method: 'POST',
           header: {
             'Content-Type': 'application/json',
-            'Authorization': wx.getStorageSync('auth_token')
+            'Authorization': wx.getStorageSync('authToken')
           },
           data: res,
           success(response) {
