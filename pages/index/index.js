@@ -13,9 +13,6 @@ Page({
     console.debug('onLoad query:', query)
     if (query.login === 'true') {
       wxLogin(this)
-      if (!this.data.userInfo) {
-        this.setData({ onlyLogin: true })
-      }
     } else {
       this.setData({
         authToken: wx.getStorageSync('authToken'),
