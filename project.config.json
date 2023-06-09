@@ -37,7 +37,8 @@
     "ignoreUploadUnusedFiles": true,
     "useStaticServer": true,
     "localPlugins": false,
-    "condition": false
+    "condition": false,
+    "skylineRenderEnable": false
   },
   "compileType": "miniprogram",
   "simulatorType": "qywx_simulator_plugin",

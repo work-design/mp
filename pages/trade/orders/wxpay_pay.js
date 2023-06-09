@@ -1,4 +1,4 @@
-import { setPath } from '../../../../utils/util'
+import { setPath } from '../../../utils/util'
 
 Page({
   data: {
