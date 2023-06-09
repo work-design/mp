@@ -2,8 +2,8 @@
   "entryPagePath": "pages/index/index",
   "pages":[
     "pages/index/index",
-    "pages/trade/my/orders/wxpay_pay",
-    "pages/profiled/my/addresses/index",
+    "pages/trade/wxpay_pay/index",
+    "pages/profiled/addresses/index",
     "pages/home/index",
     "pages/service/index",
     "pages/subscribe/index",
