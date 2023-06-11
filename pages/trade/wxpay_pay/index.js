@@ -1,66 +1,45 @@
-// pages/trade/wxpay_pay/index.js
+import { setPath } from '../../../utils/util'
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    authToken: wx.getStorageSync('authToken')
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  onLoad(query) {
+    setPath(query, this)
+    wx.request({
+      url: decodeURIComponent(query.url) + '.json',
+      header: {
+        'Content-Type': 'application/json',
+        'Authorization': wx.getStorageSync('authToken')
+      },
+      data: {
+        appid: wx.getAccountInfoSync().miniProgram.appId
+      },
+      success(res) {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          wx.requestPayment({
+            ...res.data,
+            success(res) {
+              console.debug(res)
+            },
+            fail(res) {
+              console.debug(res)
+            }
+          })
+        } else {
+          wx.showModal({
+            title: 'status code fails',
+            content: JSON.stringify(res.data)
+          })
+        }
+      },
+      fail(res) {
+        wx.showModal({
+          title: 'request fail',
+          content: JSON.stringify(res)
+        })
+      }
+    })
   }
+
 })
