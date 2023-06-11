@@ -27,5 +27,8 @@ Page({
         console.debug(res)
       }
     })
+  },
+  handBack() {
+    wx.navigateBack()
   }
 })
