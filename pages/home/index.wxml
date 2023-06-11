@@ -1,1 +1,0 @@
-<web-view src="{{host}}{{path}}?auth_token={{authToken}}#wechat_redirect"></web-view>
