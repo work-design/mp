@@ -3,7 +3,6 @@ import { APPID, HOST } from '../../config'
 Page({
   onLoad(query) {
     console.debug('onLoad query:', query)
-    return
     wx.login({
       success: res => {
         wx.request({
