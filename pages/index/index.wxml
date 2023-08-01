@@ -2,4 +2,4 @@
   <navigation-bar background-color="#fff" front-color="#000"></navigation-bar>
 </page-meta>
 
-<web-view src="{{host}}{{path}}?auth_token={{authToken}}#wechat_redirect"></web-view>
+<web-view src="{{host}}{{path}}#wechat_redirect"></web-view>

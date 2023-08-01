@@ -3,8 +3,7 @@ import { HOST } from '../../config'
 Page({
   data: {
     host: HOST,
-    path: '/board',
-    authToken: wx.getStorageSync('authToken')
+    path: '/board'
   },
   onLoad(query) {
     console.debug('onLoad query:', query)
@@ -22,7 +21,7 @@ Page({
       _data.path = this.data.path
     }
     if (query.state) {
-      _data.path = `${_data.path}?state=query.state`
+      _data.path = `${_data.path}?state=${query.state}&auth_token=${wx.getStorageSync('authToken')}`
     }
     this.setData(_data)
   },
