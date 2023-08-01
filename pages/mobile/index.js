@@ -1,5 +1,4 @@
 import { getPhoneNumber, wxLogin } from '../../utils/login'
-import { setPath } from '../../utils/util'
 import { AVATAR } from '../../config'
 
 Page({
