@@ -36,8 +36,5 @@ Page({
   },
   onShareTimeline(options) {
     console.debug('onShareTimeline', options.webViewUrl)
-  },
-  onPullDownRefresh() {
-    wx.startPullDownRefresh()
   }
 })
