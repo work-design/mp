@@ -1,4 +1,4 @@
-import { APPID, HOST } from '../../config'
+import { HOST } from '../../config'
 
 Page({
   onLoad(query) {
@@ -10,7 +10,7 @@ Page({
           method: 'POST',
           data: {
             code: res.code,
-            appid: APPID
+            appid: wx.getAccountInfoSync().miniProgram.appId
           },
           success: res => {
             wx.setStorageSync('authToken', res.data.auth_token)

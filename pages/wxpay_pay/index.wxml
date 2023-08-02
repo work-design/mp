@@ -1,0 +1,7 @@
+<page-meta>
+  <navigation-bar background-color="#fff" front-color="#000"></navigation-bar>
+</page-meta>
+
+<view>
+  <text>微信支付中...</text>
+</view>

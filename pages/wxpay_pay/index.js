@@ -17,7 +17,9 @@ Page({
           wx.requestPayment({
             ...res.data,
             success(res) {
-              console.debug(res)
+              wx.redirectTo({
+                url: `/pages/index/index?path=${query.path}`
+              })
             },
             fail(res) {
               console.debug(res)
@@ -38,5 +40,4 @@ Page({
       }
     })
   }
-
 })
