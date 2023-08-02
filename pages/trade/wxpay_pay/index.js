@@ -1,11 +1,8 @@
-import { setPath } from '../../../utils/util'
-
 Page({
   data: {
     authToken: wx.getStorageSync('authToken')
   },
   onLoad(query) {
-    setPath(query, this)
     wx.request({
       url: decodeURIComponent(query.url) + '.json',
       header: {
