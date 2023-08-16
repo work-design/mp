@@ -6,17 +6,14 @@ Page({
   },
   onLoad(query) {
     console.debug('onLoad query:', query)
+
     const url = new URL(this.data.url)
     url.searchParams.set('auth_token', wx.getStorageSync('authToken'))
-    if (query.org_id) {
-      url.path = `/org_${query.org_id}` + url.path
-    }
     if (Object.keys(query).includes('path')) {
-      if (query.path.startsWith('/') || query.path.startsWith('%2F')) {
-        url.path = decodeURIComponent(query.path)
-      } else {
-        url.path = decodeURIComponent(`/${query.path}`)
-      }
+      url.pathname = decodeURIComponent(query.path)
+    }
+    if (query.org_id) {
+      url.pathname = `org_${query.org_id}` + url.pathname
     }
     if (query.state) {
       url.searchParams.set('state', query.state)
