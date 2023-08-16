@@ -6,7 +6,7 @@ Page({
   },
   onLoad(query) {
     console.debug('onLoad query:', query)
-    const url = new webkitURL(this.data.url)
+    const url = new URL(this.data.url)
     url.searchParams.set('auth_token', wx.getStorageSync('authToken'))
     if (query.org_id) {
       url.path = `/org_${query.org_id}` + url.path
@@ -24,7 +24,7 @@ Page({
     this.setData({url: url})
   },
   onShareAppMessage(options) {
-    const url = new webkitURL(options.webViewUrl)
+    const url = new URL(options.webViewUrl)
     url.searchParams.delete('auth_token')
     const path = `${url.pathname}${url.search}`
     return {
