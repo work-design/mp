@@ -2,28 +2,26 @@ import { HOST } from '../../config'
 
 Page({
   data: {
-    host: HOST,
-    path: '/board'
+    url: `${HOST}/board`
   },
   onLoad(query) {
     console.debug('onLoad query:', query)
-    const _data = {}
+    const url = new webkitURL(this.data.url)
+    url.searchParams.set('auth_token', wx.getStorageSync('authToken'))
     if (query.org_id) {
-      _data.host = HOST + `/org_${query.org_id}`
+      url.path = `/org_${query.org_id}` + url.path
     }
     if (Object.keys(query).includes('path')) {
       if (query.path.startsWith('/') || query.path.startsWith('%2F')) {
-        _data.path = decodeURIComponent(query.path)
+        url.path = decodeURIComponent(query.path)
       } else {
-        _data.path = decodeURIComponent(`/${query.path}`)
+        url.path = decodeURIComponent(`/${query.path}`)
       }
-    } else {
-      _data.path = this.data.path
     }
     if (query.state) {
-      _data.path = `${_data.path}?state=${query.state}&auth_token=${wx.getStorageSync('authToken')}`
+      url.searchParams.set('state', query.state)
     }
-    this.setData(_data)
+    this.setData({url: url})
   },
   onShareAppMessage(options) {
     const url = new webkitURL(options.webViewUrl)

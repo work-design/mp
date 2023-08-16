@@ -5,4 +5,4 @@
 <view>
   <text>正在进入应用...</text>
 </view>
-<web-view src="{{host}}{{path}}#wechat_redirect"></web-view>
+<web-view src="{{url}}#wechat_redirect"></web-view>
