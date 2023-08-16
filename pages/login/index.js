@@ -2,7 +2,7 @@ import { HOST } from '../../config'
 
 Page({
   onLoad(query) {
-    console.debug('onLoad query:', query)
+    console.debug('login/index onLoad query:', query)
     wx.login({
       success: res => {
         wx.request({
@@ -17,7 +17,7 @@ Page({
             wx.setStorageSync('authToken', res.data.auth_token)
             wx.setStorageSync('programUser', res.data.program_user)
             wx.redirectTo({
-              url: `/pages/index/index?path=${res.url}&state=${query.state}`
+              url: `/pages/index/index?url=${res.data.url}&state=${query.state}`
             })
           }
         })

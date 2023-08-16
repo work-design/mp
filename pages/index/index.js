@@ -5,9 +5,12 @@ Page({
     url: `${HOST}/board`
   },
   onLoad(query) {
-    console.debug('onLoad query:', query)
+    console.debug('index/index onLoad query:', query)
 
-    const url = new URL(this.data.url)
+    let url = new webkitURL(this.data.url)
+    if (query.url) {
+      url = new webkitURL(query.url)
+    }
     url.searchParams.set('auth_token', wx.getStorageSync('authToken'))
     if (Object.keys(query).includes('path')) {
       url.pathname = decodeURIComponent(query.path)
@@ -21,7 +24,7 @@ Page({
     this.setData({url: url})
   },
   onShareAppMessage(options) {
-    const url = new URL(options.webViewUrl)
+    const url = new webkitURL(options.webViewUrl)
     url.searchParams.delete('auth_token')
     const path = `${url.pathname}${url.search}`
     return {
