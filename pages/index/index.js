@@ -1,8 +1,6 @@
-import { HOST } from '../../config'
-
 Page({
   data: {
-    url: `${HOST}/board`
+    url: `${wx.getExtConfigSync().host}/board`
   },
   onLoad(query) {
     console.debug('index/index onLoad query:', query)

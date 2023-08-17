@@ -1,12 +1,10 @@
-import { HOST } from '../../config'
-
 Page({
   data: {
 
   },
   onLoad() {
     wx.request({
-      url: HOST + '/wechat/app_configs',
+      url: wx.getExtConfigSync().host + '/wechat/app_configs',
       data: { appid: wx.getAccountInfoSync().miniProgram.appId },
       success: (res) => {
         this.setData(res.data)

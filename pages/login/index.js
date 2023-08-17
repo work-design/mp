@@ -1,12 +1,10 @@
-import { HOST } from '../../config'
-
 Page({
   onLoad(query) {
     console.debug('login/index onLoad query:', query)
     wx.login({
       success: res => {
         wx.request({
-          url: HOST + '/wechat/program_users',
+          url: wx.getExtConfigSync().host + '/wechat/program_users',
           method: 'POST',
           data: {
             code: res.code,

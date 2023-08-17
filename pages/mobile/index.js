@@ -1,10 +1,9 @@
 import { getPhoneNumber, wxLogin } from '../../utils/login'
-import { AVATAR } from '../../config'
 
 Page({
   data: {
     path: '/board',
-    avatarUrl: AVATAR,
+    avatarUrl: '',
     authToken: wx.getStorageSync('authToken'),
     programUser: wx.getStorageSync('programUser')
   },
