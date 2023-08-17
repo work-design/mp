@@ -18,9 +18,6 @@ Page({
     if (query.org_id) {
       url.pathname = `org_${query.org_id}` + url.pathname
     }
-    if (query.state) {
-      url.searchParams.set('state', query.state)
-    }
     this.setData({url: url})
   },
   onShareAppMessage(options) {
