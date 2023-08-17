@@ -5,7 +5,7 @@
     "pages/login/index",
     "pages/mobile/index",
     "pages/wxpay_pay/index",
-    "pages/profiled/addresses/index",
+    "pages/addresses/index",
     "pages/service/index",
     "pages/subscribe/index",
     "pages/print/config/index",
