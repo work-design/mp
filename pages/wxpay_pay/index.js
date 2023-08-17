@@ -3,7 +3,7 @@ Page({
     wx.request({
       url: decodeURIComponent(query.url),
       header: {
-        'Content-Type': 'application/json',
+        'Accept': 'application/json',
         'Authorization': wx.getStorageSync('authToken')
       },
       data: {
