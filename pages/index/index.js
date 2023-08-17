@@ -7,7 +7,7 @@ Page({
     console.debug('index/index onLoad query:', query)
     let url = this.data.url
     if (query.url) {
-      url = query.url
+      url = decodeURIComponent(query.url)
     } else if (Object.keys(query).includes('path')) {
       url = `${HOST}${decodeURIComponent(query.path)}`
     }
