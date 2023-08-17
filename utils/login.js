@@ -1,32 +1,4 @@
-import { HOST, APPID } from '../config'
-
 // 登录
-export const wxLogin = (page) => {
-  wx.login({
-    success: res => {
-      if (res.code) {
-        wx.request({
-          url: HOST + '/wechat/program_users',
-          method: 'POST',
-          data: {
-            code: res.code,
-            appid: APPID
-          },
-          success: res => {
-            wx.setStorageSync('authToken', res.data.auth_token)
-            wx.setStorageSync('programUser', res.data.program_user)
-            page.setData({ authToken: res.data.auth_token, programUser: res.data.program_user })
-          }
-        })
-      } else {
-        console.log('登录失败！' + res.errMsg)
-      }
-    },
-    fail: res => {
-      console.debug(res)
-    }
-  })
-}
 
 export const getPhoneNumber = (e, page) => {
   wx.request({

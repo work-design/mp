@@ -4,9 +4,8 @@ Page({
   },
   onLoad(query) {
     wx.request({
-      url: decodeURIComponent(query.url) + '.json',
+      url: decodeURIComponent(query.url),
       header: {
-        'Content-Type': 'application/json',
         'Authorization': wx.getStorageSync('authToken')
       },
       data: {

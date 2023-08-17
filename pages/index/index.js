@@ -1,22 +1,17 @@
+const HOST = wx.getExtConfigSync().host
 Page({
   data: {
-    url: `${wx.getExtConfigSync().host}/board`
+    url: `${HOST}/board`
   },
   onLoad(query) {
     console.debug('index/index onLoad query:', query)
-
-    let url = new URL(this.data.url)
+    let url = this.data.url
     if (query.url) {
-      url = new URL(query.url)
+      url = query.url
+    } else if (Object.keys(query).includes('path')) {
+      url = `${HOST}${decodeURIComponent(query.path)}`
     }
-    url.searchParams.set('auth_token', wx.getStorageSync('authToken'))
-    if (Object.keys(query).includes('path')) {
-      url.pathname = decodeURIComponent(query.path)
-    }
-    if (query.org_id) {
-      url.pathname = `org_${query.org_id}` + url.pathname
-    }
-    this.setData({url: url})
+    this.setData({ url: url })
   },
   onShareAppMessage(options) {
     const url = new URL(options.webViewUrl)

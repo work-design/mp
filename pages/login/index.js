@@ -12,8 +12,6 @@ Page({
             appid: wx.getAccountInfoSync().miniProgram.appId
           },
           success: res => {
-            wx.setStorageSync('authToken', res.data.auth_token)
-            wx.setStorageSync('programUser', res.data.program_user)
             wx.redirectTo({
               url: `/pages/index/index?url=${res.data.url}`
             })
