@@ -1,7 +1,4 @@
 Page({
-  data: {
-    authToken: wx.getStorageSync('authToken')
-  },
   onLoad(query) {
     wx.request({
       url: decodeURIComponent(query.url),
