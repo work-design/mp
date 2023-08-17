@@ -17,7 +17,7 @@ Page({
             wx.setStorageSync('authToken', res.data.auth_token)
             wx.setStorageSync('programUser', res.data.program_user)
             wx.redirectTo({
-              url: `/pages/index/index?url=${res.data.url}&state=${query.state}`
+              url: `/pages/index/index?url=${res.data.url}`
             })
           }
         })
