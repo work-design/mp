@@ -3,9 +3,7 @@ const HOST = wx.getExtConfigSync().host
 
 Page({
   data: {
-    avatarUrl: defaultAvatarUrl,
-    authToken: wx.getStorageSync('authToken'),
-    programUser: wx.getStorageSync('programUser')
+    avatarUrl: defaultAvatarUrl
   },
   onLoad(query) {
     console.debug('profile query:', query)
@@ -14,7 +12,6 @@ Page({
     wx.startPullDownRefresh()
   },
   onChooseAvatar(e) {
-    wx.xx = e
     this.setData({ avatarUrl: e.detail.avatarUrl })
     wx.uploadFile({
       url: HOST + '/auth/board/user',
@@ -23,6 +20,26 @@ Page({
       header: {
         Accept: 'application/json',
         Authorization: wx.getStorageSync('authToken')
+      }
+    })
+  },
+  inputName(e) {
+    console.debug('input',e)
+    this.setData({ name: e.detail.value })
+  },
+  onChangeName(e) {
+    wx.xx = e
+    wx.request({
+      url: HOST + '/auth/board/user',
+      method: 'POST',
+      header: {
+        Accept: 'application/json',
+        Authorization: wx.getStorageSync('authToken')
+      },
+      data: {
+        user: {
+          name: this.data.name
+        }
       }
     })
   }
