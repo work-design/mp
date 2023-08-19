@@ -24,11 +24,9 @@ Page({
     })
   },
   inputName(e) {
-    console.debug('input',e)
     this.setData({ name: e.detail.value })
   },
-  onChangeName(e) {
-    wx.xx = e
+  onChangeName() {
     wx.request({
       url: HOST + '/auth/board/user',
       method: 'POST',
