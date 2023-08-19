@@ -2,7 +2,6 @@ import { getPhoneNumber, wxLogin } from '../../utils/login'
 
 Page({
   data: {
-    path: '/board',
     avatarUrl: '',
     authToken: wx.getStorageSync('authToken'),
     programUser: wx.getStorageSync('programUser')

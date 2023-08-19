@@ -12,10 +12,8 @@
     <input type="nickname" class="weui-input mt-1" placeholder="请输入昵称"/>
   </view>
   <view class="userinfo">
-    <button wx:if="{{programUser.only_auth}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信快捷登录</button>
-    <view wx:else>
+    <view>
       <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信快捷登录</button>
-      <navigator url="/pages/home/index" class="weui-btn">浏览服务</navigator>
     </view>
   </view>
 </view>
