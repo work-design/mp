@@ -1,5 +1,3 @@
-import { getPhoneNumber, wxLogin } from '../../utils/login'
-
 Page({
   data: {
     avatarUrl: '',
@@ -8,25 +6,7 @@ Page({
   },
   onLoad(query) {
     console.debug('onLoad query:', query)
-    setPath(query, this)
-    this.setData({
-      logining: query.login === 'true'
-    })
-    if (this.data.logining || !this.data.programUser) {
-      wxLogin(this)
-    }
-  },
-  onShareAppMessage(options) {
-    const url = new webkitURL(options.webViewUrl)
-    url.searchParams.delete('auth_token')
-    const path = `${url.pathname}${url.search}`
-    return {
-      title: '自定义转发标题',
-      path: `/page/index/index?path=${path}`
-    }
-  },
-  onShareTimeline(options) {
-    console.debug('onShareTimeline', options.webViewUrl)
+
   },
   onPullDownRefresh() {
     wx.startPullDownRefresh()
@@ -35,6 +15,16 @@ Page({
     this.setData({ avatarUrl: e.detail.avatarUrl })
   },
   getPhoneNumber(e) {
-    getPhoneNumber(e, this)
+    wx.request({
+      url: HOST + '/wechat/program_users/mobile',
+      method: 'POST',
+      data: {
+        detail: e.detail,
+        auth_token: wx.getStorageSync('authToken')
+      },
+      success: res => {
+        page.setData({ programUser: res.data.program_user })
+      }
+    })
   }
 })
