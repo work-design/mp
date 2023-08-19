@@ -2,7 +2,5 @@
   <navigation-bar background-color="#fff" front-color="#000"></navigation-bar>
 </page-meta>
 
-<view>
-  <text>正在进入应用...</text>
-</view>
+<view class="center">正在进入应用...</view>
 <web-view src="{{url}}#wechat_redirect"></web-view>

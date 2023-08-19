@@ -2,6 +2,6 @@
   <navigation-bar background-color="#fff" front-color="#000"></navigation-bar>
 </page-meta>
 
-<view>
+<view class="center">
   <text>正在登录中...</text>
 </view>
