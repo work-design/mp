@@ -3,7 +3,6 @@
   "pages":[
     "pages/index/index",
     "pages/login/index",
-    "pages/mobile/index",
     "pages/wxpay_pay/index",
     "pages/addresses/index",
     "pages/service/index",
