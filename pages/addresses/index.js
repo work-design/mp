@@ -7,7 +7,7 @@ Page({
           url: decodeURIComponent(query.url),
           method: 'POST',
           header: {
-            'Authorization': wx.getStorageSync('authToken')
+            Authorization: wx.getStorageSync('authToken')
           },
           data: res,
           success(response) {

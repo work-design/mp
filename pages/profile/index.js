@@ -1,5 +1,5 @@
 const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
-const HOST = 'https://test.work.design/'
+const HOST = wx.getExtConfigSync().host
 
 Page({
   data: {
@@ -17,9 +17,13 @@ Page({
     wx.xx = e
     this.setData({ avatarUrl: e.detail.avatarUrl })
     wx.uploadFile({
-      url: HOST + 'auth/board/user',
+      url: HOST + '/auth/board/user',
       filePath: e.detail.avatarUrl,
-      name: 'avatar'
+      name: 'user[avatar]',
+      header: {
+        Accept: 'application/json',
+        Authorization: wx.getStorageSync('authToken')
+      }
     })
   }
 })
