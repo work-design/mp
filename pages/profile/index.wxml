@@ -1,0 +1,12 @@
+<page-meta>
+  <navigation-bar background-color="#fff" front-color="#000"></navigation-bar>
+</page-meta>
+
+<view class="container">
+  <view class="userinfo">
+    <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+      <image class="avatar" src="{{avatarUrl}}"></image>
+    </button>
+    <input type="nickname" class="weui-input mt-1" placeholder="请输入昵称"/>
+  </view>
+</view>
