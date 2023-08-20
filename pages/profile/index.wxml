@@ -7,6 +7,6 @@
     <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
       <image class="avatar" src="{{avatarUrl}}"></image>
     </button>
-    <input type="nickname" bindnicknamereview="onChangeName" bindblur="inputName" class="weui-input mt-1" placeholder="请输入昵称"/>
+    <input type="nickname" value="{{name}}" bindnicknamereview="onChangeName" bindblur="inputName" class="weui-input mt-1" placeholder="请输入昵称"/>
   </view>
 </view>

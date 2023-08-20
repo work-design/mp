@@ -13,6 +13,7 @@ Page({
           },
           success: res => {
             wx.setStorageSync('authToken', res.data.auth_token)
+            wx.setStorageSync('user', res.data.user)
             wx.redirectTo({
               url: `/pages/index/index?url=${encodeURIComponent(res.data.url)}`
             })
