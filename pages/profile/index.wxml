@@ -9,4 +9,5 @@
     </button>
     <input type="nickname" value="{{name}}" bindnicknamereview="onChangeName" bindblur="inputName" class="weui-input mt-1" placeholder="请输入昵称"/>
   </view>
+  <navigator open-type="navigateBack">返回</navigator>
 </view>
