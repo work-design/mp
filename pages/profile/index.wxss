@@ -11,6 +11,7 @@ button {
 navigator {
   color: rgb(110, 150, 80);
   background-color: rgb(57, 57, 57);
+  padding: 1em 2em;
 }
 
 .container {
