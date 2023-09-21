@@ -1,8 +1,9 @@
 const HOST = wx.getExtConfigSync().host
+const PATH = wx.getExtConfigSync().path
 
 Page({
   data: {
-    url: `${HOST}/board`
+    url: HOST + (PATH.startsWith('/') ? PATH : `/${PATH}`)
   },
   onLoad(query) {
     console.debug('index/index onLoad query:', query)
