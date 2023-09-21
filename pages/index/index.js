@@ -11,7 +11,8 @@ Page({
     if (query.url) {
       url = decodeURIComponent(query.url)
     } else if (Object.keys(query).includes('path')) {
-      url = `${HOST}${decodeURIComponent(query.path)}`
+      const path = decodeURIComponent(query.path)
+      url = HOST + (path.startsWith('/') ? path : `/${path}`)
     }
     this.setData({ url: url })
   },
