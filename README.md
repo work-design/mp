@@ -8,7 +8,8 @@
 {
   "extAppid": "",
   "ext": {
-    "host": ""
+    "host": "",
+    "path": ""
   },
   "window": {}
 }

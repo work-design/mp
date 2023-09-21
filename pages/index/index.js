@@ -1,4 +1,5 @@
 const HOST = wx.getExtConfigSync().host
+
 Page({
   data: {
     url: `${HOST}/board`

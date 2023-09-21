@@ -1,15 +1,18 @@
+const HOST = wx.getExtConfigSync().host
+const APPID = wx.getAccountInfoSync().miniProgram.appId
+
 Page({
   onLoad(query) {
     console.debug('login/index onLoad query:', query)
     wx.login({
       success: res => {
         wx.request({
-          url: wx.getExtConfigSync().host + '/wechat/program_users',
+          url: HOST + '/wechat/program_users',
           method: 'POST',
           data: {
             code: res.code,
             state: query.state,
-            appid: wx.getAccountInfoSync().miniProgram.appId
+            appid: APPID
           },
           success: res => {
             wx.setStorageSync('authToken', res.data.auth_token)
