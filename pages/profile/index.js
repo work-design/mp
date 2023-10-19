@@ -38,7 +38,6 @@ Page({
     this.setData({ name: e.detail.value })
   },
   onChangeName(e) {
-    console.debug('ddd', e)
     if (e.detail.pass) {
       wx.request({
         url: HOST + '/auth/board/user',
