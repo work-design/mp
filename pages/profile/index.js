@@ -11,6 +11,7 @@ Page({
     wx.request({
       url: HOST + '/auth/board/user',
       header: {
+        Accept: 'application/json',
         Authorization: wx.getStorageSync('authToken')
       },
       success: res => {
