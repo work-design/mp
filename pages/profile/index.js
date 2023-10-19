@@ -8,6 +8,15 @@ Page({
   },
   onLoad(query) {
     console.debug('profile query:', query)
+    wx.request({
+      url: HOST + '/auth/board/user',
+      header: {
+        Authorization: wx.getStorageSync('authToken')
+      },
+      success: res => {
+        this.setData({ name: res.data.name, avatarUrl: res.data.avatar_url })
+      }
+    })
   },
   onPullDownRefresh() {
     wx.startPullDownRefresh()
