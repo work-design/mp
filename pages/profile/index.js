@@ -37,19 +37,22 @@ Page({
   inputName(e) {
     this.setData({ name: e.detail.value })
   },
-  onChangeName() {
-    wx.request({
-      url: HOST + '/auth/board/user',
-      method: 'POST',
-      header: {
-        Accept: 'application/json',
-        Authorization: wx.getStorageSync('authToken')
-      },
-      data: {
-        user: {
-          name: this.data.name
+  onChangeName(e) {
+    console.debug('ddd', e)
+    if (e.detail.pass) {
+      wx.request({
+        url: HOST + '/auth/board/user',
+        method: 'POST',
+        header: {
+          Accept: 'application/json',
+          Authorization: wx.getStorageSync('authToken')
+        },
+        data: {
+          user: {
+            name: this.data.name
+          }
         }
-      }
-    })
+      })
+    }
   }
 })
