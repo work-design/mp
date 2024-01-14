@@ -1,4 +1,4 @@
-const HOST = wx.getExtConfigSync().host
+const HOST = wx.getExtConfigSync().auth_host || wx.getExtConfigSync().host
 const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
