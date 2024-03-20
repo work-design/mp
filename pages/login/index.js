@@ -11,8 +11,8 @@ Page({
           method: 'POST',
           data: {
             code: res.code,
-            state: query.state,
-            appid: APPID
+            appid: APPID,
+            ...query
           },
           success: res => {
             wx.setStorageSync('authToken', res.data.auth_token)
