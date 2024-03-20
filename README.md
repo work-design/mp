@@ -9,6 +9,7 @@
   "extAppid": "",
   "ext": {
     "host": "",
+    "auth_host": "",
     "path": ""
   },
   "window": {}
