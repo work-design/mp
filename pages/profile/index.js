@@ -49,8 +49,13 @@ Page({
         },
         data: {
           user: e.detail.value
+        },
+        success() {
+          wx.navigateBack()
         }
       })
+    } else {
+      wx.navigateBack()
     }
   }
 })
