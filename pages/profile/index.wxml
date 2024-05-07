@@ -18,6 +18,8 @@
         name="name"
         value="{{name}}"
         bindnicknamereview="onChangeName"
+        bindfocus="clearInput"
+        bindblur="revertInput"
         class="name-input"
         placeholder="请输入昵称"
       />

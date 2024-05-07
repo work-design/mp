@@ -15,7 +15,11 @@ Page({
         Authorization: wx.getStorageSync('authToken')
       },
       success: res => {
-        this.setData({ name: res.data.name, avatarUrl: res.data.avatar_url })
+        this.setData({
+          name: res.data.name,
+          initName: res.data.name,
+          avatarUrl: res.data.avatar_url
+        })
       }
     })
   },
@@ -33,6 +37,17 @@ Page({
         Authorization: wx.getStorageSync('authToken')
       }
     })
+  },
+  clearInput(e) {
+    console.debug('clearInput:', e)
+    e.currentTarget.value = ''
+    this.setData({ name: '' })
+  },
+  revertInput(e) {
+    console.debug('rever:', e)
+    if (e.detail.value.length === 0) {
+      this.setData({name: this.data.initName})
+    }
   },
   onChangeName(e) {
 
