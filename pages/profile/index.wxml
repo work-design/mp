@@ -4,10 +4,31 @@
 
 <view class="container">
   <view class="userinfo">
-    <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-      <image class="avatar" src="{{avatarUrl}}"></image>
+    <button
+      open-type="chooseAvatar"
+      bind:chooseavatar="onChooseAvatar"
+      class="avatar-wrapper"
+    >
+      <image src="{{avatarUrl}}" class="avatar"></image>
+      <text class="tip">点击更换头像</text>
     </button>
-    <input type="nickname" value="{{name}}" bindnicknamereview="onChangeName" bindblur="inputName" class="weui-input mt-1" placeholder="请输入昵称"/>
+    <form catchsubmit="formSubmit">
+      <input
+        type="nickname"
+        name="name"
+        value="{{name}}"
+        bindnicknamereview="onChangeName"
+        class="name-input"
+        placeholder="请输入昵称"
+      />
+      <button
+        type="primary"
+        formType="submit"
+        class="name-submit"
+      >
+        确认
+      </button>
+    </form>
   </view>
   <navigator open-type="navigateBack">返回</navigator>
 </view>

@@ -34,11 +34,12 @@ Page({
       }
     })
   },
-  inputName(e) {
-    this.setData({ name: e.detail.value })
-  },
   onChangeName(e) {
-    if (e.detail.pass) {
+
+  },
+  formSubmit(e) {
+    console.debug('formSubmit:', e)
+    if (e.detail.value) {
       wx.request({
         url: HOST + '/auth/board/user',
         method: 'POST',
@@ -47,9 +48,7 @@ Page({
           Authorization: wx.getStorageSync('authToken')
         },
         data: {
-          user: {
-            name: this.data.name
-          }
+          user: e.detail.value
         }
       })
     }

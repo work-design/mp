@@ -4,19 +4,21 @@ page {
 }
 
 button {
-  color: rgb(110, 150, 80);
-  background-color: rgb(57, 57, 57);
+  background-color: transparent;
 }
 
 navigator {
-  color: rgb(110, 150, 80);
-  background-color: rgb(57, 57, 57);
-  padding: 1em 2em;
+  margin-top: 0.5rem;
+  width: 184px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 4px;
+  text-align: center;
 }
 
 .container {
-  background-color: rgb(51, 51, 51);
-  justify-content: space-around;
+  background-color: #eee;
+  justify-content: center;
 }
 
 .userinfo {
@@ -33,20 +35,33 @@ navigator {
 button.avatar-wrapper {
   padding: 0;
   width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+text.tip {
+  font-size: 0.75rem;
+  font-weight: normal;
+  margin-top: 0.25rem;
+  color: grey;
 }
 
 .avatar {
   overflow: hidden;
   width: 128rpx;
   height: 128rpx;
-  margin: 20rpx;
   border-radius: 50%;
 }
 
-.weui-input {
+.name-input {
   text-align: center;
+  margin-top: 2rem;
+  padding: 1rem;
+  border: solid 1px grey;
 }
 
-.usermotto {
-  margin-top: 200px;
+.name-submit {
+  margin-top: 4rem;
 }
+
