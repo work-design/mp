@@ -20,6 +20,10 @@ App({
             const page = getCurrentPages()[0]
             if (page) {
               page.setData({url: `${page.data.url}${page.data.url.includes('?') ? '&' : '?'}auth_token=${res.data.auth_token}`})
+            } else {
+              wx.redirectTo({
+                url: `/pages/index/index?url=${encodeURIComponent(res.data.url)}`
+              })
             }
           }
         })
