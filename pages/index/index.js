@@ -16,6 +16,9 @@ Page({
     }
     this.setData({ url: url })
   },
+  handleLoad(e) {
+    console.debug('ddddd--------d', e)
+  },
   onShareAppMessage(options) {
     const url = new URL(options.webViewUrl)
     url.searchParams.delete('auth_token')

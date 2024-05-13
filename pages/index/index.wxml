@@ -3,4 +3,4 @@
 </page-meta>
 
 <view class="center">正在进入应用...</view>
-<web-view src="{{url}}#wechat_redirect"></web-view>
+<web-view src="{{url}}#wechat_redirect" bindload="handleLoad"></web-view>

@@ -4,6 +4,7 @@ const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 App({
   onLaunch(options) {
+    console.debug('------------1', getCurrentPages())
     wx.login({
       success: res => {
         wx.request({
@@ -17,9 +18,9 @@ App({
           success: res => {
             wx.setStorageSync('authToken', res.data.auth_token)
             wx.setStorageSync('user', res.data.user)
-            wx.redirectTo({
-              url: `/pages/index/index?url=${encodeURIComponent(res.data.url)}`
-            })
+            const page = getCurrentPages()[0]
+            console.debug('------------2', )
+            page.setData({ url: `${page.data.url}?auth_token=${res.data.auth_token}` })
           }
         })
       },
