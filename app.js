@@ -17,9 +17,18 @@ App({
           success: res => {
             wx.setStorageSync('authToken', res.data.auth_token)
             wx.setStorageSync('user', res.data.user)
+            let url
             const page = getCurrentPages()[0]
+
+            if (options.query.path) {
+              const path = decodeURIComponent(options.query.path)
+              url = HOST + (path.startsWith('/') ? path : `/${path}`)
+            } else if (page) {
+              url = page.data.url
+            }
+
             if (page) {
-              page.setData({url: `${page.data.url}${page.data.url.includes('?') ? '&' : '?'}auth_token=${res.data.auth_token}`})
+              page.setData({url: `${url}${url.includes('?') ? '&' : '?'}auth_token=${res.data.auth_token}`})
             } else {
               wx.redirectTo({
                 url: `/pages/index/index?url=${encodeURIComponent(res.data.url)}`
