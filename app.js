@@ -4,17 +4,28 @@ const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 App({
   onLaunch(options) {
-    const x = wx.getExtConfigSync()
-    console.debug('ext Config:', x)
-
-    wx.request({
-      url: HOST + '/wechat/launch',
-      method: 'POST',
-      data: {
-        appid: APPID,
-        ...options
+    wx.login({
+      success: res => {
+        wx.request({
+          url: HOST + '/wechat/program_users',
+          method: 'POST',
+          data: {
+            code: res.code,
+            appid: APPID,
+            ...options
+          },
+          success: res => {
+            wx.setStorageSync('authToken', res.data.auth_token)
+            wx.setStorageSync('user', res.data.user)
+            wx.redirectTo({
+              url: `/pages/index/index?url=${encodeURIComponent(res.data.url)}`
+            })
+          }
+        })
       },
-      success: res => {}
+      fail: res => {
+        console.debug('wx.login fail:', res)
+      }
     })
   }
 })
