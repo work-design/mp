@@ -6,13 +6,17 @@ Page({
     url: HOST + (PATH.startsWith('/') ? PATH : `/${PATH}`)
   },
   onLoad(query) {
-    console.debug('index/index onLoad query:', query)
     let url = this.data.url
     if (query.url) {
       url = decodeURIComponent(query.url)
     } else if (Object.keys(query).includes('path')) {
       const path = decodeURIComponent(query.path)
       url = HOST + (path.startsWith('/') ? path : `/${path}`)
+    } else if (query.scene) {
+      const path = decodeURIComponent(query.scene)
+      if (path.startsWith('/')) {
+        url = HOST + path
+      }
     }
     this.setData({ url: url })
   },
