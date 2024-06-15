@@ -1,12 +1,30 @@
+const HOST = wx.getExtConfigSync().auth_host || wx.getExtConfigSync().host
+const APPID = wx.getAccountInfoSync().miniProgram.appId
+
 Page({
 
   onload() {
 
   },
 
-  getPhoneNumber (e) {
-    console.log(e.detail.code)  // 动态令牌
-    console.log(e.detail.errMsg) // 回调信息（成功失败都会返回）
-    console.log(e.detail.errno)  // 错误码（失败时返回）
+  getPhoneNumber(e) {
+    wx.request({
+      url: HOST + '/wechat/program_users/mobile',
+      method: 'POST',
+      header: {
+        Accept: 'application/json',
+        Authorization: wx.getStorageSync('authToken')
+      },
+      data: e,
+      success: res => {
+        wx.setStorageSync('authToken', res.data.auth_token)
+        wx.setStorageSync('user', res.data.user)
+        wx.redirectTo({
+          url: `/pages/index/index?url=${encodeURIComponent(res.data.url)}`
+        })
+      }
+    })
+
+
   }
 })
