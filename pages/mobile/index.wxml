@@ -1,0 +1,6 @@
+<button
+  open-type="getPhoneNumber"
+  bindgetphonenumber="getPhoneNumber"
+>
+  手机号登录
+</button>
