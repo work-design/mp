@@ -85,7 +85,14 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId, page) => {
       for (const item of res.characteristics) {
         console.debug('device id:', deviceId, 'service id:', serviceId, 'characteristic id', item.uuid)
         if (item.properties.read) {
-          wx.readBLECharacteristicValue({ deviceId, serviceId, characteristicId: item.uuid })
+          wx.readBLECharacteristicValue({
+            deviceId,
+            serviceId,
+            characteristicId: item.uuid,
+            success (res) {
+              console.log('-----------readBLECharacteristicValue:', res)
+            }
+          })
         }
         if (item.properties.write && item.properties.writeNoResponse) {
           console.debug('who can write', item.uuid, item)
@@ -125,6 +132,8 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId, page) => {
         value: ab2hex(characteristic.value)
       })
     }
+    const v = ab2hex(characteristic.value)
+    console.debug('-------------', v.match(/.{1,2}/g).map(i => String.fromCharCode(parseInt(i, 16))).join())
 
     page.setData({ chs: foundChs })
   })
