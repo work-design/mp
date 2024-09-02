@@ -1,5 +1,5 @@
-const HOST = wx.getExtConfigSync().host
-const PATH = wx.getExtConfigSync().path
+const HOST = wx.getExtConfigSync().host || 'https://7color.one.work'
+const PATH = wx.getExtConfigSync().path || '/my'
 
 Page({
   data: {

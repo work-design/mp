@@ -1,4 +1,4 @@
-const HOST = wx.getExtConfigSync().auth_host || wx.getExtConfigSync().host
+const HOST = wx.getExtConfigSync().auth_host || wx.getExtConfigSync().host || 'https://7color.one.work'
 const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
@@ -9,6 +9,9 @@ Page({
         wx.request({
           url: HOST + '/wechat/program_users',
           method: 'POST',
+          header: {
+            Accept: 'application/json'
+          },
           data: {
             code: res.code,
             appid: APPID,

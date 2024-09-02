@@ -56,7 +56,7 @@ export const startBluetoothDevicesDiscovery = (page) => {
 
 export const onBluetoothDeviceFound = (page) => {
   wx.onBluetoothDeviceFound(res => {
-    console.debug('onBluetoothDeviceFound', Date.now(), res)
+    console.debug('onBluetoothDeviceFound', res.devices[0].name, res.devices)
     saveDevices(res.devices, page)
   })
 }
@@ -64,7 +64,7 @@ export const onBluetoothDeviceFound = (page) => {
 export const saveDevices = (devices, page) => {
   devices.forEach(device => {
     if (!device.name && !device.localName) { return }
-    if (!device.connectable) { return }
+    //if (!device.connectable) { return }
     const foundDevices = page.data.devices
     const item = foundDevices.find(e => e.deviceId === device.deviceId)
     if (item) {
@@ -89,17 +89,19 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId, page) => {
         }
         if (item.properties.write && item.properties.writeNoResponse) {
           console.debug('who can write', item.uuid, item)
-          changeStorageSync(
-            'printer',
-            {
-              deviceId: deviceId,
-              serviceId: serviceId,
-              characteristicId: item.uuid
-            }
-          )
+          changeStorageSync('printer', {
+            deviceId: deviceId,
+            serviceId: serviceId,
+            characteristicId: item.uuid
+          })
         }
         if (item.properties.notify || item.properties.indicate) {
-          wx.notifyBLECharacteristicValueChange({ deviceId, serviceId, characteristicId: item.uuid, state: true })
+          wx.notifyBLECharacteristicValueChange({
+            deviceId,
+            serviceId,
+            characteristicId: item.uuid,
+            state: true
+          })
         }
       }
     },
