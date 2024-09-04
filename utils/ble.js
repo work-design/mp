@@ -56,23 +56,19 @@ export const startBluetoothDevicesDiscovery = (page) => {
 
 export const onBluetoothDeviceFound = (page) => {
   wx.onBluetoothDeviceFound(res => {
-    console.debug('搜索到新设备', res.devices[0].name, res.devices)
-    saveDevices(res.devices, page)
-  })
-}
-
-export const saveDevices = (devices, page) => {
-  devices.forEach(device => {
-    if (!device.name && !device.localName) { return }
-    //if (!device.connectable) { return }
     const foundDevices = page.data.devices
-    const item = foundDevices.find(e => e.deviceId === device.deviceId)
-    if (item) {
-      Object.assign(item, device)
-    } else {
-      foundDevices.push(device)
-    }
-    page.setData({ devices: foundDevices })
+    res.devices.forEach(device => {
+      if (!device.name && !device.localName) { return }
+      if (device.name.includes('未知或不支持的设备')) { return }
+      const item = foundDevices.find(e => e.deviceId === device.deviceId)
+      if (item) {
+        Object.assign(item, device)
+      } else {
+        console.debug('搜索到新设备', device.name)
+        foundDevices.push(device)
+      }
+      page.setData({ devices: foundDevices })
+    })
   })
 }
 
