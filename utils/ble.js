@@ -3,7 +3,7 @@ import { changeStorageSync } from './helper'
 export const openBluetoothAdapter = (page) => {
   wx.openBluetoothAdapter({
     success: res => {
-      console.debug('openBluetoothAdapter success', res, page.data.connectedDeviceId)
+      console.debug('初始化蓝牙模块', res, page.data.connectedDeviceId)
       if (page.data.connectedDeviceId) {
         createBLEConnection(page.data.connectedDeviceId, page)
       } else {
@@ -45,11 +45,11 @@ export const startBluetoothDevicesDiscovery = (page) => {
   wx.startBluetoothDevicesDiscovery({
     allowDuplicatesKey: true,
     success: res => {
-      console.debug('startBluetoothDevicesDiscovery success', res)
+      console.debug('开始搜寻附近的蓝牙设备', res)
       onBluetoothDeviceFound(page)
     },
     fail: res => {
-      console.debug('startBluetoothDevicesDiscovery fail', res)
+      console.debug('搜寻附近的蓝牙设备失败', res)
     }
   })
 }
@@ -67,8 +67,8 @@ export const onBluetoothDeviceFound = (page) => {
         console.debug('搜索到新设备', device.name)
         foundDevices.push(device)
       }
-      page.setData({ devices: foundDevices })
     })
+    page.setData({ devices: foundDevices })
   })
 }
 
@@ -185,7 +185,7 @@ export const createBLEConnection = (deviceId, page) => {
   wx.createBLEConnection({
     deviceId,
     success: res => {
-      console.debug('createBLEConnection success', res)
+      console.debug('连接蓝牙设备', res)
       page.setData({ connectedDeviceId: deviceId })
       wx.setStorageSync('printer', { deviceId: deviceId, connected: true })
       getBLEDeviceServices(deviceId, page)

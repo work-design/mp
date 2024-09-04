@@ -30,7 +30,7 @@ Page({
     wx.closeBLEConnection({
       deviceId: this.data.connectedDeviceId,
       success: res => {
-        console.debug('closeBLEConnection success', res)
+        console.debug('断开与蓝牙设备的连接', res)
         this.setData({ connectedDeviceId: '' })
         wx.removeStorageSync('printer')
       }
