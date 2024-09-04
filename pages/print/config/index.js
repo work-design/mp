@@ -12,8 +12,9 @@ Page({
   },
   onLoad(options) {
     console.debug('onload', options)
+    const printer = wx.getStorageSync('printer') || {}
     this.setData({
-      connectedDeviceId: wx.getStorageSync('printer').deviceId // 只有当连接成功的才赋值, 当断开时会取消赋值
+      ...printer // 只有当连接成功的才赋值, 当断开时会取消赋值
     })
     getBluetoothAdapterState(this)
   },

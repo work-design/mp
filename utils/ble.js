@@ -20,7 +20,7 @@ export const openBluetoothAdapter = (page) => {
 export const getBluetoothAdapterState = (page) => {
   wx.getBluetoothAdapterState({
     success: res => {
-      console.debug('getBluetoothAdapterState success', res, page.data.connectedDeviceId)
+      console.debug('获取本机蓝牙适配器状态', res.adapterState)
       const state = res.adapterState || res
       if (state.discovering) {
         onBluetoothDeviceFound(page)
@@ -56,7 +56,7 @@ export const startBluetoothDevicesDiscovery = (page) => {
 
 export const onBluetoothDeviceFound = (page) => {
   wx.onBluetoothDeviceFound(res => {
-    console.debug('onBluetoothDeviceFound', res.devices[0].name, res.devices)
+    console.debug('搜索到新设备', res.devices[0].name, res.devices)
     saveDevices(res.devices, page)
   })
 }
@@ -82,8 +82,11 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId, page) => {
     deviceId,
     serviceId,
     success: res => {
+      let table = [
+        ['device id', 'service id', 'characteristic id']
+      ]
       for (const item of res.characteristics) {
-        console.debug('device id:', deviceId, 'service id:', serviceId, 'characteristic id', item.uuid)
+        table.push([deviceId, serviceId, item.uuid])
         if (item.properties.read) {
           wx.readBLECharacteristicValue({
             deviceId,
@@ -111,6 +114,7 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId, page) => {
           })
         }
       }
+      console.debug(table)
     },
     fail(res) {
       console.error('getBLEDeviceCharacteristics', res)
