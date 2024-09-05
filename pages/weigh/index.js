@@ -47,7 +47,8 @@ Page({
   },
 
   doWeigh() {
-    const printer = wx.getStorageSync('printer') || {}
+
+
     wx.request({
       url: this.data.url,
       header: {

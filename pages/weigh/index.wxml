@@ -41,11 +41,10 @@
 <view class="connected_info" wx:if="{{connectedDeviceId}}">
   <view>
     <view>
-      <text>url:</text>
-      <text>{{url}}</text>
+      <text>{{value}}</text>
     </view>
     <view>
-      <button bindtap="doPrint" class="weui-btn weui-btn_primary">打印</button>
+      <button bindtap="doWeigh" class="weui-btn weui-btn_primary">发送</button>
     </view>
   </view>
 </view>
