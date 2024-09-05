@@ -134,6 +134,7 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId, page) => {
         value: ab2hex(characteristic.value)
       })
     }
+    page.setData({ chs: foundChs })
     const v = ab2hex(characteristic.value)
     const result = v.match(/.{1,2}/g).map(i => String.fromCharCode(parseInt(i, 16)))
     const weight = `${result.slice(1, 8).join('')}${result.slice(15, 17).join('')}`
@@ -141,7 +142,7 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId, page) => {
     arr.shift()
 
     if (weight && arr.every(el => el === weight)) {
-      page.setData({chs: foundChs, value: weight})
+      page.setData({ value: weight })
     }
   })
 }
