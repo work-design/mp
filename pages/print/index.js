@@ -3,7 +3,7 @@ import {
   writeBLECharacteristicValue,
   startBluetoothDevicesDiscovery,
   getBluetoothAdapterState
-} from '../../../utils/ble'
+} from '../../utils/ble'
 
 Page({
   data: {
@@ -14,10 +14,12 @@ Page({
     console.debug('onload', options)
     const printer = wx.getStorageSync('printer') || {}
     this.setData({
+      url: decodeURIComponent(options.url),
       ...printer // 只有当连接成功的才赋值, 当断开时会取消赋值
     })
     getBluetoothAdapterState(this)
   },
+
   startBluetoothDevicesDiscovery() {
     startBluetoothDevicesDiscovery(this)
   },
@@ -44,6 +46,14 @@ Page({
     })
   },
   doPrint() {
-    writeBLECharacteristicValue()
+    wx.request({
+      url: this.data.url,
+      success: res => {
+        writeBLECharacteristicValue(this.data.printer, res.data)
+      },
+      complete: res => {
+        console.debug(res)
+      }
+    })
   }
 })

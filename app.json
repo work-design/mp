@@ -8,8 +8,7 @@
     "pages/addresses/index",
     "pages/service/index",
     "pages/subscribe/index",
-    "pages/print/config/index",
-    "pages/print/execute/index",
+    "pages/print/index",
     "pages/profile/index"
   ],
   "requiredPrivateInfos": [

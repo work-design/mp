@@ -1,6 +1,26 @@
 page {
   color: #333;
 }
+
+.connected_info {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #F0F0F0;
+  padding: 10px;
+  padding-bottom: 20px;
+  margin-bottom: env(safe-area-inset-bottom);
+  font-size: 14px;
+  min-height: 100px;
+  box-shadow: 0 0 3px 0;
+}
+.connected_info .operation {
+  position: absolute;
+  display: inline-block;
+  right: 30px;
+}
+
+
 .devices_summary {
   margin-top: 30px;
   padding: 10px;
