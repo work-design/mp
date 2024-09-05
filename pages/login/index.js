@@ -3,7 +3,7 @@ const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
   onLoad(query) {
-    console.debug('login/index onLoad query:', query)
+    console.debug('login onLoad query:', query)
     wx.login({
       success: res => {
         wx.request({

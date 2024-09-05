@@ -5,7 +5,9 @@ Page({
   onLoad() {
     wx.request({
       url: wx.getExtConfigSync().host + '/wechat/app_configs',
-      data: { appid: wx.getAccountInfoSync().miniProgram.appId },
+      data: { 
+        appid: wx.getAccountInfoSync().miniProgram.appId 
+      },
       success: (res) => {
         this.setData(res.data)
       },

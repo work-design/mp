@@ -11,7 +11,7 @@ Page({
     chs: []
   },
   onLoad(options) {
-    console.debug('onload', options)
+    console.debug('print onload', options)
     const printer = wx.getStorageSync('printer') || {}
     this.setData({
       url: decodeURIComponent(options.url),
