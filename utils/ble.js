@@ -119,6 +119,7 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId, page) => {
   })
 
   // 操作之前先监听，保证第一时间获取数据
+  const arr = Array(50).fill('0000000 g')
   wx.onBLECharacteristicValueChange(characteristic => {
     const foundChs = page.data.chs
     const item = foundChs.find(e => e.uuid === characteristic.characteristicId)
@@ -136,7 +137,12 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId, page) => {
     const v = ab2hex(characteristic.value)
     const result = v.match(/.{1,2}/g).map(i => String.fromCharCode(parseInt(i, 16)))
     const weight = `${result.slice(1, 8).join('')}${result.slice(15, 17).join('')}`
-    page.setData({ chs: foundChs, value: weight })
+    arr.push(weight)
+    arr.shift()
+
+    if (weight && arr.every(el => el === weight)) {
+      page.setData({chs: foundChs, value: weight})
+    }
   })
 }
 
