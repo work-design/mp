@@ -47,10 +47,15 @@ Page({
   },
 
   doPrint() {
+    const printer = wx.getStorageSync('printer') || {}
     wx.request({
       url: this.data.url,
+      header: {
+        Accept: 'application/json',
+        Authorization: wx.getStorageSync('authToken')
+      },
       success: res => {
-        writeBLECharacteristicValue(this.data.printer, res.data)
+        writeBLECharacteristicValue(printer, res.data)
       },
       complete: res => {
         console.debug(res)
