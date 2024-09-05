@@ -9,6 +9,9 @@ App({
         wx.request({
           url: HOST + '/wechat/program_users',
           method: 'POST',
+          header: {
+            Accept: 'application/json'
+          },
           data: {
             code: res.code,
             appid: APPID,
@@ -24,6 +27,8 @@ App({
               const path = decodeURIComponent(options.query.scene)
               if (path.startsWith('/')) {
                 url = HOST + path
+              } else {
+                url = page.data.url
               }
             } else if (page) {
               url = page.data.url

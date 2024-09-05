@@ -39,7 +39,7 @@ Page({
 
   restartBluetoothDevicesDiscovery() {
     wx.stopBluetoothDevicesDiscovery({
-      complete(res) {
+      complete: res => {
         console.debug('停止蓝牙扫描', res)
         startBluetoothDevicesDiscovery(this)
       }

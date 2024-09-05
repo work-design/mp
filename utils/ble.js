@@ -22,16 +22,17 @@ export const getBluetoothAdapterState = (page) => {
     success: res => {
       console.debug('获取本机蓝牙适配器状态', res.adapterState)
       const state = res.adapterState || res
+
       if (state.discovering) {
         onBluetoothDeviceFound(page)
-      } else if (state.available) {
+      } else {
+        startBluetoothDevicesDiscovery(page)
+      }
+
+      if (state.available) {
         if (page.data.connectedDeviceId) {
           createBLEConnection(page.data.connectedDeviceId, page)
-        } else {
-          startBluetoothDevicesDiscovery(page)
         }
-      } else {
-        console.log(state)
       }
     },
     fail: res => {
