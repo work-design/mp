@@ -41,7 +41,7 @@
 <view class="connected_info" wx:if="{{connectedDeviceId}}">
   <view>
     <view>
-      <text>{{value}}</text>
+      <text class="size-5">{{value}}</text>
     </view>
     <view>
       <button bindtap="doWeigh" class="weui-btn weui-btn_primary">发送</button>

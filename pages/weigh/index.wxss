@@ -2,6 +2,10 @@ page {
   color: #333;
 }
 
+.size-5 {
+    font-size: 1.25rem;
+}
+
 .connected_info {
   position: fixed;
   bottom: 0;
