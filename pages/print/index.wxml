@@ -38,10 +38,10 @@
 
 <button bindtap="restartBluetoothDevicesDiscovery" class="weui-btn weui-btn_primary">查找蓝牙设备</button>
 
-<view class="connected_info" wx:if="{{printer}}">
+<view class="connected_info" wx:if="{{connectedDeviceId}}">
   <view>
     <view>
-      <text>已连接到 {{printer.deviceId}}</text>
+      <text>已连接到 {{printer}}</text>
     </view>
     <view>
       <text>url:</text>
