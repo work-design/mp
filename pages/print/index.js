@@ -20,14 +20,12 @@ Page({
     getBluetoothAdapterState(this)
   },
 
-  startBluetoothDevicesDiscovery() {
-    startBluetoothDevicesDiscovery(this)
-  },
   createBLEConnection(e) {
     const ds = e.currentTarget.dataset
     const deviceId = ds.deviceId
     createBLEConnection(deviceId, this)
   },
+
   closeBLEConnection() {
     wx.closeBLEConnection({
       deviceId: this.data.connectedDeviceId,
@@ -38,13 +36,16 @@ Page({
       }
     })
   },
-  stopBluetoothDevicesDiscovery() {
+
+  restartBluetoothDevicesDiscovery() {
     wx.stopBluetoothDevicesDiscovery({
       complete(res) {
-        console.debug('stopBluetoothDevicesDiscovery complete', res)
+        console.debug('停止蓝牙扫描', res)
+        startBluetoothDevicesDiscovery(this)
       }
     })
   },
+
   doPrint() {
     wx.request({
       url: this.data.url,

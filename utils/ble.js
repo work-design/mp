@@ -200,7 +200,7 @@ export const createBLEConnection = (deviceId, page) => {
       getBluetoothDevice(deviceId, page)
       wx.stopBluetoothDevicesDiscovery({
         complete(res) {
-          console.debug('stopBluetoothDevicesDiscovery complete', res)
+          console.debug('停止扫描蓝牙设备', res)
         }
       })
     },
