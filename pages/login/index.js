@@ -1,4 +1,4 @@
-const HOST = wx.getExtConfigSync().auth_host || wx.getExtConfigSync().host || 'https://7color.one.work'
+const HOST = wx.getExtConfigSync().auth_host || wx.getExtConfigSync().host
 const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
