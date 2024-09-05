@@ -9,6 +9,7 @@
     "pages/service/index",
     "pages/subscribe/index",
     "pages/print/index",
+    "pages/weigh/index",
     "pages/profile/index"
   ],
   "requiredPrivateInfos": [
