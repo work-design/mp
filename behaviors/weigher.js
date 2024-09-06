@@ -1,6 +1,7 @@
-Component({
+export const weigher = Behavior({
   observers: {
-    'chs': (buffer) => {
+    'buffer': (buffer) => {
+      console.debug('---------in be', buffer)
 
       const arr = Array(36).fill('0000000 g')
 
@@ -12,10 +13,6 @@ Component({
       if (weight && arr.every(el => el === weight)) {
         this.setData({ value: weight })
       }
-
-      this.setData({
-        sum: numberA + numberB
-      })
     }
   }
 })

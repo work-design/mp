@@ -137,7 +137,7 @@ export const onBLECharacteristicValueChange = (page) => {
       })
     }
 
-    page.setData({ chs: foundChs })
+    page.setData({ chs: foundChs, buffer: buffer })
   })
 }
 

@@ -4,12 +4,16 @@ import {
   startBluetoothDevicesDiscovery,
   getBluetoothAdapterState
 } from '../../utils/ble'
+import { weigher } from '../../behaviors/weigher'
 
 Page({
   data: {
     devices: [],
     chs: []
   },
+
+  behaviors: [weigher],
+
   onLoad(options) {
     console.debug('print onload', options)
     const printer = wx.getStorageSync('printer') || {}
@@ -47,8 +51,6 @@ Page({
   },
 
   doWeigh() {
-
-
     wx.request({
       url: this.data.url,
       header: {
