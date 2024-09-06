@@ -74,7 +74,7 @@ export const onBluetoothDeviceFound = (page) => {
 }
 
 // 获取蓝牙低功耗设备某个服务中所有特征
-export const getBLEDeviceCharacteristics = (deviceId, serviceId, page) => {
+export const getBLEDeviceCharacteristics = (deviceId, serviceId) => {
   wx.getBLEDeviceCharacteristics({
     deviceId,
     serviceId,
@@ -89,13 +89,13 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId, page) => {
             deviceId,
             serviceId,
             characteristicId: item.uuid,
-            success (res) {
-              console.log('-----------readBLECharacteristicValue:', res)
+            success(res) {
+              console.debug('读取蓝牙设备特征值的二进制数据', res)
             }
           })
         }
         if (item.properties.write && item.properties.writeNoResponse) {
-          console.debug('who can write', item.uuid, item)
+          console.debug('可写入', item.uuid, item)
           changeStorageSync('printer', {
             deviceId: deviceId,
             serviceId: serviceId,
@@ -114,10 +114,12 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId, page) => {
       console.debug(table)
     },
     fail(res) {
-      console.error('getBLEDeviceCharacteristics', res)
+      console.error('读取蓝牙设备特征值失败', res)
     }
   })
+}
 
+export const onBLECharacteristicValueChange = (page) => {
   // 操作之前先监听，保证第一时间获取数据
   const arr = Array(50).fill('0000000 g')
   wx.onBLECharacteristicValueChange(characteristic => {
@@ -184,7 +186,8 @@ export const getBLEDeviceServices = (deviceId, page) => {
       for (const item of res.services) {
         if (item.isPrimary) {
           console.debug('device id:', deviceId, 'primary service id:', item.uuid)
-          getBLEDeviceCharacteristics(deviceId, item.uuid, page)
+          getBLEDeviceCharacteristics(deviceId, item.uuid)
+          onBLECharacteristicValueChange(page)
         }
       }
     }
