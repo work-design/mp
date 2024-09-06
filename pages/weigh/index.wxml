@@ -41,6 +41,9 @@
 <view class="connected_info" wx:if="{{connectedDeviceId}}">
   <view>
     <view>
+      <text class="size-5">{{origin_value}}</text>
+    </view>
+    <view>
       <text class="size-5">{{value}}</text>
     </view>
     <view>

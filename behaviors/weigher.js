@@ -1,7 +1,6 @@
 export const weigher = Behavior({
   observers: {
-    'buffer': (buffer) => {
-      console.debug('---------in be', buffer)
+    'buffer': function(buffer) {
 
       const arr = Array(36).fill('0000000 g')
 
@@ -10,6 +9,9 @@ export const weigher = Behavior({
       arr.push(weight)
       arr.shift()
 
+      console.debug('---------in be', weight, this)
+
+      this.setData({ origin_value: weight })
       if (weight && arr.every(el => el === weight)) {
         this.setData({ value: weight })
       }
