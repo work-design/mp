@@ -1,5 +1,5 @@
 import { changeStorageSync } from './helper'
-// 初始化蓝牙模块
+
 export const openBluetoothAdapter = (page) => {
   wx.openBluetoothAdapter({
     success: res => {
@@ -10,13 +10,12 @@ export const openBluetoothAdapter = (page) => {
         startBluetoothDevicesDiscovery(page)
       }
     },
-    fail(res) {
-      console.debug('openBluetoothAdapter fail', res)
+    fail: res => {
+      console.debug('初始化蓝牙模块失败', res)
     }
   })
 }
 
-// 获取本机蓝牙适配器状态
 export const getBluetoothAdapterState = (page) => {
   wx.getBluetoothAdapterState({
     success: res => {
@@ -36,7 +35,7 @@ export const getBluetoothAdapterState = (page) => {
       }
     },
     fail: res => {
-      console.debug('getBluetoothAdapterState fail', res)
+      console.debug('获取本机蓝牙适配器状态失败', res)
       openBluetoothAdapter(page)
     }
   })
