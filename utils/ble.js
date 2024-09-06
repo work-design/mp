@@ -216,8 +216,8 @@ export const createBLEConnection = (deviceId, page) => {
         }
       })
     },
-    fail(res) {
-      console.debug('createBLEConnection fail', res)
+    fail: res => {
+      console.debug('连接蓝牙设备失败', res)
     }
   })
 }
@@ -225,7 +225,7 @@ export const createBLEConnection = (deviceId, page) => {
 export const getBluetoothDevice = (deviceId, page) => {
   wx.getBluetoothDevices({
     success: res => {
-      console.debug('getBluetoothDevices success', res)
+      console.debug('获取在蓝牙模块生效期间所有搜索到的蓝牙设备', res)
       const device = res.devices.find(e => e.deviceId === deviceId)
       const foundDevices = page.data.devices
       const item = foundDevices.find(e => e.deviceId === device.deviceId)
