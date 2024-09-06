@@ -123,19 +123,21 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId, page) => {
   wx.onBLECharacteristicValueChange(characteristic => {
     const foundChs = page.data.chs
     const item = foundChs.find(e => e.uuid === characteristic.characteristicId)
+    const buffer = Array.from(new Uint8Array(characteristic.value)).map(i => i.toString(16).padStart(2, '0')).join('')
+
     if (item) {
       Object.assign(item, {
         uuid: characteristic.characteristicId,
-        value: ab2hex(characteristic.value)
+        value: buffer
       })
     } else {
       foundChs.push({
         uuid: characteristic.characteristicId,
-        value: ab2hex(characteristic.value)
+        value: buffer
       })
     }
+
     page.setData({ chs: foundChs })
-    const v = ab2hex(characteristic.value)
     const result = v.match(/.{1,2}/g).map(i => String.fromCharCode(parseInt(i, 16)))
     const weight = `${result.slice(1, 8).join('')}${result.slice(15, 17).join('')}`
     arr.push(weight)
@@ -233,15 +235,4 @@ export const getBluetoothDevice = (deviceId, page) => {
       page.setData({ devices: foundDevices })
     }
   })
-}
-
-// ArrayBuffer 转 16 进度字符串
-const ab2hex = (buffer) => {
-  var hexArr = Array.prototype.map.call(
-    new Uint8Array(buffer),
-    function (bit) {
-      return ('00' + bit.toString(16)).slice(-2)
-    }
-  )
-  return hexArr.join('')
 }
