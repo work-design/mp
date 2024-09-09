@@ -12,6 +12,8 @@ export const weigher = Behavior({
       this.setData({ origin_value: weight })
       if (weight && this.data.arr.every(el => el === weight)) {
         this.setData({ value: weight })
+      } else {
+        this.setData({ value: null })
       }
     }
   }
