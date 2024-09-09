@@ -193,7 +193,7 @@ export const createBLEConnection = (deviceId, page) => {
       wx.setStorageSync('printer', { deviceId: deviceId, connected: true })
       getBLEDeviceServices(deviceId, page)
       wx.onBLEConnectionStateChange(res => {
-        console.debug(`device ${res.deviceId} state has changed, connected: ${res.connected}`)
+        console.debug(`${res.deviceId} 状态已改变, 连接状态: ${res.connected}`)
         const result = wx.getStorageSync('printer')
         if (result.deviceId === res.deviceId && !res.connected) {
           Object.assign(result, { connected: false })

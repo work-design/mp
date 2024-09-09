@@ -1,8 +1,3 @@
-<view class="devices_summary">
-  <view>已连接设备：</view>
-  <view>{{connectedDeviceId}}</view>
-</view>
-
 <view class="devices_summary">已发现 {{devices.length}} 个设备：</view>
 <scroll-view class="device_list" scroll-y scroll-with-animation>
   <view
@@ -36,7 +31,10 @@
   </view>
 </scroll-view>
 
-<button bindtap="restartBluetoothDevicesDiscovery" class="weui-btn weui-btn_primary">查找蓝牙设备</button>
+<button
+  bindtap="restartBluetoothDevicesDiscovery"
+  class="weui-btn weui-btn_primary"
+>查找蓝牙设备</button>
 
 <view class="connected_info" wx:if="{{connectedDeviceId}}">
   <view>
