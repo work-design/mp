@@ -15,7 +15,7 @@ Page({
   behaviors: [weigher],
 
   onLoad(options) {
-    console.debug('print onload', options)
+    console.debug('weigh onload', options)
     const printer = wx.getStorageSync('printer') || {}
     this.setData({
       url: decodeURIComponent(options.url),
