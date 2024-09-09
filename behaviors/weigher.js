@@ -9,8 +9,6 @@ export const weigher = Behavior({
       this.data.arr.push(weight)
       this.data.arr.shift()
 
-      console.debug('---------in be', weight, this.data.arr)
-
       this.setData({ origin_value: weight })
       if (weight && this.data.arr.every(el => el === weight)) {
         this.setData({ value: weight })
