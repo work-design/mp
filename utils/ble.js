@@ -72,7 +72,7 @@ export const onBluetoothDeviceFound = (page) => {
   })
 }
 
-// 获取蓝牙低功耗设备某个服务中所有特征
+// 获取蓝牙设备服务中所有特征
 export const getBLEDeviceCharacteristics = (deviceId, serviceId) => {
   wx.getBLEDeviceCharacteristics({
     deviceId,
@@ -88,7 +88,7 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId) => {
             deviceId,
             serviceId,
             characteristicId: item.uuid,
-            success(res) {
+            success: res => {
               console.debug('读取蓝牙设备特征值的二进制数据', res)
             }
           })
@@ -168,14 +168,14 @@ export const writeBLECharacteristicValue = (printer, data) => {
   }
 }
 
-// 获取蓝牙低功耗设备所有服务 (service)
+// 获取蓝牙设备的所有服务
 export const getBLEDeviceServices = (deviceId, page) => {
   wx.getBLEDeviceServices({
     deviceId,
     success: res => {
       for (const item of res.services) {
         if (item.isPrimary) {
-          console.debug('device id:', deviceId, 'primary service id:', item.uuid)
+          console.debug('设备 ID：', deviceId, '主服务：', item.uuid)
           getBLEDeviceCharacteristics(deviceId, item.uuid)
           onBLECharacteristicValueChange(page)
         }
