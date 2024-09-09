@@ -1,9 +1,4 @@
-import {
-  createBLEConnection,
-  writeBLECharacteristicValue,
-  startBluetoothDevicesDiscovery,
-  getBluetoothAdapterState
-} from '../../utils/ble'
+import { createBLEConnection, startBluetoothDevicesDiscovery, getBluetoothAdapterState } from '../../utils/ble'
 import { weigher } from '../../behaviors/weigher'
 
 Page({
