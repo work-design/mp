@@ -39,13 +39,19 @@
 <view class="connected_info" wx:if="{{connectedDeviceId}}">
   <view>
     <view>
+      <text>等待读数稳定中：</text>
       <text class="size-5">{{origin_value}}</text>
     </view>
-    <view>
+    <view wx:if="{{value}}">
+      <text>最终读数：</text>
       <text class="size-5">{{value}}</text>
     </view>
     <view>
-      <button bindtap="doWeigh" class="weui-btn weui-btn_primary">发送</button>
+      <button
+        bindtap="doWeigh"
+        class="weui-btn weui-btn_primary"
+        disabled="{{!value}}"
+      >发送</button>
     </view>
   </view>
 </view>
