@@ -10,6 +10,12 @@
     "pages/subscribe/index",
     "pages/profile/index"
   ],
+  "plugins": {
+    "hello-plugin": {
+      "version": "dev",
+      "provider": "wxcdcb0fa80cf4c2c9"
+    }
+  },
   "requiredPrivateInfos": [
     "chooseAddress"
   ],
