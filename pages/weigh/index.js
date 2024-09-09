@@ -57,8 +57,11 @@ Page({
         Accept: 'application/json',
         Authorization: wx.getStorageSync('authToken')
       },
+      body: {
+        value: this.data.value
+      },
       success: res => {
-        writeBLECharacteristicValue(printer, res.data)
+
       },
       complete: res => {
         console.debug(res)
