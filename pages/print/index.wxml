@@ -1,0 +1,46 @@
+<view class="devices_summary">已发现 {{devices.length}} 个设备：</view>
+<scroll-view class="device_list" scroll-y scroll-with-animation>
+  <view
+    wx:for="{{devices}}"
+    wx:key="index"
+    data-device-id="{{item.deviceId}}"
+    data-name="{{item.name || item.localName}}"
+    bindtap="{{connectedDeviceId === item.deviceId ? 'closeBLEConnection' : 'createBLEConnection'}}"
+    class="device_item"
+    hover-class="device_item_hover"
+  >
+    <view class="device_item__left">
+      <view style="font-size: 16px; color: #333;">
+        <text>{{item.name}}</text>
+        <text wx:if="{{connectedDeviceId === item.deviceId}}" class="weui-badge">已连接</text>
+        <text wx:else class="weui-badge" style="background-color: darkgrey">未连接</text>
+      </view>
+      <view wx:if="{{item.RSSI}}" style="font-size: 10px">
+        <text>信号强度: </text>
+        <text>{{item.RSSI}}dBm</text>
+      </view>
+      <view style="font-size: 10px">
+        <text>UUID: </text>
+        <text>{{item.deviceId}}</text>
+      </view>
+      <view wx:if="{{item.advertisServiceUUIDs}}" style="font-size: 10px">
+        <text>Service数量: </text>
+        <text>{{item.advertisServiceUUIDs.length}}</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<button bindtap="restartBluetoothDevicesDiscovery" class="weui-btn weui-btn_primary">查找蓝牙设备</button>
+
+<view class="connected_info" wx:if="{{connectedDeviceId}}">
+  <view>
+    <view>
+      <text>url:</text>
+      <text>{{url}}</text>
+    </view>
+    <view>
+      <button bindtap="doPrint" class="weui-btn weui-btn_primary">打印</button>
+    </view>
+  </view>
+</view>

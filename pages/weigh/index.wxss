@@ -1,0 +1,56 @@
+page {
+  color: #333;
+}
+
+.size-5 {
+    font-size: 1.25rem;
+}
+
+.connected_info {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #F0F0F0;
+  padding: 10px;
+  padding-bottom: 20px;
+  margin-bottom: env(safe-area-inset-bottom);
+  font-size: 14px;
+  min-height: 100px;
+  box-shadow: 0 0 3px 0;
+}
+.connected_info .operation {
+  position: absolute;
+  display: inline-block;
+  right: 30px;
+}
+
+
+.devices_summary {
+  margin-top: 30px;
+  padding: 10px;
+  font-size: 16px;
+}
+.device_list {
+  height: 300px;
+  margin: 50px 5px;
+  margin-top: 0;
+  border: 1px solid #EEE;
+  border-radius: 5px;
+  width: auto;
+}
+.device_item {
+  display: flex;
+  border-bottom: 1px solid #EEE;
+  padding: 10px;
+  color: #666;
+}
+.device_item__left {
+  flex-grow: 1;
+}
+.device_item__right {
+  width: 20px;
+}
+.device_item_hover {
+  background-color: rgba(0, 0, 0, .1);
+}
+
