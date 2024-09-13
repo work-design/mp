@@ -1,21 +1,17 @@
 {
   "entryPagePath": "pages/index/index",
   "pages": [
+    "pages/addresses/index",
     "pages/index/index",
     "pages/login/index",
     "pages/mobile/index",
-    "pages/wxpay_pay/index",
-    "pages/addresses/index",
+    "pages/print/index",
+    "pages/profile/index",
     "pages/service/index",
     "pages/subscribe/index",
-    "pages/profile/index"
+    "pages/weigh/index",
+    "pages/wxpay_pay/index"
   ],
-  "plugins": {
-    "bluetooth": {
-      "version": "1.0.0",
-      "provider": "wxcdcb0fa80cf4c2c9"
-    }
-  },
   "requiredPrivateInfos": [
     "chooseAddress"
   ],
