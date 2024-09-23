@@ -1,5 +1,5 @@
 import { createBLEConnection, startBluetoothDevicesDiscovery, getBluetoothAdapterState } from '../../utils/ble'
-import { weigher } from '../../behaviors/weigher'
+import { tcs } from '../../behaviors/tcs'
 
 Page({
   data: {
@@ -7,7 +7,7 @@ Page({
     chs: []
   },
 
-  behaviors: [weigher],
+  behaviors: [tcs],
 
   onLoad(options) {
     console.debug('weigh onload', options)

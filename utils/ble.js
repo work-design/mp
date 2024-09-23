@@ -89,7 +89,7 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId) => {
             serviceId,
             characteristicId: item.uuid,
             success: res => {
-              console.debug('读取蓝牙设备特征值的二进制数据', res)
+              console.debug('读取蓝牙设备特征值的二进制数据', item.uuid, res)
             }
           })
         }
