@@ -46,7 +46,17 @@ export const getBluetoothAdapterState = (page) => {
   })
 }
 
-export const startBluetoothDevicesDiscovery = () => {
+export const restartBluetoothDevicesDiscovery = (page) => {
+  wx.stopBluetoothDevicesDiscovery({
+    success: res => {
+      console.debug('停止蓝牙扫描', res)
+      page.setData({ devices: [] })
+      startBluetoothDevicesDiscovery(page)
+    }
+  })
+}
+
+const startBluetoothDevicesDiscovery = () => {
   wx.startBluetoothDevicesDiscovery({
     allowDuplicatesKey: true,
     success: res => {
@@ -54,16 +64,6 @@ export const startBluetoothDevicesDiscovery = () => {
     },
     fail: res => {
       console.debug('搜寻附近的蓝牙设备失败', res)
-    }
-  })
-}
-
-export const restartBluetoothDevicesDiscovery = (page) => {
-  wx.stopBluetoothDevicesDiscovery({
-    success: res => {
-      console.debug('停止蓝牙扫描', res)
-      page.setData({ devices: [] })
-      startBluetoothDevicesDiscovery(page)
     }
   })
 }
