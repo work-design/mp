@@ -18,12 +18,8 @@ export const getBluetoothAdapterState = (page) => {
           }
         })
         wx.onBluetoothDeviceFound(res => {
-          console.debug('发现蓝牙设备', res.devices, page.data.devices)
           filterBluetoothDevices(res.devices, page)
         })
-        if (page.data.connectedDeviceId) {
-          createBLEConnection(page.data.connectedDeviceId, page)
-        }
       }
     },
     fail: stateRes => {
@@ -81,6 +77,11 @@ const filterBluetoothDevices = (devices, page) => {
       foundDevices.push(device)
     }
   })
+
+  if (page.data.connectedDeviceId) {
+    createBLEConnection(page.data.connectedDeviceId, page)
+  }
+
   page.setData({ devices: foundDevices })
 }
 
