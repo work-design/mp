@@ -2,9 +2,9 @@ import { changeStorageSync } from './helper'
 
 export const getBluetoothAdapterState = (page) => {
   wx.getBluetoothAdapterState({
-    success: res => {
-      console.debug('获取本机蓝牙适配器状态', res.adapterState)
-      const state = res.adapterState || res
+    success: stateRes => {
+      console.debug('获取本机蓝牙适配器状态', stateRes.adapterState)
+      const state = stateRes.adapterState || stateRes
 
       if (state.discovering) {
       } else {
@@ -18,14 +18,17 @@ export const getBluetoothAdapterState = (page) => {
             filterBluetoothDevices(res.devices, page)
           }
         })
-        onBluetoothDeviceFound(page)
+        wx.onBluetoothDeviceFound(res => {
+          console.debug('发现蓝牙设备', res.devices, page.data.devices)
+          filterBluetoothDevices(res.devices, page)
+        })
         if (page.data.connectedDeviceId) {
           createBLEConnection(page.data.connectedDeviceId, page)
         }
       }
     },
-    fail: fail_res => {
-      console.debug('获取本机蓝牙适配器状态失败', fail_res)
+    fail: stateRes => {
+      console.debug('获取本机蓝牙适配器状态失败', stateRes)
       wx.openBluetoothAdapter({
         success: res => {
           console.debug('初始化蓝牙模块', res, page.data.connectedDeviceId)
@@ -65,14 +68,7 @@ export const restartBluetoothDevicesDiscovery = (page) => {
   })
 }
 
-export const onBluetoothDeviceFound = (page) => {
-  wx.onBluetoothDeviceFound(res => {
-    console.debug('-----------------------', res.devices, page.data.devices)
-    filterBluetoothDevices(res.devices, page)
-  })
-}
-
-export const filterBluetoothDevices = (devices, page) => {
+const filterBluetoothDevices = (devices, page) => {
   const foundDevices = page.data.devices
   devices.forEach(device => {
     if (!device.name && !device.localName) { return }
