@@ -80,6 +80,7 @@ export const filterBluetoothDevices = (devices, page) => {
   const foundDevices = page.data.devices
   devices.forEach(device => {
     if (!device.name && !device.localName) { return }
+    if (!device.RSSI) { return }
     if (device.name.includes('未知或不支持的设备')) { return }
     const item = foundDevices.find(e => e.deviceId === device.deviceId)
     if (item) {
