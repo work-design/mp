@@ -23,12 +23,18 @@ export const getBluetoothAdapterState = (page) => {
       const state = res.adapterState || res
 
       if (state.discovering) {
-        onBluetoothDeviceFound(page)
       } else {
         startBluetoothDevicesDiscovery(page)
       }
 
       if (state.available) {
+        wx.getBluetoothDevices({
+          success: res => {
+            console.debug('获取在蓝牙模块生效期间所有搜索到的蓝牙设备', res)
+            filterBluetoothDevices(res.devices, page)
+          }
+        })
+        onBluetoothDeviceFound(page)
         if (page.data.connectedDeviceId) {
           createBLEConnection(page.data.connectedDeviceId, page)
         }
@@ -41,12 +47,11 @@ export const getBluetoothAdapterState = (page) => {
   })
 }
 
-export const startBluetoothDevicesDiscovery = (page) => {
+export const startBluetoothDevicesDiscovery = () => {
   wx.startBluetoothDevicesDiscovery({
     allowDuplicatesKey: true,
     success: res => {
       console.debug('开始搜寻附近的蓝牙设备', res)
-      onBluetoothDeviceFound(page)
     },
     fail: res => {
       console.debug('搜寻附近的蓝牙设备失败', res)
@@ -54,22 +59,37 @@ export const startBluetoothDevicesDiscovery = (page) => {
   })
 }
 
+export const restartBluetoothDevicesDiscovery = (page) => {
+  wx.stopBluetoothDevicesDiscovery({
+    success: res => {
+      console.debug('停止蓝牙扫描', res)
+      page.setData({ devices: [] })
+      startBluetoothDevicesDiscovery(page)
+    }
+  })
+}
+
 export const onBluetoothDeviceFound = (page) => {
   wx.onBluetoothDeviceFound(res => {
-    const foundDevices = page.data.devices
-    res.devices.forEach(device => {
-      if (!device.name && !device.localName) { return }
-      if (device.name.includes('未知或不支持的设备')) { return }
-      const item = foundDevices.find(e => e.deviceId === device.deviceId)
-      if (item) {
-        Object.assign(item, device)
-      } else {
-        console.debug('搜索到新设备', device.name)
-        foundDevices.push(device)
-      }
-    })
-    page.setData({ devices: foundDevices })
+    console.debug('-----------------------', res.devices, page.data.devices)
+    filterBluetoothDevices(res.devices, page)
   })
+}
+
+export const filterBluetoothDevices = (devices, page) => {
+  const foundDevices = page.data.devices
+  devices.forEach(device => {
+    if (!device.name && !device.localName) { return }
+    if (device.name.includes('未知或不支持的设备')) { return }
+    const item = foundDevices.find(e => e.deviceId === device.deviceId)
+    if (item) {
+      Object.assign(item, device)
+    } else {
+      console.debug('搜索到新设备', device.name)
+      foundDevices.push(device)
+    }
+  })
+  page.setData({ devices: foundDevices })
 }
 
 // 获取蓝牙设备服务中所有特征

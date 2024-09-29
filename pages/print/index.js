@@ -1,7 +1,7 @@
 import {
   createBLEConnection,
   writeBLECharacteristicValue,
-  startBluetoothDevicesDiscovery,
+  restartBluetoothDevicesDiscovery,
   getBluetoothAdapterState
 } from '../../utils/ble'
 
@@ -38,12 +38,7 @@ Page({
   },
 
   restartBluetoothDevicesDiscovery() {
-    wx.stopBluetoothDevicesDiscovery({
-      complete: res => {
-        console.debug('停止蓝牙扫描', res)
-        startBluetoothDevicesDiscovery(this)
-      }
-    })
+    restartBluetoothDevicesDiscovery(this)
   },
 
   doPrint() {
