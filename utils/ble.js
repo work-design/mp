@@ -6,8 +6,7 @@ export const getBluetoothAdapterState = (page) => {
       console.debug('获取本机蓝牙适配器状态', stateRes.adapterState)
       const state = stateRes.adapterState || stateRes
 
-      if (state.discovering) {
-      } else {
+      if (!state.discovering) {
         startBluetoothDevicesDiscovery(page)
       }
 
