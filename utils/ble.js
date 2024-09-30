@@ -1,6 +1,6 @@
 import { changeStorageSync } from './helper'
 
-export const getBluetoothAdapterState = (page) => {
+export function getBluetoothAdapterState(page) {
   wx.getBluetoothAdapterState({
     success: stateRes => {
       console.debug('获取本机蓝牙适配器状态', stateRes.adapterState)
@@ -41,7 +41,7 @@ export const getBluetoothAdapterState = (page) => {
   })
 }
 
-export const restartBluetoothDevicesDiscovery = (page) => {
+export function restartBluetoothDevicesDiscovery(page) {
   wx.stopBluetoothDevicesDiscovery({
     success: res => {
       console.debug('停止蓝牙扫描', res)
@@ -51,7 +51,7 @@ export const restartBluetoothDevicesDiscovery = (page) => {
   })
 }
 
-const startBluetoothDevicesDiscovery = () => {
+function startBluetoothDevicesDiscovery() {
   wx.startBluetoothDevicesDiscovery({
     allowDuplicatesKey: true,
     success: res => {
@@ -63,7 +63,7 @@ const startBluetoothDevicesDiscovery = () => {
   })
 }
 
-const filterBluetoothDevices = (devices, page) => {
+function filterBluetoothDevices(devices, page) {
   const foundDevices = page.data.devices
   devices.forEach(device => {
     if (!device.name && !device.localName) { return }
@@ -86,7 +86,7 @@ const filterBluetoothDevices = (devices, page) => {
 }
 
 // 获取蓝牙设备服务中所有特征
-export const getBLEDeviceCharacteristics = (deviceId, serviceId) => {
+export function getBLEDeviceCharacteristics(deviceId, serviceId) {
   wx.getBLEDeviceCharacteristics({
     deviceId,
     serviceId,
@@ -132,7 +132,7 @@ export const getBLEDeviceCharacteristics = (deviceId, serviceId) => {
 }
 
 // 操作之前先监听，保证第一时间获取数据
-export const onBLECharacteristicValueChange = (page) => {
+export function onBLECharacteristicValueChange(page) {
   wx.onBLECharacteristicValueChange(characteristic => {
     const foundChs = page.data.chs
     const item = foundChs.find(e => e.uuid === characteristic.characteristicId)
@@ -154,7 +154,7 @@ export const onBLECharacteristicValueChange = (page) => {
   })
 }
 
-export const writeBLECharacteristicValue = (printer, data) => {
+export function writeBLECharacteristicValue(printer, data) {
   const maxChunk = 20
 
   while (data.length > 0) {
@@ -182,7 +182,7 @@ export const writeBLECharacteristicValue = (printer, data) => {
 }
 
 // 获取蓝牙设备的所有服务
-export const getBLEDeviceServices = (deviceId, page) => {
+export function getBLEDeviceServices(deviceId, page) {
   wx.getBLEDeviceServices({
     deviceId,
     success: res => {
@@ -197,7 +197,7 @@ export const getBLEDeviceServices = (deviceId, page) => {
   })
 }
 
-export const createBLEConnection = (deviceId, page) => {
+export function createBLEConnection(deviceId, page) {
   wx.createBLEConnection({
     deviceId,
     success: res => {
@@ -226,7 +226,7 @@ export const createBLEConnection = (deviceId, page) => {
   })
 }
 
-export const getBluetoothDevice = (deviceId, page) => {
+export function getBluetoothDevice(deviceId, page) {
   wx.getBluetoothDevices({
     success: res => {
       console.debug('获取在蓝牙模块生效期间所有搜索到的蓝牙设备', res)
