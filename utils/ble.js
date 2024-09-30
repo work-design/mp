@@ -77,6 +77,11 @@ function filterBluetoothDevices(devices, page) {
       foundDevices.push(device)
     }
   })
+  foundDevices.sort((a, b) => {
+    if (a.RSSI > b.RSSI) {
+      return -1
+    }
+  })
 
   if (page.data.connectedDeviceId) {
     createBLEConnection(page.data.connectedDeviceId, page)
