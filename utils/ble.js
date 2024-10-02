@@ -1,5 +1,3 @@
-import { changeStorageSync } from './helper'
-
 export function getBluetoothAdapterState(page) {
   wx.getBluetoothAdapterState({
     success: stateRes => {
@@ -86,7 +84,7 @@ function filterBluetoothDevices(devices, page) {
 }
 
 // 获取蓝牙设备服务中所有特征
-export function getBLEDeviceCharacteristics(deviceId, serviceId) {
+export function getBLEDeviceCharacteristics(deviceId, serviceId, page) {
   wx.getBLEDeviceCharacteristics({
     deviceId,
     serviceId,
@@ -108,10 +106,12 @@ export function getBLEDeviceCharacteristics(deviceId, serviceId) {
         }
         if (item.properties.write && item.properties.writeNoResponse) {
           console.debug('可写入', item.uuid, item)
-          changeStorageSync('printer', {
-            deviceId: deviceId,
-            serviceId: serviceId,
-            characteristicId: item.uuid
+          page.setData({
+            printer: {
+              deviceId: deviceId,
+              serviceId: serviceId,
+              characteristicId: item.uuid
+            }
           })
         }
         if (item.properties.notify || item.properties.indicate) {
@@ -189,7 +189,7 @@ export function getBLEDeviceServices(deviceId, page) {
       for (const item of res.services) {
         if (item.isPrimary) {
           console.debug('设备 ID：', deviceId, '主服务：', item.uuid)
-          getBLEDeviceCharacteristics(deviceId, item.uuid)
+          getBLEDeviceCharacteristics(deviceId, item.uuid, page)
           onBLECharacteristicValueChange(page)
         }
       }
@@ -202,7 +202,11 @@ export function createBLEConnection(deviceId, page) {
     deviceId,
     success: res => {
       console.debug('连接蓝牙设备', res)
-      page.setData({ connectedDeviceId: deviceId })
+      page.setData({
+        printer: {
+          deviceId: deviceId
+        }
+      })
       getBLEDeviceServices(deviceId, page)
       getBluetoothDevice(deviceId, page)
       wx.stopBluetoothDevicesDiscovery({
@@ -229,7 +233,9 @@ export function getBluetoothDevice(deviceId, page) {
       } else {
         foundDevices.push(device)
       }
-      page.setData({ devices: foundDevices })
+      page.setData({
+        devices: foundDevices
+      })
     }
   })
 }

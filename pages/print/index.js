@@ -39,11 +39,10 @@ Page({
 
   closeBLEConnection() {
     wx.closeBLEConnection({
-      deviceId: this.data.connectedDeviceId,
+      deviceId: this.data.printer.deviceId,
       success: res => {
         console.debug('断开与蓝牙设备的连接', res)
-        this.setData({ connectedDeviceId: '' })
-        wx.removeStorageSync('printer')
+        this.setData({ printer: {} })
       }
     })
   },
@@ -53,7 +52,6 @@ Page({
   },
 
   doPrint() {
-    const printer = wx.getStorageSync('printer') || {}
     wx.request({
       url: this.data.url,
       header: {
@@ -61,7 +59,7 @@ Page({
         Authorization: wx.getStorageSync('authToken')
       },
       success: res => {
-        writeBLECharacteristicValue(printer, res.data)
+        writeBLECharacteristicValue(this.data.printer, res.data)
       },
       complete: res => {
         console.debug(res)
