@@ -27,11 +27,7 @@ export function getBluetoothAdapterState(page) {
       wx.openBluetoothAdapter({
         success: res => {
           console.debug('初始化蓝牙模块', res, page.data.connectedDeviceId)
-          if (page.data.connectedDeviceId) {
-            createBLEConnection(page.data.connectedDeviceId, page)
-          } else {
-            startBluetoothDevicesDiscovery(page)
-          }
+          startBluetoothDevicesDiscovery(page)
           wx.onBluetoothDeviceFound(res => {
             filterBluetoothDevices(res.devices, page)
           })
@@ -205,8 +201,6 @@ export function createBLEConnection(deviceId, page) {
     deviceId,
     success: res => {
       console.debug('连接蓝牙设备', res)
-      page.setData({ connectedDeviceId: deviceId })
-      wx.setStorageSync('printer', { deviceId: deviceId, connected: true })
       getBLEDeviceServices(deviceId, page)
       getBluetoothDevice(deviceId, page)
       wx.stopBluetoothDevicesDiscovery({
