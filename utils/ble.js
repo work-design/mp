@@ -181,22 +181,6 @@ export function writeBLECharacteristicValue(printer, data) {
   }
 }
 
-// 获取蓝牙设备的所有服务
-export function getBLEDeviceServices(deviceId, page) {
-  wx.getBLEDeviceServices({
-    deviceId,
-    success: res => {
-      for (const item of res.services) {
-        if (item.isPrimary) {
-          console.debug('设备 ID：', deviceId, '主服务：', item.uuid)
-          getBLEDeviceCharacteristics(deviceId, item.uuid, page)
-          onBLECharacteristicValueChange(page)
-        }
-      }
-    }
-  })
-}
-
 export function createBLEConnection(deviceId, page) {
   wx.createBLEConnection({
     deviceId,
@@ -205,6 +189,19 @@ export function createBLEConnection(deviceId, page) {
       page.setData({
         printer: {
           deviceId: deviceId
+        }
+      })
+      // 获取蓝牙设备的所有服务
+      wx.getBLEDeviceServices({
+        deviceId,
+        success: res => {
+          for (const item of res.services) {
+            if (item.isPrimary) {
+              console.debug('设备 ID：', deviceId, '主服务：', item.uuid)
+              getBLEDeviceCharacteristics(deviceId, item.uuid, page)
+              onBLECharacteristicValueChange(page)
+            }
+          }
         }
       })
       getBLEDeviceServices(deviceId, page)
