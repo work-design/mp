@@ -15,3 +15,13 @@
   "window": {}
 }
 ```
+
+
+wx.onBLEConnectionStateChange(res => {
+console.debug(`${res.deviceId} 状态已改变, 连接状态: ${res.connected}`)
+const result = wx.getStorageSync('printer')
+if (result.deviceId === res.deviceId && !res.connected) {
+Object.assign(result, { connected: false })
+wx.setStorageSync('printer', result)
+}
+})

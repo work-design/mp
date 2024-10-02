@@ -32,6 +32,9 @@ export function getBluetoothAdapterState(page) {
           } else {
             startBluetoothDevicesDiscovery(page)
           }
+          wx.onBluetoothDeviceFound(res => {
+            filterBluetoothDevices(res.devices, page)
+          })
         },
         fail: res => {
           console.debug('初始化蓝牙模块失败', res)
@@ -210,14 +213,6 @@ export function createBLEConnection(deviceId, page) {
       page.setData({ connectedDeviceId: deviceId })
       wx.setStorageSync('printer', { deviceId: deviceId, connected: true })
       getBLEDeviceServices(deviceId, page)
-      wx.onBLEConnectionStateChange(res => {
-        console.debug(`${res.deviceId} 状态已改变, 连接状态: ${res.connected}`)
-        const result = wx.getStorageSync('printer')
-        if (result.deviceId === res.deviceId && !res.connected) {
-          Object.assign(result, { connected: false })
-          wx.setStorageSync('printer', result)
-        }
-      })
       getBluetoothDevice(deviceId, page)
       wx.stopBluetoothDevicesDiscovery({
         complete(res) {
