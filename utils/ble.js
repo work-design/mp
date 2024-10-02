@@ -204,8 +204,6 @@ export function createBLEConnection(deviceId, page) {
           }
         }
       })
-      getBLEDeviceServices(deviceId, page)
-      getBluetoothDevice(deviceId, page)
       wx.stopBluetoothDevicesDiscovery({
         complete(res) {
           console.debug('停止扫描蓝牙设备', res)
