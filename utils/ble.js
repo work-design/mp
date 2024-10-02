@@ -202,6 +202,7 @@ export function createBLEConnection(deviceId, page) {
     deviceId,
     success: res => {
       console.debug('连接蓝牙设备', res)
+      page.setData({ connectedDeviceId: deviceId })
       getBLEDeviceServices(deviceId, page)
       getBluetoothDevice(deviceId, page)
       wx.stopBluetoothDevicesDiscovery({
