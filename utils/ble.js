@@ -1,4 +1,3 @@
-const HOST = wx.getExtConfigSync().host
 import { changeStorageSync } from './helper'
 
 export function getBluetoothAdapterState(page) {

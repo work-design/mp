@@ -1,3 +1,4 @@
+const HOST = wx.getExtConfigSync().host
 import {
   createBLEConnection,
   writeBLECharacteristicValue,
