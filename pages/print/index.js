@@ -8,12 +8,24 @@ import {
 Page({
   data: {
     devices: [],
+    registeredDevices: [],
     chs: []
   },
   onLoad(options) {
     console.debug('print onload', options)
     this.setData({
       url: decodeURIComponent(options.url),
+    })
+    wx.request({
+      url: HOST + '/bluetooth/devices',
+      header: {
+        Accept: 'application/json'
+      },
+      success: res => {
+        this.setData({
+          registeredDevices: res.data.devices
+        })
+      }
     })
     getBluetoothAdapterState(this)
   },

@@ -78,18 +78,10 @@ function filterBluetoothDevices(devices, page) {
     }
   })
 
-  wx.request({
-    url: HOST + '/bluetooth/devices',
-    header: {
-      Accept: 'application/json'
-    },
-    success: res => {
-      const item = foundDevices.find(e => res.data.devices.includes(e.name))
-      if (item) {
-        createBLEConnection(item.deviceId, page)
-      }
-    }
-  })
+  const item = foundDevices.find(e => page.data.registeredDevices.includes(e.name))
+  if (item) {
+    createBLEConnection(item.deviceId, page)
+  }
 
   page.setData({ devices: foundDevices })
 }
