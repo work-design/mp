@@ -1,3 +1,4 @@
+const HOST = wx.getExtConfigSync().host
 import { changeStorageSync } from './helper'
 
 export function getBluetoothAdapterState(page) {
@@ -26,7 +27,7 @@ export function getBluetoothAdapterState(page) {
       console.debug('获取本机蓝牙适配器状态失败', stateRes)
       wx.openBluetoothAdapter({
         success: res => {
-          console.debug('初始化蓝牙模块', res, page.data.connectedDeviceId)
+          console.debug('初始化蓝牙模块', res)
           startBluetoothDevicesDiscovery(page)
           wx.onBluetoothDeviceFound(res => {
             filterBluetoothDevices(res.devices, page)
@@ -77,9 +78,18 @@ function filterBluetoothDevices(devices, page) {
     }
   })
 
-  if (page.data.connectedDeviceId) {
-    createBLEConnection(page.data.connectedDeviceId, page)
-  }
+  wx.request({
+    url: HOST + '/bluetooth/devices',
+    header: {
+      Accept: 'application/json'
+    },
+    success: res => {
+      const item = foundDevices.find(e => res.data.devices.includes(e.name))
+      if (item) {
+        createBLEConnection(item.deviceId, page)
+      }
+    }
+  })
 
   page.setData({ devices: foundDevices })
 }
