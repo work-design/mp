@@ -1,4 +1,4 @@
-<view class="devices_summary">已发现 {{devices.length}} 个设备：</view>
+<view class="devices_summary">发现 {{devices.length}} 个设备：</view>
 <scroll-view class="device_list" scroll-y scroll-with-animation>
   <view
     wx:for="{{devices}}"
