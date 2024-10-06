@@ -12,7 +12,7 @@
     <view class="device_item__left">
       <view style="font-size: 16px; color: #333;">
         <text>{{item.name}}</text>
-        <text wx:if="{{printer.deviceId === item.deviceId}}" class="weui-badge" style="background-color: grey">已连接</text>
+        <text wx:if="{{printer.deviceId === item.deviceId}}" class="weui-badge" style="background-color: rgb(0, 209, 178)">已连接</text>
         <text wx:else class="weui-badge" style="background-color: grey">未连接</text>
       </view>
       <view wx:if="{{item.RSSI}}" style="font-size: 10px">
@@ -33,10 +33,6 @@
 
 <button bindtap="restartBluetoothDevicesDiscovery" class="weui-btn weui-btn_primary">查找蓝牙设备</button>
 
-<view class="connected_info" wx:if="{{printer.deviceId}}">
-  <view>
-    <view>
-      <button bindtap="doPrint" class="weui-btn weui-btn_primary">打印</button>
-    </view>
-  </view>
+<view class="connected_info" wx:if="{{!printer.deviceId}}">
+  <button bindtap="doPrint" class="weui-btn weui-btn_primary">打印</button>
 </view>
