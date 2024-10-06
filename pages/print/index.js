@@ -53,6 +53,7 @@ Page({
   },
 
   doPrint() {
+    console.debug('print url', this.data.url)
     wx.request({
       url: this.data.url,
       header: {
