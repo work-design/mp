@@ -16,6 +16,7 @@ export function getBluetoothAdapterState(page) {
           }
         })
         wx.onBluetoothDeviceFound(res => {
+          console.debug('发现新设备', res)
           filterBluetoothDevices(res.devices, page)
         })
       }
@@ -27,6 +28,7 @@ export function getBluetoothAdapterState(page) {
           console.debug('初始化蓝牙模块', res)
           startBluetoothDevicesDiscovery(page)
           wx.onBluetoothDeviceFound(res => {
+            console.debug('发现 2新设备', JSON.stringify(res.devices))
             filterBluetoothDevices(res.devices, page)
           })
         },
@@ -76,7 +78,9 @@ function filterBluetoothDevices(devices, page) {
   })
 
   const item = foundDevices.find(e => page.data.registeredDevices.includes(e.name))
-  if (item) {
+  if (item && page.data.printer.deviceId !== item.deviceId) {
+    console.debug('可连接设备', item)
+    wx.offBluetoothDeviceFound()
     createBLEConnection(item.deviceId, page)
   }
 
@@ -183,7 +187,12 @@ export function createBLEConnection(deviceId, page) {
   wx.createBLEConnection({
     deviceId,
     success: res => {
-      console.debug('连接蓝牙设备', res)
+      console.debug('连接蓝牙设备', deviceId, res)
+      wx.stopBluetoothDevicesDiscovery({
+        complete(res) {
+          console.debug('停止扫描蓝牙设备', res)
+        }
+      })
       page.setData({
         printer: {
           deviceId: deviceId
@@ -200,11 +209,6 @@ export function createBLEConnection(deviceId, page) {
               onBLECharacteristicValueChange(page)
             }
           }
-        }
-      })
-      wx.stopBluetoothDevicesDiscovery({
-        complete(res) {
-          console.debug('停止扫描蓝牙设备', res)
         }
       })
     },

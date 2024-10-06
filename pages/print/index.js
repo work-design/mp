@@ -10,7 +10,8 @@ Page({
   data: {
     devices: [],
     registeredDevices: [],
-    chs: []
+    chs: [],
+    printer: {}
   },
   onLoad(options) {
     console.debug('print onload', options)
