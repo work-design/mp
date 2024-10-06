@@ -65,7 +65,7 @@ function filterBluetoothDevices(devices, page) {
   devices.forEach(device => {
     if (!device.name && !device.localName) { return }
     if (!device.RSSI) { return }
-    if (device.name.includes('未知或不支持的设备')) { return }
+    if (device.name.includes('未知或不支持的设备') || device.name.includes('未知设备')) { return }
     const item = foundDevices.find(e => e.deviceId === device.deviceId)
     if (item) {
       Object.assign(item, device)
