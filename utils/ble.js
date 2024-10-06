@@ -163,8 +163,6 @@ export function writeBLECharacteristicValue(printer, data) {
     let uint = new Uint8Array(buffer)
     uint.set(subData)
 
-    console.debug('test buffer', buffer)
-
     wx.writeBLECharacteristicValue({
       deviceId: printer.deviceId,
       serviceId: printer.serviceId,
@@ -172,10 +170,10 @@ export function writeBLECharacteristicValue(printer, data) {
       value: buffer,
       writeType: 'write',
       success(res) {
-        console.debug('write success', res.errMsg)
+        console.debug('写入数据成功', res.errMsg)
       },
       fail(res) {
-        console.debug('fail', res)
+        console.debug('写入数据失败', res)
       }
     })
   }
