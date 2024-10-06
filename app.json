@@ -1,8 +1,8 @@
 {
   "entryPagePath": "pages/index/index",
   "pages": [
-    "pages/addresses/index",
     "pages/index/index",
+    "pages/addresses/index",
     "pages/login/index",
     "pages/mobile/index",
     "pages/print/index",
