@@ -26,6 +26,7 @@ page {
   padding: 10px;
   font-size: 16px;
 }
+
 .device_list {
   height: 300px;
   margin: 50px 5px;

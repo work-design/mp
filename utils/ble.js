@@ -80,6 +80,15 @@ function filterBluetoothDevices(devices, page) {
   const item = foundDevices.find(e => page.data.registeredDevices.includes(e.name))
   if (item && page.data.printer.deviceId !== item.deviceId) {
     console.debug('可连接设备', item)
+    foundDevices.sort((a, b) => {
+      if (a.deviceId === item.deviceId) {
+        return -1
+      } else if (b.deviceId === item.deviceId) {
+        return 1
+      }
+
+      return 0
+    })
     wx.offBluetoothDeviceFound(res => {
       console.debug('停止监听', res)
     })
