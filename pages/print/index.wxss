@@ -1,13 +1,12 @@
 page {
   color: #333;
+  display: flex;
+  flex-direction: column;
 }
 
 .connected_info {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding: 10px;
-  padding-bottom: 20px;
+  flex-grow: 0;
+  padding: 20px;
   margin-bottom: env(safe-area-inset-bottom);
   font-size: 14px;
   min-height: 100px;
@@ -25,6 +24,7 @@ page {
 }
 
 .device_list {
+  flex-grow: 1;
   height: 300px;
   margin: 50px 5px;
   margin-top: 0;

@@ -31,11 +31,6 @@
   </view>
 </scroll-view>
 
-<button
-  bindtap="restartBluetoothDevicesDiscovery"
-  class=""
->查找蓝牙设备</button>
-
-<view class="connected_info" wx:if="{{printer.deviceId}}">
-  <button bindtap="doPrint" class="">打印</button>
+<view class="connected_info" wx:unless="{{printer.deviceId}}">
+  <button bindtap="doPrint">打印</button>
 </view>
