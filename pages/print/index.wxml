@@ -34,3 +34,6 @@
 <view class="connected_info" wx:if="{{printer.deviceId}}">
   <button bindtap="doPrint">打印</button>
 </view>
+<view class="connected_info" wx:else>
+  <text>正在连接打印机...</text>
+</view>
