@@ -61,7 +61,13 @@ Page({
         Authorization: wx.getStorageSync('authToken')
       },
       success: res => {
-        writeBLECharacteristicValue(this.data.printer, res.data)
+        if (Array.isArray(res.data[0])) {
+          res.data.forEach(data => {
+            writeBLECharacteristicValue(this.data.printer, data)
+          })
+        } else {
+          writeBLECharacteristicValue(this.data.printer, res.data)
+        }
       },
       complete: res => {
         console.debug(res)
