@@ -31,6 +31,6 @@
   </view>
 </scroll-view>
 
-<view class="connected_info" wx:unless="{{printer.deviceId}}">
+<view class="connected_info" wx:if="{{printer.deviceId}}">
   <button bindtap="doPrint">打印</button>
 </view>
