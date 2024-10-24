@@ -1,3 +1,5 @@
+const HOST = wx.getExtConfigSync().host
+
 export function getBluetoothAdapterState(page) {
   wx.getBluetoothAdapterState({
     success: stateRes => {
@@ -28,11 +30,24 @@ export function getBluetoothAdapterState(page) {
           console.debug('初始化蓝牙模块', res)
           startBluetoothDevicesDiscovery(page)
           wx.onBluetoothDeviceFound(res => {
-            console.debug('发现 2新设备', JSON.stringify(res.devices))
+            console.debug('发现新设备', JSON.stringify(res.devices))
             filterBluetoothDevices(res.devices, page)
           })
         },
         fail: res => {
+          wx.request({
+            url: HOST + '/bluetooth/devices/err',
+            method: 'POST',
+            header: {
+              Accept: 'application/json'
+            },
+            data: {
+              api: 'openBluetoothAdapter',
+              message: res
+            },
+            success: res => {
+            }
+          })
           console.debug('初始化蓝牙模块失败', res)
         }
       })
