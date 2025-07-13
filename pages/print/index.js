@@ -1,21 +1,33 @@
+const HOST = wx.getExtConfigSync().host
 import {
   createBLEConnection,
   writeBLECharacteristicValue,
-  startBluetoothDevicesDiscovery,
+  restartBluetoothDevicesDiscovery,
   getBluetoothAdapterState
 } from '../../utils/ble'
 
 Page({
   data: {
     devices: [],
-    chs: []
+    registeredDevices: [],
+    chs: [],
+    printer: {}
   },
   onLoad(options) {
     console.debug('print onload', options)
-    const printer = wx.getStorageSync('printer') || {}
     this.setData({
       url: decodeURIComponent(options.url),
-      printer: printer // 只有当连接成功的才赋值, 当断开时会取消赋值
+    })
+    wx.request({
+      url: HOST + '/bluetooth/devices',
+      header: {
+        Accept: 'application/json'
+      },
+      success: res => {
+        this.setData({
+          registeredDevices: res.data.devices
+        })
+      }
     })
     getBluetoothAdapterState(this)
   },
@@ -28,26 +40,20 @@ Page({
 
   closeBLEConnection() {
     wx.closeBLEConnection({
-      deviceId: this.data.connectedDeviceId,
+      deviceId: this.data.printer.deviceId,
       success: res => {
         console.debug('断开与蓝牙设备的连接', res)
-        this.setData({ connectedDeviceId: '' })
-        wx.removeStorageSync('printer')
+        this.setData({ printer: {} })
       }
     })
   },
 
   restartBluetoothDevicesDiscovery() {
-    wx.stopBluetoothDevicesDiscovery({
-      complete: res => {
-        console.debug('停止蓝牙扫描', res)
-        startBluetoothDevicesDiscovery(this)
-      }
-    })
+    restartBluetoothDevicesDiscovery(this)
   },
 
   doPrint() {
-    const printer = wx.getStorageSync('printer') || {}
+    console.debug('print url', this.data.url)
     wx.request({
       url: this.data.url,
       header: {
@@ -55,7 +61,13 @@ Page({
         Authorization: wx.getStorageSync('authToken')
       },
       success: res => {
-        writeBLECharacteristicValue(printer, res.data)
+        if (Array.isArray(res.data[0])) {
+          res.data.forEach(data => {
+            writeBLECharacteristicValue(this.data.printer, data)
+          })
+        } else {
+          writeBLECharacteristicValue(this.data.printer, res.data)
+        }
       },
       complete: res => {
         console.debug(res)

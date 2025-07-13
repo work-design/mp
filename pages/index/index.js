@@ -6,6 +6,7 @@ Page({
     url: HOST + (PATH.startsWith('/') ? PATH : `/${PATH}`)
   },
   onLoad(query) {
+    console.debug('index onLoad query:', query)
     let url = this.data.url
     if (query.url) {
       url = decodeURIComponent(query.url)

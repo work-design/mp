@@ -2,15 +2,15 @@
   "entryPagePath": "pages/index/index",
   "pages": [
     "pages/index/index",
+    "pages/addresses/index",
     "pages/login/index",
     "pages/mobile/index",
-    "pages/wxpay_pay/index",
-    "pages/addresses/index",
+    "pages/print/index",
+    "pages/profile/index",
     "pages/service/index",
     "pages/subscribe/index",
-    "pages/print/index",
     "pages/weigh/index",
-    "pages/profile/index"
+    "pages/wxpay_pay/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
