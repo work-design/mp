@@ -38,7 +38,10 @@
     "useStaticServer": true,
     "localPlugins": false,
     "condition": false,
-    "skylineRenderEnable": false
+    "skylineRenderEnable": false,
+    "compileWorklet": false,
+    "swc": false,
+    "disableSWC": true
   },
   "compileType": "miniprogram",
   "simulatorType": "qywx_simulator_plugin",
@@ -56,5 +59,6 @@
   "packOptions": {
     "ignore": [],
     "include": []
-  }
+  },
+  "appid": "wx4dedfa19878045a1"
 }

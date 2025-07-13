@@ -12,9 +12,6 @@
     "pages/weigh/index",
     "pages/profile/index"
   ],
-  "requiredPrivateInfos": [
-    "chooseAddress"
-  ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
