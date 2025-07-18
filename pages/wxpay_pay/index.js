@@ -19,6 +19,9 @@ Page({
               })
             },
             fail(res) {
+              wx.redirectTo({
+                url: `/pages/index/index?path=${query.path}`
+              })
               console.debug(res)
             }
           })
