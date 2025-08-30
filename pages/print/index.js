@@ -60,10 +60,10 @@ Page({
       success: res => {
         if (Array.isArray(res.data[0])) {
           res.data.forEach(data => {
-            printer.writeBLECharacteristicValue(data)
+            printer.writeValue(data)
           })
         } else {
-          printer.writeBLECharacteristicValue(res.data)
+          printer.writeValue(res.data)
         }
       },
       complete: res => {

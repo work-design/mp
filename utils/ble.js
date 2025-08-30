@@ -8,7 +8,7 @@ export default class BluetoothPrinter {
   constructor(page) {
     this.page = page
     this.devices = []
-    this.foundDevices = []
+    this.chs = []
     this.registeredDevices = []
     this.printer = {}
   }
@@ -180,9 +180,9 @@ export default class BluetoothPrinter {
   }
 
   // 操作之前先监听，保证第一时间获取数据
-  onBLECharacteristicValueChange() {
+  #onBLECharacteristicValueChange() {
     wx.onBLECharacteristicValueChange(characteristic => {
-      const foundChs = page.data.chs
+      const foundChs = this.chs
       const item = foundChs.find(e => e.uuid === characteristic.characteristicId)
       const buffer = Array.from(new Uint8Array(characteristic.value)).map(i => i.toString(16).padStart(2, '0')).join('')
 
@@ -198,13 +198,12 @@ export default class BluetoothPrinter {
         })
       }
 
-      page.setData({ chs: foundChs, buffer: buffer })
+      this.chs = foundChs
     })
   }
 
-  writeBLECharacteristicValue(data) {
-    const maxChunk = 20
-
+  // 向蓝牙设备发送数据
+  writeValue(data, maxChunk = 20) {
     while (data.length > 0) {
       let subData = data.splice(0, maxChunk)
       let buffer = new ArrayBuffer(subData.length)
@@ -242,7 +241,7 @@ export default class BluetoothPrinter {
               if (item.isPrimary) {
                 console.debug('设备 ID：', deviceId, '主服务：', item.uuid)
                 this.getBLEDeviceCharacteristics(deviceId, item.uuid)
-                this.onBLECharacteristicValueChange()
+                this.#onBLECharacteristicValueChange()
               }
             }
           }
