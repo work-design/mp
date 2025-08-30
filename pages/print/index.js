@@ -21,9 +21,7 @@ Page({
         Accept: 'application/json'
       },
       success: res => {
-        this.setData({
-          registeredDevices: res.data.devices
-        })
+        printer.registeredDevices = res.data.devices
       }
     })
     printer.getBluetoothAdapterState()
