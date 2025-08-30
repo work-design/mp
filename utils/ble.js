@@ -261,7 +261,6 @@ export default class BluetoothPrinter {
       success: res => {
         console.debug('获取在蓝牙模块生效期间所有搜索到的蓝牙设备', res)
         const device = res.devices.find(e => e.deviceId === deviceId)
-        const item = this.foundDevices.find(e => e.deviceId === device.deviceId)
       }
     })
   }
