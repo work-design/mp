@@ -1,10 +1,5 @@
 const HOST = wx.getExtConfigSync().host
-import {
-  createBLEConnection,
-  writeBLECharacteristicValue,
-  restartBluetoothDevicesDiscovery,
-  getBluetoothAdapterState
-} from '../../utils/ble'
+import BluetoothPrinter from '../../utils/ble'
 
 Page({
   data: {
@@ -13,8 +8,10 @@ Page({
     chs: [],
     printer: {}
   },
+
   onLoad(options) {
     console.debug('print onload', options)
+    const printer = new BluetoothPrinter(this)
     this.setData({
       url: decodeURIComponent(options.url),
     })
@@ -29,7 +26,7 @@ Page({
         })
       }
     })
-    getBluetoothAdapterState(this)
+    this.getBluetoothAdapterState()
   },
 
   createBLEConnection(e) {

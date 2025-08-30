@@ -1,6 +1,6 @@
 const HOST = wx.getExtConfigSync().host
 
-class BluetoothPrinter {
+export default class BluetoothPrinter {
 
   constructor(page) {
     this.page = page
@@ -272,5 +272,3 @@ class BluetoothPrinter {
   }
 
 }
-
-export default BluetoothPrinter
