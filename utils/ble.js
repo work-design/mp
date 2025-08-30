@@ -13,7 +13,7 @@ export default class BluetoothPrinter {
   }
 
   // 获取本机蓝牙适配器状态
-  getBluetoothAdapterState(callback = () => {}) {
+  getState(callback = () => {}) {
     wx.getBluetoothAdapterState({
       success: stateRes => {
         console.debug('获取本机蓝牙适配器状态', stateRes.adapterState)

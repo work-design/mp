@@ -25,7 +25,7 @@ Page({
       }
     })
 
-    this.printer.getBluetoothAdapterState(res => {
+    this.printer.getState(res => {
       wx.request({
         url: HOST + '/bluetooth/devices/err',
         method: 'POST',
