@@ -9,6 +9,8 @@ export default class BluetoothPrinter {
     this.page = page
     this.devices = []
     this.foundDevices = []
+    this.registeredDevices = []
+    this.printer = {}
   }
 
   // 获取本机蓝牙适配器状态
@@ -90,21 +92,23 @@ export default class BluetoothPrinter {
   }
 
   filterBluetoothDevices(devices) {
+    const foundDevices = this.devices
+
     devices.forEach(device => {
       if (!device.name && !device.localName) { return }
       if (!device.RSSI) { return }
       if (device.name.includes('未知或不支持的设备') || device.name.includes('未知设备')) { return }
-      const item = this.foundDevices.find(e => e.deviceId === device.deviceId)
+      const item = foundDevices.find(e => e.deviceId === device.deviceId)
       if (item) {
         Object.assign(item, device)
       } else {
         console.debug('搜索到新设备', device.name)
-        this.foundDevices.push(device)
+        foundDevices.push(device)
       }
     })
 
-    const item = foundDevices.find(e => this.page.data.registeredDevices.includes(e.name))
-    if (item && page.data.printer.deviceId !== item.deviceId) {
+    const item = this.foundDevices.find(e => this.registeredDevices.includes(e.name))
+    if (item && this.printer.deviceId !== item.deviceId) {
       console.debug('可连接设备', item)
       foundDevices.sort((a, b) => {
         if (a.deviceId === item.deviceId) {
@@ -126,7 +130,7 @@ export default class BluetoothPrinter {
       this.createBLEConnection(item.deviceId)
     }
 
-    this.page.setData({ devices: foundDevices })
+    this.devices = foundDevices
   }
 
   // 获取蓝牙设备服务中所有特征
@@ -152,13 +156,11 @@ export default class BluetoothPrinter {
           }
           if (item.properties.write && item.properties.writeNoResponse) {
             console.debug('可写入', item.uuid, item)
-            page.setData({
-              printer: {
-                deviceId: deviceId,
-                serviceId: serviceId,
-                characteristicId: item.uuid
-              }
-            })
+            this.printer = {
+              deviceId: deviceId,
+              serviceId: serviceId,
+              characteristicId: item.uuid
+            }
           }
           if (item.properties.notify || item.properties.indicate) {
             wx.notifyBLECharacteristicValueChange({
@@ -200,7 +202,7 @@ export default class BluetoothPrinter {
     })
   }
 
-  writeBLECharacteristicValue(printer, data) {
+  writeBLECharacteristicValue(data) {
     const maxChunk = 20
 
     while (data.length > 0) {
@@ -210,9 +212,9 @@ export default class BluetoothPrinter {
       uint.set(subData)
 
       wx.writeBLECharacteristicValue({
-        deviceId: printer.deviceId,
-        serviceId: printer.serviceId,
-        characteristicId: printer.characteristicId,
+        deviceId: this.printer.deviceId,
+        serviceId: this.printer.serviceId,
+        characteristicId: this.printer.characteristicId,
         value: buffer,
         writeType: 'write',
         success(res) {
@@ -230,11 +232,8 @@ export default class BluetoothPrinter {
       deviceId,
       success: res => {
         console.debug('连接蓝牙设备', deviceId, res)
-        page.setData({
-          printer: {
-            deviceId: deviceId
-          }
-        })
+        this.printer = { deviceId: deviceId }
+
         // 获取蓝牙设备的所有服务
         wx.getBLEDeviceServices({
           deviceId,

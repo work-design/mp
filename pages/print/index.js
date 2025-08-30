@@ -46,7 +46,7 @@ Page({
   },
 
   restartBluetoothDevicesDiscovery() {
-    restartBluetoothDevicesDiscovery(this)
+    printer.restartBluetoothDevicesDiscovery
   },
 
   doPrint() {
@@ -60,10 +60,10 @@ Page({
       success: res => {
         if (Array.isArray(res.data[0])) {
           res.data.forEach(data => {
-            writeBLECharacteristicValue(this.data.printer, data)
+            printer.writeBLECharacteristicValue(data)
           })
         } else {
-          writeBLECharacteristicValue(this.data.printer, res.data)
+          printer.writeBLECharacteristicValue(res.data)
         }
       },
       complete: res => {
