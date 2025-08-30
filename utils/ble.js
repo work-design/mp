@@ -1,9 +1,14 @@
 const HOST = wx.getExtConfigSync().host
 
+// setData
+// devices
+// printer
 export default class BluetoothPrinter {
 
   constructor(page) {
     this.page = page
+    this.devices = []
+    this.foundDevices = []
   }
 
   // 获取本机蓝牙适配器状态
@@ -85,21 +90,20 @@ export default class BluetoothPrinter {
   }
 
   filterBluetoothDevices(devices) {
-    const foundDevices = page.data.devices
     devices.forEach(device => {
       if (!device.name && !device.localName) { return }
       if (!device.RSSI) { return }
       if (device.name.includes('未知或不支持的设备') || device.name.includes('未知设备')) { return }
-      const item = foundDevices.find(e => e.deviceId === device.deviceId)
+      const item = this.foundDevices.find(e => e.deviceId === device.deviceId)
       if (item) {
         Object.assign(item, device)
       } else {
         console.debug('搜索到新设备', device.name)
-        foundDevices.push(device)
+        this.foundDevices.push(device)
       }
     })
 
-    const item = foundDevices.find(e => page.data.registeredDevices.includes(e.name))
+    const item = foundDevices.find(e => this.page.data.registeredDevices.includes(e.name))
     if (item && page.data.printer.deviceId !== item.deviceId) {
       console.debug('可连接设备', item)
       foundDevices.sort((a, b) => {
@@ -126,7 +130,7 @@ export default class BluetoothPrinter {
   }
 
   // 获取蓝牙设备服务中所有特征
-  getBLEDeviceCharacteristics(deviceId, serviceId, page) {
+  getBLEDeviceCharacteristics(deviceId, serviceId) {
     wx.getBLEDeviceCharacteristics({
       deviceId,
       serviceId,
@@ -257,16 +261,12 @@ export default class BluetoothPrinter {
       success: res => {
         console.debug('获取在蓝牙模块生效期间所有搜索到的蓝牙设备', res)
         const device = res.devices.find(e => e.deviceId === deviceId)
-        const foundDevices = page.data.devices
-        const item = foundDevices.find(e => e.deviceId === device.deviceId)
+        const item = this.foundDevices.find(e => e.deviceId === device.deviceId)
         if (item) {
           Object.assign(item, device)
         } else {
-          foundDevices.push(device)
+          this.foundDevices.push(device)
         }
-        page.setData({
-          devices: foundDevices
-        })
       }
     })
   }
