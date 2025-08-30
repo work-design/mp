@@ -14,19 +14,19 @@ export default class BluetoothPrinter {
         const state = stateRes.adapterState || stateRes
 
         if (!state.discovering) {
-          startBluetoothDevicesDiscovery(page)
+          this.startBluetoothDevicesDiscovery()
         }
 
         if (state.available) {
           wx.getBluetoothDevices({
             success: res => {
               console.debug('获取在蓝牙模块生效期间所有搜索到的蓝牙设备', res)
-              filterBluetoothDevices(res.devices, page)
+              this.filterBluetoothDevices(res.devices)
             }
           })
           wx.onBluetoothDeviceFound(res => {
             console.debug('发现新设备', res)
-            filterBluetoothDevices(res.devices, page)
+            this.filterBluetoothDevices(res.devices)
           })
         }
       },
@@ -35,10 +35,10 @@ export default class BluetoothPrinter {
         wx.openBluetoothAdapter({
           success: res => {
             console.debug('初始化蓝牙模块', res)
-            startBluetoothDevicesDiscovery(page)
+            this.startBluetoothDevicesDiscovery()
             wx.onBluetoothDeviceFound(res => {
               console.debug('发现新设备', JSON.stringify(res.devices))
-              filterBluetoothDevices(res.devices, page)
+              this.filterBluetoothDevices(res.devices)
             })
           },
           fail: res => {
@@ -79,7 +79,7 @@ export default class BluetoothPrinter {
       success: res => {
         console.debug('停止蓝牙扫描', res)
         this.page.setData({ devices: [] })
-        startBluetoothDevicesDiscovery()
+        this.startBluetoothDevicesDiscovery()
       }
     })
   }
@@ -119,7 +119,7 @@ export default class BluetoothPrinter {
           console.debug('停止扫描蓝牙设备', res)
         }
       })
-      createBLEConnection(item.deviceId, page)
+      this.createBLEConnection(item.deviceId)
     }
 
     this.page.setData({ devices: foundDevices })
@@ -221,7 +221,7 @@ export default class BluetoothPrinter {
     }
   }
 
-  createBLEConnection(deviceId, page) {
+  createBLEConnection(deviceId) {
     wx.createBLEConnection({
       deviceId,
       success: res => {
@@ -238,8 +238,8 @@ export default class BluetoothPrinter {
             for (const item of res.services) {
               if (item.isPrimary) {
                 console.debug('设备 ID：', deviceId, '主服务：', item.uuid)
-                getBLEDeviceCharacteristics(deviceId, item.uuid, page)
-                onBLECharacteristicValueChange(page)
+                this.getBLEDeviceCharacteristics(deviceId, item.uuid)
+                this.onBLECharacteristicValueChange()
               }
             }
           }
@@ -252,7 +252,7 @@ export default class BluetoothPrinter {
   }
 
 
-  getBluetoothDevice(deviceId, page) {
+  getBluetoothDevice(deviceId) {
     wx.getBluetoothDevices({
       success: res => {
         console.debug('获取在蓝牙模块生效期间所有搜索到的蓝牙设备', res)
