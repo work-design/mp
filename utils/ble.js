@@ -6,7 +6,7 @@ class BluetoothPrinter {
     this.page = page
   }
 
-  
+  // 获取本机蓝牙适配器状态
   getBluetoothAdapterState() {
     wx.getBluetoothAdapterState({
       success: stateRes => {
