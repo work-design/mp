@@ -107,7 +107,7 @@ export default class BluetoothPrinter {
       }
     })
 
-    const item = this.foundDevices.find(e => this.registeredDevices.includes(e.name))
+    const item = foundDevices.find(e => this.registeredDevices.includes(e.name))
     if (item && this.printer.deviceId !== item.deviceId) {
       console.debug('可连接设备', item)
       foundDevices.sort((a, b) => {

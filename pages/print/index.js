@@ -11,7 +11,7 @@ Page({
 
   onLoad(options) {
     console.debug('print onload', options)
-    const printer = new BluetoothPrinter(this)
+    this.printer = new BluetoothPrinter(this)
     this.setData({
       url: decodeURIComponent(options.url),
     })
@@ -21,10 +21,11 @@ Page({
         Accept: 'application/json'
       },
       success: res => {
-        printer.registeredDevices = res.data.devices
+        this.printer.registeredDevices = res.data.devices
       }
     })
-    printer.getBluetoothAdapterState()
+
+    this.printer.getBluetoothAdapterState()
   },
 
   createBLEConnection(e) {
