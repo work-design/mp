@@ -26,7 +26,7 @@ Page({
         })
       }
     })
-    this.getBluetoothAdapterState()
+    printer.getBluetoothAdapterState()
   },
 
   createBLEConnection(e) {
