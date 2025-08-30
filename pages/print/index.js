@@ -11,7 +11,7 @@ Page({
 
   onLoad(options) {
     console.debug('print onload', options)
-    this.printer = new BluetoothPrinter(this)
+    this.printer = new BluetoothPrinter()
     this.setData({
       url: decodeURIComponent(options.url),
     })

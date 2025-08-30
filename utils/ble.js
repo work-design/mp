@@ -5,8 +5,7 @@ const HOST = wx.getExtConfigSync().host
 // printer
 export default class BluetoothPrinter {
 
-  constructor(page) {
-    this.page = page
+  constructor() {
     this.devices = []
     this.chs = []
     this.registeredDevices = []
@@ -85,7 +84,6 @@ export default class BluetoothPrinter {
     wx.stopBluetoothDevicesDiscovery({
       success: res => {
         console.debug('停止蓝牙扫描', res)
-        this.page.setData({ devices: [] })
         this.startBluetoothDevicesDiscovery()
       }
     })
