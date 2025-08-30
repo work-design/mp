@@ -25,7 +25,21 @@ Page({
       }
     })
 
-    this.printer.getBluetoothAdapterState()
+    this.printer.getBluetoothAdapterState(res => {
+      wx.request({
+        url: HOST + '/bluetooth/devices/err',
+        method: 'POST',
+        header: {
+          Accept: 'application/json'
+        },
+        data: {
+          api: 'openBluetoothAdapter',
+          message: res
+        },
+        success: res => {
+        }
+      })
+    })
   },
 
   createBLEConnection(e) {
