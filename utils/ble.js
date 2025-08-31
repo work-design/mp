@@ -228,7 +228,6 @@ export default class BluetoothPrinter {
               if (item.isPrimary) {
                 console.debug('设备 ID：', deviceId, '主服务：', item.uuid)
                 this.#getBLEDeviceCharacteristics(deviceId, item.uuid, success)
-                this.#onBLECharacteristicValueChange()
               }
             }
           }
