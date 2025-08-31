@@ -113,14 +113,14 @@ export default class BluetoothPrinter {
           console.debug('停止扫描蓝牙设备', res)
         }
       })
-      this.createBLEConnection(item.deviceId)
+      this.#createBLEConnection(item.deviceId, success)
     }
 
     this.allDevices = foundDevices
   }
 
   // 获取蓝牙设备服务中所有特征
-  #getBLEDeviceCharacteristics(deviceId, serviceId) {
+  #getBLEDeviceCharacteristics(deviceId, serviceId, success) {
     wx.getBLEDeviceCharacteristics({
       deviceId,
       serviceId,
@@ -147,6 +147,7 @@ export default class BluetoothPrinter {
               serviceId: serviceId,
               characteristicId: item.uuid
             }
+            success?.()
           }
           if (item.properties.notify || item.properties.indicate) {
             wx.notifyBLECharacteristicValueChange({
@@ -159,7 +160,7 @@ export default class BluetoothPrinter {
         }
         console.debug(table)
       },
-      fail(res) {
+      fail: res => {
         console.error('读取蓝牙设备特征值失败', res)
       }
     })
@@ -212,7 +213,7 @@ export default class BluetoothPrinter {
     }
   }
 
-  createBLEConnection(deviceId) {
+  #createBLEConnection(deviceId, success) {
     wx.createBLEConnection({
       deviceId,
       success: res => {
@@ -226,7 +227,7 @@ export default class BluetoothPrinter {
             for (const item of res.services) {
               if (item.isPrimary) {
                 console.debug('设备 ID：', deviceId, '主服务：', item.uuid)
-                this.#getBLEDeviceCharacteristics(deviceId, item.uuid)
+                this.#getBLEDeviceCharacteristics(deviceId, item.uuid, success)
                 this.#onBLECharacteristicValueChange()
               }
             }
