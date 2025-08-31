@@ -25,6 +25,7 @@ Page({
       success: () => {
         this.setData({ state: '打印机已连接，即将打印' })
         this.doPrint(printer, url)
+        wx.navigateBack()
       },
       fail: res => {
         wx.request({
