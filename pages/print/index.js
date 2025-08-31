@@ -40,6 +40,8 @@ Page({
         })
       }
     })
+
+    this.printer = printer
   },
 
   doPrint(printer, url) {
