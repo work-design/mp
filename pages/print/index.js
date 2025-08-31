@@ -21,9 +21,9 @@ Page({
         printer.registeredDevices = res.data.devices
         this.setData({ registeredDevices: res.data.devices })
       },
-      complete: res => {
+      fail: res => {
         wx.showModal({
-          title: 'request complete',
+          title: 'request fail',
           content: JSON.stringify(res)
         })
       }
