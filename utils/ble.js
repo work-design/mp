@@ -13,7 +13,7 @@ export default class BluetoothPrinter {
   }
 
   // 获取本机蓝牙适配器状态
-  getState({ success, fail } = {}) {
+  getState({ success, fail, complete } = {}) {
     wx.getBluetoothAdapterState({
       success: stateRes => {
         console.debug('获取本机蓝牙适配器状态', stateRes.adapterState)
@@ -28,11 +28,13 @@ export default class BluetoothPrinter {
             success: res => {
               console.debug('获取在蓝牙模块生效期间所有搜索到的蓝牙设备', res)
               this.#filterBluetoothDevices(res.devices, success)
+              complete?.(this.allDevices)
             }
           })
           wx.onBluetoothDeviceFound(res => {
             console.debug('发现新设备', res)
             this.#filterBluetoothDevices(res.devices, success)
+            complete?.(this.allDevices)
           })
         }
       },
@@ -45,6 +47,7 @@ export default class BluetoothPrinter {
             wx.onBluetoothDeviceFound(res => {
               console.debug('发现新设备', JSON.stringify(res.devices))
               this.#filterBluetoothDevices(res.devices, success)
+              complete?.(this.allDevices)
             })
           },
           fail: res => {

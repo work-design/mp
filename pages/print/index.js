@@ -24,11 +24,15 @@ Page({
     printer.getState({
       success: (res) => {
         this.setData({
-          state: '打印机已连接，即将打印',
-          devices: res.devices
+          state: '打印机已连接，即将打印'
         })
         this.doPrint(printer, url)
         wx.navigateBack()
+      },
+      complete: (res) => {
+        this.setData({
+          devices: res
+        })
       },
       fail: res => {
         wx.request({
