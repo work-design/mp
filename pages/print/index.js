@@ -42,26 +42,6 @@ Page({
     })
   },
 
-  createBLEConnection(e) {
-    const ds = e.currentTarget.dataset
-    const deviceId = ds.deviceId
-    printer.createBLEConnection(deviceId)
-  },
-
-  closeBLEConnection() {
-    wx.closeBLEConnection({
-      deviceId: this.data.printer.deviceId,
-      success: res => {
-        console.debug('断开与蓝牙设备的连接', res)
-        this.setData({ printer: {} })
-      }
-    })
-  },
-
-  restartBluetoothDevicesDiscovery() {
-    printer.restartBluetoothDevicesDiscovery
-  },
-
   doPrint() {
     console.debug('print url', this.data.url)
     wx.request({
