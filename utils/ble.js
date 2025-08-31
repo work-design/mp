@@ -141,7 +141,7 @@ export default class BluetoothPrinter {
             })
           }
           if (item.properties.write && item.properties.writeNoResponse) {
-            console.debug('可写入', item.uuid, item)
+            console.debug('可写入', deviceId, serviceId, item.uuid, item)
             this.printer = {
               deviceId: deviceId,
               serviceId: serviceId,
