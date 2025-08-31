@@ -119,51 +119,22 @@ export default class BluetoothPrinter {
     this.allDevices = foundDevices
   }
 
-  // 获取蓝牙设备服务中所有特征
-  #getBLEDeviceCharacteristics(deviceId, serviceId, success) {
-    wx.getBLEDeviceCharacteristics({
-      deviceId,
-      serviceId,
-      success: res => {
-        let table = [
-          ['device id', 'service id', 'characteristic id']
-        ]
-        for (const item of res.characteristics) {
-          table.push([deviceId, serviceId, item.uuid])
-          if (item.properties.read) {
-            wx.readBLECharacteristicValue({
-              deviceId,
-              serviceId,
-              characteristicId: item.uuid,
-              success: res => {
-                console.debug('读取蓝牙设备特征值的二进制数据', item.uuid, res)
-              }
-            })
-          }
-          if (item.properties.write && item.properties.writeNoResponse) {
-            console.debug('可写入', deviceId, serviceId, item.uuid, item)
-            this.printer = {
-              deviceId: deviceId,
-              serviceId: serviceId,
-              characteristicId: item.uuid
-            }
-            success?.()
-          }
-          if (item.properties.notify || item.properties.indicate) {
-            wx.notifyBLECharacteristicValueChange({
-              deviceId,
-              serviceId,
-              characteristicId: item.uuid,
-              state: true
-            })
-          }
+  // 获取特征值
+  #xxx(characteristics, success, size, index) {
+    for (const characteristic of characteristics) {
+      if (characteristic.properties.write && characteristic.properties.writeNoResponse) {
+        console.debug('可写入', deviceId, serviceId, characteristic.uuid, item)
+        this.printer = {
+          deviceId: deviceId,
+          serviceId: serviceId,
+          characteristicId: characteristic.uuid
         }
-        console.debug(table)
-      },
-      fail: res => {
-        console.error('读取蓝牙设备特征值失败', res)
       }
-    })
+    }
+    // 所有 service 的特制值已获取完毕
+    if (size === index + 1) {
+      success?.()
+    }
   }
 
   // 操作之前先监听，保证第一时间获取数据
@@ -218,18 +189,28 @@ export default class BluetoothPrinter {
       deviceId,
       success: res => {
         console.debug('连接蓝牙设备', deviceId, res)
-        this.printer = { deviceId: deviceId }
 
         // 获取蓝牙设备的所有服务
         wx.getBLEDeviceServices({
           deviceId,
           success: res => {
-            for (const item of res.services) {
-              if (item.isPrimary) {
-                console.debug('设备 ID：', deviceId, '主服务：', item.uuid)
-                this.#getBLEDeviceCharacteristics(deviceId, item.uuid, success)
+            const servicesLength = res.services.length
+            res.services.forEach((service, index) => {
+              if (service.isPrimary) {
+                console.debug('设备 ID：', deviceId, '主服务：', service.uuid)
+                // 获取蓝牙设备服务中所有特征
+                wx.getBLEDeviceCharacteristics({
+                  deviceId: deviceId,
+                  serviceId: service.uuid,
+                  success: res => {
+                    this.#xxx(res.characteristics, success, servicesLength, index)
+                  },
+                  fail: res => {
+                    console.error('读取蓝牙设备特征值失败', res)
+                  }
+                })
               }
-            }
+            })
           }
         })
       },
