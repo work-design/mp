@@ -27,12 +27,12 @@ export default class BluetoothPrinter {
           wx.getBluetoothDevices({
             success: res => {
               console.debug('获取在蓝牙模块生效期间所有搜索到的蓝牙设备', res)
-              this.filterBluetoothDevices(res.devices)
+              this.#filterBluetoothDevices(res.devices)
             }
           })
           wx.onBluetoothDeviceFound(res => {
             console.debug('发现新设备', res)
-            this.filterBluetoothDevices(res.devices)
+            this.#filterBluetoothDevices(res.devices)
           })
         }
       },
@@ -44,7 +44,7 @@ export default class BluetoothPrinter {
             this.startBluetoothDevicesDiscovery()
             wx.onBluetoothDeviceFound(res => {
               console.debug('发现新设备', JSON.stringify(res.devices))
-              this.filterBluetoothDevices(res.devices)
+              this.#filterBluetoothDevices(res.devices)
             })
           },
           fail: res => {
@@ -77,7 +77,7 @@ export default class BluetoothPrinter {
     })
   }
 
-  filterBluetoothDevices(devices) {
+  #filterBluetoothDevices(devices) {
     const foundDevices = this.devices
 
     devices.forEach(device => {

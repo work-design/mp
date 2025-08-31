@@ -4,7 +4,6 @@ import BluetoothPrinter from '../../utils/ble'
 Page({
   data: {
     devices: [],
-    registeredDevices: [],
     chs: [],
     printer: {}
   },
