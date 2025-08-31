@@ -3,28 +3,25 @@ import BluetoothPrinter from '../../utils/ble'
 
 Page({
   data: {
-    devices: [],
-    chs: [],
-    printer: {}
+    state: '正在连接打印机...'
   },
 
   onLoad(options) {
     console.debug('print onload', options)
-    this.printer = new BluetoothPrinter()
-    this.setData({
-      url: decodeURIComponent(options.url),
-    })
+    const printer = new BluetoothPrinter()
+    const url = decodeURIComponent(options.url)
+
     wx.request({
       url: HOST + '/bluetooth/devices',
       header: {
         Accept: 'application/json'
       },
       success: res => {
-        this.printer.registeredDevices = res.data.devices
+        printer.registeredDevices = res.data.devices
       }
     })
 
-    this.printer.getState(res => {
+    printer.getState(res => {
       wx.request({
         url: HOST + '/bluetooth/devices/err',
         method: 'POST',
@@ -39,12 +36,15 @@ Page({
         }
       })
     })
+
+    this.setData({ state: '打印机已连接， 即将打印' })
+    this.doPrint(printer, url)
   },
 
-  doPrint() {
-    console.debug('print url', this.data.url)
+  doPrint(printer, url) {
+    console.debug('print url', url)
     wx.request({
-      url: this.data.url,
+      url: url,
       header: {
         Accept: 'application/json',
         Authorization: wx.getStorageSync('authToken')
