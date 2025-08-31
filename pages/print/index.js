@@ -21,24 +21,25 @@ Page({
       }
     })
 
-    printer.getState(res => {
-      wx.request({
-        url: HOST + '/bluetooth/devices/err',
-        method: 'POST',
-        header: {
-          Accept: 'application/json'
-        },
-        data: {
-          api: 'openBluetoothAdapter',
-          message: res
-        },
-        success: res => {
-        }
-      })
+    printer.getState({
+      success: () => {
+        this.setData({ state: '打印机已连接，即将打印' })
+        this.doPrint(printer, url)
+      },
+      fail: res => {
+        wx.request({
+          url: HOST + '/bluetooth/devices/err',
+          method: 'POST',
+          header: {
+            Accept: 'application/json'
+          },
+          data: {
+            api: 'openBluetoothAdapter',
+            message: res
+          }
+        })
+      }
     })
-
-    this.setData({ state: '打印机已连接，即将打印' })
-    this.doPrint(printer, url)
   },
 
   doPrint(printer, url) {
