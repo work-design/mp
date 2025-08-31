@@ -120,7 +120,7 @@ export default class BluetoothPrinter {
   }
 
   // 获取蓝牙设备服务中所有特征
-  getBLEDeviceCharacteristics(deviceId, serviceId) {
+  #getBLEDeviceCharacteristics(deviceId, serviceId) {
     wx.getBLEDeviceCharacteristics({
       deviceId,
       serviceId,
@@ -226,7 +226,7 @@ export default class BluetoothPrinter {
             for (const item of res.services) {
               if (item.isPrimary) {
                 console.debug('设备 ID：', deviceId, '主服务：', item.uuid)
-                this.getBLEDeviceCharacteristics(deviceId, item.uuid)
+                this.#getBLEDeviceCharacteristics(deviceId, item.uuid)
                 this.#onBLECharacteristicValueChange()
               }
             }
