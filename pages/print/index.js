@@ -37,7 +37,7 @@ Page({
       })
     })
 
-    this.setData({ state: '打印机已连接， 即将打印' })
+    this.setData({ state: '打印机已连接，即将打印' })
     this.doPrint(printer, url)
   },
 
