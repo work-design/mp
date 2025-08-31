@@ -121,20 +121,7 @@ export default class BluetoothPrinter {
 
   // 获取特征值
   #xxx(characteristics, success, size, index) {
-    for (const characteristic of characteristics) {
-      if (characteristic.properties.write && characteristic.properties.writeNoResponse) {
-        console.debug('可写入', deviceId, serviceId, characteristic.uuid, item)
-        this.printer = {
-          deviceId: deviceId,
-          serviceId: serviceId,
-          characteristicId: characteristic.uuid
-        }
-      }
-    }
-    // 所有 service 的特制值已获取完毕
-    if (size === index + 1) {
-      success?.()
-    }
+
   }
 
   // 操作之前先监听，保证第一时间获取数据
@@ -203,7 +190,20 @@ export default class BluetoothPrinter {
                   deviceId: deviceId,
                   serviceId: service.uuid,
                   success: res => {
-                    this.#xxx(res.characteristics, success, servicesLength, index)
+                    for (const characteristic of res.characteristics) {
+                      if (characteristic.properties.write && characteristic.properties.writeNoResponse) {
+                        console.debug('可写入', deviceId, service.uuid, characteristic.uuid)
+                        this.printer = {
+                          deviceId: deviceId,
+                          serviceId: service.uuid,
+                          characteristicId: characteristic.uuid
+                        }
+                      }
+                    }
+                    // 所有 service 的特制值已获取完毕
+                    if (servicesLength === index + 1) {
+                      success?.()
+                    }
                   },
                   fail: res => {
                     console.error('读取蓝牙设备特征值失败', res)
