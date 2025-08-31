@@ -22,8 +22,11 @@ Page({
     })
 
     printer.getState({
-      success: () => {
-        this.setData({ state: '打印机已连接，即将打印' })
+      success: (res) => {
+        this.setData({
+          state: '打印机已连接，即将打印',
+          devices: res.devices
+        })
         this.doPrint(printer, url)
         wx.navigateBack()
       },

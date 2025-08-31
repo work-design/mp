@@ -202,7 +202,7 @@ export default class BluetoothPrinter {
                     }
                     // 所有 service 的特制值已获取完毕
                     if (servicesLength === index + 1) {
-                      success?.()
+                      success?.({ devices: this.allDevices })
                     }
                   },
                   fail: res => {
