@@ -3,7 +3,8 @@ import BluetoothPrinter from '../../utils/ble'
 
 Page({
   data: {
-    state: '正在连接打印机...'
+    state: '正在连接打印机...',
+    host: HOST
   },
 
   onLoad(options) {

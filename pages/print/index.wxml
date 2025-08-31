@@ -1,9 +1,15 @@
 <view>
+  <text>host</text>
+  <text>{{host}}</text>
+</view>
+
+<view>
   <text>注册设备为：</text>
   <view wx:for="{{registeredDevices}}">
     <text>{{item}}</text>
   </view>
 </view>
+
 <view class="devices_summary">发现 {{devices.length}} 个设备：</view>
 <scroll-view class="device_list" scroll-y scroll-with-animation>
   <view wx:for="{{devices}}" wx:key="index" class="device_item">
