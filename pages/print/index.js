@@ -18,6 +18,7 @@ Page({
       },
       success: res => {
         printer.registeredDevices = res.data.devices
+        this.setData({ registeredDevices: res.data.devices })
       }
     })
 
