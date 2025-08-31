@@ -6,7 +6,7 @@ const HOST = wx.getExtConfigSync().host
 export default class BluetoothPrinter {
 
   constructor() {
-    this.devices = []
+    this.allDevices = []
     this.chs = []
     this.registeredDevices = []
     this.printer = {}
@@ -78,7 +78,7 @@ export default class BluetoothPrinter {
   }
 
   #filterBluetoothDevices(devices) {
-    const foundDevices = this.devices
+    const foundDevices = this.allDevices
 
     devices.forEach(device => {
       if (!device.name && !device.localName) { return }
@@ -116,7 +116,7 @@ export default class BluetoothPrinter {
       this.createBLEConnection(item.deviceId)
     }
 
-    this.devices = foundDevices
+    this.allDevices = foundDevices
   }
 
   // 获取蓝牙设备服务中所有特征
