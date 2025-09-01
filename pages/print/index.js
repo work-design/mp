@@ -1,5 +1,5 @@
 const HOST = wx.getExtConfigSync().host
-import BluetoothPrinter from '../../utils/ble'
+const BluetoothPrinter = requirePlugin('bluetooth')
 
 Page({
   data: {

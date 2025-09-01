@@ -1,4 +1,3 @@
-import { createBLEConnection, startBluetoothDevicesDiscovery, getBluetoothAdapterState } from '../../utils/ble'
 import { tcs } from '../../behaviors/tcs'
 
 Page({
