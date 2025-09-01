@@ -14,7 +14,7 @@
   ],
   "plugins": {
     "bluetooth": {
-      "version": "dev-06c55a64e270b1a004e88dbfb8bf4770",
+      "version": "1.0.5",
       "provider": "wxcdcb0fa80cf4c2c9"
     }
   },
