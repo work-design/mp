@@ -9,7 +9,7 @@ Page({
       data: {
         appid: wx.getAccountInfoSync().miniProgram.appId
       },
-      success(res) {
+      success: res => {
         if (res.statusCode >= 200 && res.statusCode < 300) {
           wx.requestPayment({
             ...res.data,
@@ -32,7 +32,7 @@ Page({
           })
         }
       },
-      fail(res) {
+      fail: res => {
         wx.showModal({
           title: 'request fail',
           content: JSON.stringify(res)

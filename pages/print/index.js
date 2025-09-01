@@ -34,7 +34,7 @@ Page({
         this.setData({
           state: '打印机已连接，即将打印'
         })
-        this.doPrint(printer, url)
+        this.#doPrint(printer, url)
         wx.navigateBack()
       },
       complete: (res) => {
@@ -60,7 +60,7 @@ Page({
     this.printer = printer
   },
 
-  doPrint(printer, url) {
+  #doPrint(printer, url) {
     console.debug('print url', url)
     wx.request({
       url: url,

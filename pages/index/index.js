@@ -1,10 +1,11 @@
-const HOST = wx.getExtConfigSync().host
+const WEBVIEW_HOST = wx.getExtConfigSync().webview_host
 const PATH = wx.getExtConfigSync().path
 
 Page({
   data: {
-    url: HOST + (PATH.startsWith('/') ? PATH : `/${PATH}`)
+    url: WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : `/${PATH}`)
   },
+
   onLoad(query) {
     console.debug('index onLoad query:', query)
     let url = this.data.url
@@ -12,15 +13,16 @@ Page({
       url = decodeURIComponent(query.url)
     } else if (Object.keys(query).includes('path')) {
       const path = decodeURIComponent(query.path)
-      url = HOST + (path.startsWith('/') ? path : `/${path}`)
+      url = WEBVIEW_HOST + (path.startsWith('/') ? path : `/${path}`)
     } else if (query.scene) {
       const path = decodeURIComponent(query.scene)
       if (path.startsWith('/')) {
-        url = HOST + path
+        url = WEBVIEW_HOST + path
       }
     }
     this.setData({ url: url })
   },
+
   onShareAppMessage(options) {
     const url = new URL(options.webViewUrl)
     url.searchParams.delete('auth_token')
@@ -30,6 +32,7 @@ Page({
       path: `/page/index/index?path=${path}`
     }
   },
+
   onShareTimeline(options) {
     console.debug('onShareTimeline', options.webViewUrl)
   }

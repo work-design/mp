@@ -10,17 +10,17 @@ Page({
             Authorization: wx.getStorageSync('authToken')
           },
           data: res,
-          success(response) {
+          success: (response) => {
             wx.redirectTo({
               url: `/pages/index/index?path=/profiled/my/addresses/${response.data.id}/edit`
             })
           },
-          fail(res) {
+          fail: (res) => {
             console.debug(res)
           }
         })
       },
-      fail(res) {
+      fail: (res) => {
         console.debug(res)
       }
     })
