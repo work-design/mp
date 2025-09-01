@@ -1,5 +1,5 @@
 const HOST = wx.getExtConfigSync().host
-const BluetoothPrinter = requirePlugin('bluetooth')
+const plugin = requirePlugin('bluetooth')
 
 Page({
   data: {
@@ -9,7 +9,7 @@ Page({
 
   onLoad(options) {
     console.debug('print onload', options)
-    const printer = new BluetoothPrinter()
+    const printer = new plugin.Bluetooth()
     const url = decodeURIComponent(options.url)
 
     wx.request({
