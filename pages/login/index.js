@@ -23,11 +23,20 @@ Page({
             wx.redirectTo({
               url: `/pages/index/index?url=${encodeURIComponent(res.data.url)}`
             })
+          },
+          fail: res => {
+            wx.showModal({
+              title: 'wx.login request fail',
+              content: JSON.stringify(res)
+            })
           }
         })
       },
       fail: res => {
-        console.debug('wx.login fail:', res)
+        wx.showModal({
+          title: 'wx.login fail',
+          content: JSON.stringify(res)
+        })
       }
     })
   }
