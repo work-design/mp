@@ -9,7 +9,7 @@ Page({
 
   onLoad(options) {
     console.debug('print onload', options)
-    const printer = new plugin.Bluetooth()
+    const printer = new plugin.BluetoothPrinter()
     const url = decodeURIComponent(options.url)
 
     wx.request({
