@@ -34,7 +34,7 @@ Page({
         this.setData({
           state: '打印机已连接，即将打印'
         })
-        this.#doPrint(printer, url)
+        this.doPrint(printer, url)
         wx.navigateBack()
       },
       complete: (res) => {
@@ -60,7 +60,15 @@ Page({
     this.printer = printer
   },
 
-  #doPrint(printer, url) {
+  printLocal(printer) {
+    const cpcl = new plugin.PrintCPCL()
+    cpcl.text('dddd')
+    const data = cpcl.render()
+    console.debug(data)
+    printer.writeValue(data)
+  },
+
+  doPrint(printer, url) {
     console.debug('print url', url)
     wx.request({
       url: url,
