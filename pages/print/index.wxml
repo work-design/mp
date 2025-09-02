@@ -1,9 +1,4 @@
 <view>
-  <text>host</text>
-  <text>{{host}}</text>
-</view>
-
-<view>
   <text>注册设备为：</text>
   <view wx:for="{{registeredDevices}}">
     <text>{{item}}</text>
