@@ -34,8 +34,9 @@ Page({
         this.setData({
           state: '打印机已连接，即将打印'
         })
-        this.doPrint(printer, url)
-        wx.navigateBack()
+        //this.doPrint(printer, url)
+        this.printLocal(printer)
+        //wx.navigateBack()
       },
       complete: (res) => {
         this.setData({
@@ -62,10 +63,11 @@ Page({
 
   printLocal(printer) {
     const cpcl = new plugin.PrintCPCL()
-    cpcl.text('dddd')
+    cpcl.text('你好呀')
     const data = cpcl.render()
     console.debug(data)
-    printer.writeValue(data)
+    this.xxx = data
+    printer.writeBuffer(data)
   },
 
   doPrint(printer, url) {
