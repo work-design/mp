@@ -1,21 +1,23 @@
-<view>
+<view class="box">
   <text>注册设备为：</text>
-  <view wx:for="{{registeredDevices}}">
+  <view wx:for="{{registeredDevices}}" class="box">
     <text>{{item}}</text>
   </view>
 </view>
 
-<view class="devices_summary">发现 {{devices.length}} 个设备：</view>
-<scroll-view class="device_list" scroll-y scroll-with-animation>
-  <view wx:for="{{devices}}" wx:key="index" class="device_item">
-    <view class="device_item__left">
-      <text>{{item.name}}</text>
-      <text wx:if="{{printer.deviceId === item.deviceId}}" class="weui-badge" style="background-color: rgb(0, 209, 178)">已连接</text>
-      <text wx:else class="weui-badge" style="background-color: grey">未连接</text>
+<view class="box">发现 {{devices.length}} 个设备：</view>
+<view class="box">
+  <scroll-view class="list" scroll-y scroll-with-animation>
+    <view wx:for="{{devices}}" wx:key="index" class="item">
+      <text class="item-left">{{item.name}}</text>
+      <view class="item-right">
+        <text wx:if="{{printer.deviceId === item.deviceId}}" class="" style="background-color: rgb(0, 209, 178)">已连接</text>
+        <text wx:else class="" style="background-color: grey">未连接</text>
+      </view>
     </view>
-  </view>
-</scroll-view>
+  </scroll-view>
+</view>
 
-<view>
+<view class="box text-centered">
   <text>{{ state }}</text>
 </view>
