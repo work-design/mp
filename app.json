@@ -18,6 +18,11 @@
       "provider": "wxcdcb0fa80cf4c2c9"
     }
   },
+  "permission": {
+    "scope.bluetooth": {
+      "desc": "授权蓝牙，支持蓝牙打印机"
+    }
+  },
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
