@@ -22,24 +22,16 @@ App({
             wx.setStorageSync('user', res.data.user)
             let url
             const page = getCurrentPages()[0]
+            console.debug('lauch', page)
 
-            if (options.query.scene) {
+            if (options.query.scene && page) {
               const path = decodeURIComponent(options.query.scene)
               if (path.startsWith('/')) {
                 url = HOST + path
-              } else {
-                url = page.data.url
+                page.setData({
+                  url: `${url}${url.includes('?') ? '&' : '?'}auth_token=${res.data.auth_token}`
+                })
               }
-            } else if (page) {
-              url = page.data.url
-            }
-
-            if (page && url) {
-              page.setData({url: `${url}${url.includes('?') ? '&' : '?'}auth_token=${res.data.auth_token}`})
-            } else {
-              wx.redirectTo({
-                url: `/pages/index/index?url=${encodeURIComponent(res.data.url)}`
-              })
             }
           }
         })
