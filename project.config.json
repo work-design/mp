@@ -55,7 +55,7 @@
     "tabIndent": "insertSpaces",
     "tabSize": 2
   },
-  "libVersion": "widelyUsed",
+  "libVersion": "latest",
   "packOptions": {
     "ignore": [],
     "include": []
