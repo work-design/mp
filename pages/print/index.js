@@ -44,15 +44,20 @@ Page({
         })
       },
       fail: res => {
-        wx.request({
-          url: HOST + '/bluetooth/devices/err',
-          method: 'POST',
-          header: {
-            Accept: 'application/json'
-          },
-          data: {
-            api: 'openBluetoothAdapter',
-            message: res
+        wx.getSetting({
+          success: settingRes => {
+            wx.request({
+              url: HOST + '/bluetooth/devices/err',
+              method: 'POST',
+              header: {
+                Accept: 'application/json'
+              },
+              data: {
+                api: 'openBluetoothAdapter',
+                message: res,
+                set: settingRes
+              }
+            })
           }
         })
       }
