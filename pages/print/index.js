@@ -20,44 +20,43 @@ Page({
       success: res => {
         printer.registeredDevices = res.data.devices
         this.setData({ registeredDevices: res.data.devices })
+        printer.getState({
+          success: (res) => {
+            this.setData({
+              state: '打印机已连接，即将打印'
+            })
+            this.doPrint(printer, url)
+            wx.navigateBack()
+          },
+          complete: (res) => {
+            this.setData({
+              devices: res
+            })
+          },
+          fail: res => {
+            wx.getSetting({
+              success: settingRes => {
+                wx.request({
+                  url: HOST + '/bluetooth/devices/err',
+                  method: 'POST',
+                  header: {
+                    Accept: 'application/json'
+                  },
+                  data: {
+                    api: 'openBluetoothAdapter',
+                    message: res,
+                    set: settingRes
+                  }
+                })
+              }
+            })
+          }
+        })
       },
       fail: res => {
         wx.showModal({
           title: 'request fail',
           content: JSON.stringify(res)
-        })
-      }
-    })
-
-    printer.getState({
-      success: (res) => {
-        this.setData({
-          state: '打印机已连接，即将打印'
-        })
-        this.doPrint(printer, url)
-        wx.navigateBack()
-      },
-      complete: (res) => {
-        this.setData({
-          devices: res
-        })
-      },
-      fail: res => {
-        wx.getSetting({
-          success: settingRes => {
-            wx.request({
-              url: HOST + '/bluetooth/devices/err',
-              method: 'POST',
-              header: {
-                Accept: 'application/json'
-              },
-              data: {
-                api: 'openBluetoothAdapter',
-                message: res,
-                set: settingRes
-              }
-            })
-          }
         })
       }
     })
