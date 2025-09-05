@@ -94,7 +94,7 @@ Page({
       complete: res => {
         wx.showModal({
           title: 'do Print fail',
-          content: JSON.stringify(res)
+          content: `Url: ${url}，${JSON.stringify(res)}`
         })
       }
     })
