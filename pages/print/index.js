@@ -91,7 +91,7 @@ Page({
         }
         wx.navigateBack()
       },
-      complete: res => {
+      fail: res => {
         wx.showModal({
           title: 'do Print fail',
           content: `Url: ${url}，${JSON.stringify(res)}`
