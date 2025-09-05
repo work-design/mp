@@ -26,7 +26,6 @@ Page({
               state: '打印机已连接，即将打印'
             })
             this.doPrint(printer, url)
-            wx.navigateBack()
           },
           complete: (res) => {
             this.setData({
@@ -90,6 +89,7 @@ Page({
         } else {
           printer.writeValue(res.data)
         }
+        wx.navigateBack()
       },
       complete: res => {
         wx.showModal({
