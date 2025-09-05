@@ -34,9 +34,8 @@ Page({
         this.setData({
           state: '打印机已连接，即将打印'
         })
-        //this.doPrint(printer, url)
-        this.printLocal(printer)
-        //wx.navigateBack()
+        this.doPrint(printer, url)
+        wx.navigateBack()
       },
       complete: (res) => {
         this.setData({
