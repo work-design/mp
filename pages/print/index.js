@@ -9,7 +9,7 @@ Page({
 
   onLoad(options) {
     console.debug('print onload', options)
-    const printer = new plugin.BluetoothPrinter()
+    const printer = new plugin.BluetoothPrinter(wx)
     const url = decodeURIComponent(options.url)
 
     wx.request({
@@ -25,7 +25,8 @@ Page({
             this.setData({
               state: '打印机已连接，即将打印'
             })
-            this.doPrint(printer, url)
+            //this.printLocal(printer)
+           this.doPrint(printer, url)
           },
           complete: (res) => {
             this.setData({

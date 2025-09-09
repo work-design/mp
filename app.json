@@ -14,13 +14,8 @@
   ],
   "plugins": {
     "bluetooth": {
-      "version": "1.1.8",
+      "version": "dev-00ed3574e2927450d3b4cf1f85f2a171",
       "provider": "wxcdcb0fa80cf4c2c9"
-    }
-  },
-  "permission": {
-    "scope.bluetooth": {
-      "desc": "授权蓝牙，支持蓝牙打印机"
     }
   },
   "window":{
