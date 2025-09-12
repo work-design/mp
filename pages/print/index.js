@@ -9,7 +9,7 @@ Page({
 
   onLoad(options) {
     console.debug('print onload', options)
-    const printer = new plugin.BluetoothPrinter(wx)
+    this.printer = new plugin.BluetoothPrinter(wx)
     const url = decodeURIComponent(options.url)
 
     wx.request({
@@ -18,15 +18,14 @@ Page({
         Accept: 'application/json'
       },
       success: res => {
-        printer.registeredDevices = res.data.devices
+        this.printer.registeredDevices = res.data.devices
         this.setData({ registeredDevices: res.data.devices })
-        printer.getState({
+        this.printer.getState({
           success: (res) => {
             this.setData({
               state: '打印机已连接，即将打印'
             })
-            //this.printLocal(printer)
-           this.doPrint(printer, url)
+           this.doPrint(url)
           },
           complete: (res) => {
             this.setData({
@@ -60,25 +59,26 @@ Page({
         })
       }
     })
-
-    this.printer = printer
   },
 
-  printCpcl(printer) {
+  printCpcl() {
     const cpcl = new plugin.PrintCPCL()
     cpcl.text('你好呀')
-    cpcl.text_bold('haohao好')
+    cpcl.text_bold('好')
     const data = cpcl.render()
     console.debug(data)
-    this.xxx = data
-    printer.writeBuffer(data)
+    this.printer.writeBuffer(data)
   },
 
   printPos() {
-
+    const pos = new plugin.PrintPOS()
+    pos.text('一餐之计')
+    pos.text_big('一餐之计')
+    const data = pos.render()
+    this.printer.writeValue(data)
   },
 
-  doPrint(printer, url) {
+  doPrint(url) {
     console.debug('print url', url)
     wx.request({
       url: url,
@@ -89,10 +89,10 @@ Page({
       success: res => {
         if (Array.isArray(res.data[0])) {
           res.data.forEach(data => {
-            printer.writeValue(data)
+            this.printer.writeValue(data)
           })
         } else {
-          printer.writeValue(res.data)
+          this.printer.writeValue(res.data)
         }
         wx.navigateBack()
       },
