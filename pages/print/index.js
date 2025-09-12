@@ -64,7 +64,7 @@ Page({
     this.printer = printer
   },
 
-  printLocal(printer) {
+  printCpcl(printer) {
     const cpcl = new plugin.PrintCPCL()
     cpcl.text('你好呀')
     cpcl.text_bold('haohao好')
@@ -72,6 +72,10 @@ Page({
     console.debug(data)
     this.xxx = data
     printer.writeBuffer(data)
+  },
+
+  printPos() {
+
   },
 
   doPrint(printer, url) {
