@@ -61,23 +61,6 @@ Page({
     })
   },
 
-  printCpcl() {
-    const cpcl = new plugin.PrintCPCL()
-    cpcl.text('你好呀')
-    cpcl.text_bold('好')
-    const data = cpcl.render()
-    console.debug(data)
-    this.printer.writeBuffer(data)
-  },
-
-  printPos() {
-    const pos = new plugin.PrintPOS()
-    pos.text('一餐之计')
-    pos.text_big('一餐之计')
-    const data = pos.render()
-    this.printer.writeValue(data)
-  },
-
   doPrint(url) {
     console.debug('print url', url)
     wx.request({
