@@ -5,7 +5,7 @@
   </view>
 </view>
 
-<view class="box">发现 {{devices.length}} 个设备：</view>
+<view class="box">发现 {{ devices.length }} 个设备：</view>
 <view class="box">
   <scroll-view class="list" scroll-y scroll-with-animation>
     <view wx:for="{{devices}}" wx:key="index" class="item">
