@@ -1,20 +1,27 @@
 // app.js
-const HOST = wx.getExtConfigSync().host
-const APPID = wx.getAccountInfoSync().miniProgram.appId
+const AUTH_HOST = wx.getExtConfigSync().auth_host
 
 App({
   onLaunch(options) {
+    let appid
+    if (wx.getSystemInfoSync().brand === 'devtools') {
+      appid = 'wx1ec82e7c529f99a0'
+    } else {
+      appid = wx.getAccountInfoSync().miniProgram.appId
+    }
+
     wx.login({
       success: res => {
+        console.debug('login:', res)
         wx.request({
-          url: HOST + '/wechat/program_users',
+          url: AUTH_HOST + '/wechat/program_users',
           method: 'POST',
           header: {
             Accept: 'application/json'
           },
           data: {
             code: res.code,
-            appid: APPID,
+            appid: appid,
             ...options
           },
           success: res => {
@@ -41,6 +48,7 @@ App({
       }
     })
   },
+
   onShow(options) {
     const page = getCurrentPages()[0]
 

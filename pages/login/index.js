@@ -1,9 +1,15 @@
 const AUTH_HOST = wx.getExtConfigSync().auth_host
-const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
   onLoad(query) {
     console.debug('login onLoad query:', query)
+    let appid
+    if (wx.getSystemInfoSync().brand === 'devtools') {
+      appid = 'wx1ec82e7c529f99a0'
+    } else {
+      appid = wx.getAccountInfoSync().miniProgram.appId
+    }
+
     wx.login({
       success: res => {
         wx.request({
@@ -14,7 +20,7 @@ Page({
           },
           data: {
             code: res.code,
-            appid: APPID,
+            appid: appid,
             ...query
           },
           success: res => {
