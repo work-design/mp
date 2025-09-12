@@ -29,7 +29,7 @@ App({
             wx.setStorageSync('user', res.data.user)
             let url
             const page = getCurrentPages()[0]
-            console.debug('lauch', page)
+            console.debug('launch:', page)
 
             if (options.query.scene && page) {
               const path = decodeURIComponent(options.query.scene)
