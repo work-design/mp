@@ -1,5 +1,5 @@
 <view class="box">
-  <text>注册设备为：</text>
+  <text>绑定设备为：</text>
   <view wx:for="{{registeredDevices}}" class="box">
     <text>{{item}}</text>
   </view>
