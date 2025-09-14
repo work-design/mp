@@ -4,7 +4,7 @@ const AUTH_HOST = wx.getExtConfigSync().auth_host
 App({
   onLaunch(options) {
     let appid
-    if (wx.getSystemInfoSync().brand === 'devtools') {
+    if (wx.getDeviceInfo().brand === 'devtools') {
       appid = 'wx1ec82e7c529f99a0'
     } else {
       appid = wx.getAccountInfoSync().miniProgram.appId
