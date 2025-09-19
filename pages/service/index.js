@@ -33,9 +33,6 @@ Page({
         })
       }
     })
-  },
-
-  handBack() {
-    wx.navigateBack()
   }
+
 })
