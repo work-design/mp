@@ -1,6 +1,4 @@
-<button
-  open-type="getPhoneNumber"
-  bindgetphonenumber="getPhoneNumber"
->
-  手机号登录
-</button>
+<view class="container">
+  <view>快速授权手机号。</view>
+  <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">手机号登录</button>
+</view>
