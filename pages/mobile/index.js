@@ -3,8 +3,8 @@ const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
   onload() {
-
   },
+
   getPhoneNumber(e) {
     wx.request({
       url: AUTH_HOST + '/wechat/program_users/mobile',
@@ -18,10 +18,8 @@ Page({
         ...e.detail
       },
       success: res => {
-
+        wx.navigateBack()
       }
     })
-
-
   }
 })

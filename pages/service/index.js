@@ -2,8 +2,8 @@ const HOST = wx.getExtConfigSync().host
 
 Page({
   data: {
-
   },
+
   onLoad() {
     wx.request({
       url: HOST + '/wechat/app_configs',
