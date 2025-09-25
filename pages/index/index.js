@@ -4,7 +4,7 @@ const PATH = wx.getExtConfigSync().path
 Page({
   onLoad(query) {
     console.debug('index onLoad:', query)
-    let url = this.data.url
+    let url = WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : `/${PATH}`)
     if (query.url) {
       url = decodeURIComponent(query.url)
     } else if (Object.keys(query).includes('path')) {
@@ -15,8 +15,6 @@ Page({
       if (path.startsWith('/')) {
         url = WEBVIEW_HOST + path
       }
-    } else {
-      url = WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : `/${PATH}`)
     }
 
     this.setData({ url: url })
