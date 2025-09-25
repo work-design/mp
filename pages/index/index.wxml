@@ -4,4 +4,3 @@
 
 <view class="center">正进入应用...</view>
 <web-view wx:if="{{url}}" src="{{ url }}#wechat_redirect" bindmessage="onWebMessage"></web-view>
-<view wx:else class="center">正在准备数据...</view>
