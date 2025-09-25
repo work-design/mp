@@ -8,6 +8,7 @@
     "pages/print/index",
     "pages/profile/index",
     "pages/service/index",
+    "pages/share/index",
     "pages/subscribe/index",
     "pages/weigh/index",
     "pages/wxpay_pay/index"

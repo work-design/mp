@@ -1,0 +1,7 @@
+button {
+  margin-top: 1rem;
+}
+
+.container {
+  justify-content: center;
+}

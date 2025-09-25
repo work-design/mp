@@ -16,6 +16,15 @@ Page({
     })
   },
 
+  onShareAppMessage() {
+    const url = 'https://one.work/factory/productions'
+
+    return {
+      title: '官方门店',
+      path: `/pages/index/index?url=${url}`
+    }
+  },
+
   handleContact(e) {
     wx.openCustomerServiceChat({
       extInfo: { url: this.data.service_url },
