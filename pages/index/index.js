@@ -2,12 +2,8 @@ const WEBVIEW_HOST = wx.getExtConfigSync().webview_host
 const PATH = wx.getExtConfigSync().path
 
 Page({
-  data: {
-    url: WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : `/${PATH}`)
-  },
-
   onLoad(query) {
-    console.debug('index onLoad query:', query)
+    console.debug('index onLoad:', query)
     let url = this.data.url
     if (query.url) {
       url = decodeURIComponent(query.url)
@@ -19,7 +15,10 @@ Page({
       if (path.startsWith('/')) {
         url = WEBVIEW_HOST + path
       }
+    } else {
+      url = WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : `/${PATH}`)
     }
+
     this.setData({ url: url })
   },
 

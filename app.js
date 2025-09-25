@@ -3,6 +3,8 @@ const AUTH_HOST = wx.getExtConfigSync().auth_host
 
 App({
   onLaunch(options) {
+    console.debug('On Launch:', options)
+
     let appid
     if (wx.getDeviceInfo().brand === 'devtools') {
       appid = 'wx1ec82e7c529f99a0'
@@ -50,6 +52,7 @@ App({
   },
 
   onShow(options) {
+    console.debug('On Show:', options)
     const page = getCurrentPages()[0]
 
     if (options.query.scene && page) {
