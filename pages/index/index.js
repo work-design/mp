@@ -22,9 +22,17 @@ Page({
 
   onWebMessage(e) {
     console.debug('onWebMessage', e)
-    // 只会退、销毁、分享前触发
+
     const msg = e.detail.data[e.detail.data.length - 1]
-    this.organ = msg.organ
+    if (msg) {
+      this.title = `${msg.organ}的小店`
+    } else {
+      this.title = '邀请您下单'
+      wx.showModal({
+        title: 'message get fail',
+        content: JSON.stringify(e.detail.data)
+      })
+    }
   },
 
   onShareAppMessage(options) {
@@ -36,10 +44,10 @@ Page({
     } else {
       path = base
     }
-    console.debug('shared path', path)
+    console.debug('shared path:', path)
 
     return {
-      title: `${this.organ}的小店`,
+      title: this.title,
       path: `/pages/index/index?url=${path}`
     }
   },
