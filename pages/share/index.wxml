@@ -1,11 +1,11 @@
 <view class="container">
   <view>
-    <text>分享本小程序给您的客户</text>
+    <text>分享本小程序至客户（用户）下单</text>
     <button open-type="share" type="primary">分享</button>
   </view>
 
-  <view class="mt-4">
-    <text>联系客户做个专属门店小程序</text>
+  <view class="mt-8">
+    <text>定制专属门店小程序</text>
     <button bindtap="handleContact" type="primary">联系客服</button>
   </view>
 </view>
