@@ -36,7 +36,7 @@ Page({
 
     return {
       title: '自定义转发标题',
-      path: `/page/index?path=${path}`
+      path: `/pages/index/index?url=${path}`
     }
   },
 
