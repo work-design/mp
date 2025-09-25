@@ -23,6 +23,13 @@ Page({
     this.setData({ url: url })
   },
 
+  onWebMessage(e) {
+    console.debug('onWebMessage', e)
+    // 只会退、销毁、分享前触发
+    const msg = e.detail.data[e.detail.data.length - 1]
+    this.organ = msg.organ
+  },
+
   onShareAppMessage(options) {
     let path
     const [base, search] = options.webViewUrl.split('?')
@@ -35,7 +42,7 @@ Page({
     console.debug('shared path', path)
 
     return {
-      title: '自定义转发标题',
+      title: `${this.organ}的小店`,
       path: `/pages/index/index?url=${path}`
     }
   },
