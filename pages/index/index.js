@@ -24,12 +24,19 @@ Page({
   },
 
   onShareAppMessage(options) {
-    const url = new URL(options.webViewUrl)
-    url.searchParams.delete('auth_token')
-    const path = `${url.pathname}${url.search}`
+    let path
+    const [base, search] = options.webViewUrl.split('?')
+    if (search) {
+      const pairs = search.split('&').filter(kv => !kv.startsWith('auth_token='))
+      path = pairs.length ? `${base}?${pairs.join('&')}` : base
+    } else {
+      path = base
+    }
+    console.debug('shared path', path)
+
     return {
       title: '自定义转发标题',
-      path: `/page/index/index?path=${path}`
+      path: `/page/index?path=${path}`
     }
   },
 
