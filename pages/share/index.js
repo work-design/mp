@@ -4,7 +4,7 @@ const appid = wx.getAccountInfoSync().miniProgram.appId
 Page({
   onLoad() {
     wx.request({
-      url: HOST + `/wechat/apps/${appid}/config`,
+      url: HOST + `/wechat/apps/${appid}/configs`,
       success: (res) => {
         this.setData(res.data)
       },
