@@ -38,6 +38,10 @@ page {
   box-sizing: border-box;
 }
 
+.text-centered {
+  text-align: center;
+}
+
 .center {
   display: flex;
   height: 100%;
