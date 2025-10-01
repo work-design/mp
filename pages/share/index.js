@@ -2,7 +2,10 @@ const HOST = wx.getExtConfigSync().host
 const appid = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
-  onLoad() {
+  onLoad(query) {
+    const url = decodeURIComponent(query.url)
+    this.setData({ url: url })
+
     wx.request({
       url: HOST + `/wechat/apps/${appid}/configs`,
       success: (res) => {
@@ -15,12 +18,10 @@ Page({
   },
 
   onShareAppMessage() {
-    const url = 'https://one.work/factory/productions'
-
     return {
       title: '官方门店',
       webViewUrl: this.data.share_logo,
-      path: `/pages/index/index?url=${url}`
+      path: `/pages/index/index?url=${this.data.url}`
     }
   },
 
