@@ -21,7 +21,7 @@ Page({
     return {
       title: '官方门店',
       webViewUrl: this.data.share_logo,
-      path: `/pages/index/index?url=${this.data.url}`
+      path: `/pages/index/index?url=${encodeURIComponent(this.data.url)}`
     }
   },
 
