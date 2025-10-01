@@ -3,8 +3,8 @@ const HOST = wx.getExtConfigSync().host
 Page({
   onLoad() {
     wx.request({
-      url: HOST + '/wechat/app_configs',
-      data: { 
+      url: HOST + '/wechat/apps',
+      data: {
         appid: wx.getAccountInfoSync().miniProgram.appId 
       },
       success: (res) => {
@@ -21,6 +21,7 @@ Page({
 
     return {
       title: '官方门店',
+      webViewUrl: this.data.share_logo,
       path: `/pages/index/index?url=${url}`
     }
   },
