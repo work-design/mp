@@ -2,7 +2,8 @@
   <image wx:if="{{ share_logo }}" src="{{ share_logo }}" mode="aspectFit"></image>
 
   <view class="text-centered mt-1">
-    <text>分享本小程序至客户（用户）下单</text>
+    <view>分享本小程序至客户（用户）下单</view>
+    <view class="text-sm">链接：{{ url }}</view>
     <button open-type="share" type="primary">分享</button>
   </view>
 

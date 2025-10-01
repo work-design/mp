@@ -42,6 +42,10 @@ page {
   text-align: center;
 }
 
+.text-sm {
+  font-size: 0.8rem;
+}
+
 .center {
   display: flex;
   height: 100%;
