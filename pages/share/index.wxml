@@ -1,5 +1,5 @@
 <view class="container">
-  <image wx:if="{{ share_logo }}" src="{{ share_logo }}" mode="aspectFit"></image>
+  <image wx:if="{{ share_logo }}" src="{{ share_logo }}" mode="aspectFit" show-menu-by-longpress="true"></image>
 
   <view class="text-centered mt-1 mx-3">
     <view>分享本小程序至客户（用户）下单</view>
