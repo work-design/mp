@@ -12,7 +12,7 @@ Page({
     wx.downloadFile({
       url: decodeURIComponent(query.share_logo),
       success: res => {
-        this.setData({ url: res.tempFilePath })
+        this.setData({ share_logo: res.tempFilePath })
       }
     })
 
