@@ -20,6 +20,21 @@ Page({
     this.setData({ url: url })
   },
 
+  onWebMessage(e) {
+    console.debug('onWebMessage', e)
+
+    const msg = e.detail.data[e.detail.data.length - 1]
+    if (msg) {
+      this.title = `${msg.organ}的小店`
+    } else {
+      this.title = '邀请您下单'
+      wx.showModal({
+        title: 'message get fail',
+        content: JSON.stringify(e.detail.data)
+      })
+    }
+  },
+
   onShareAppMessage(options) {
     let path
     const [base, search] = options.webViewUrl.split('?')
