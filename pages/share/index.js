@@ -6,7 +6,8 @@ Page({
     this.setData({
       url: decodeURIComponent(query.url),
       title: decodeURIComponent(query.title),
-      share_logo: decodeURIComponent(query.share_logo)
+      share_logo: decodeURIComponent(query.share_logo),
+      debug: query.debug
     })
 
     wx.request({

@@ -14,6 +14,11 @@ page {
   margin-top: 1rem;
 }
 
+.mx-3 {
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+}
+
 .weui-badge {
   align-items: center;
   font-size: 0.8rem;
