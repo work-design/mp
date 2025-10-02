@@ -5,6 +5,7 @@
     <view>分享本小程序至客户（用户）下单</view>
     <view wx:if="{{ debug }}" class="text-sm">标题：{{ title }}</view>
     <view wx:if="{{ debug }}" class="text-sm">链接：{{ url }}</view>
+    <view wx:if="{{ debug }}" class="text-sm">图片：{{ share_logo }}</view>
     <button open-type="share" type="primary">分享</button>
   </view>
 
