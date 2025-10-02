@@ -5,7 +5,7 @@ Page({
   onLoad(query) {
     this.setData({
       url: decodeURIComponent(query.url),
-      title: query.title,
+      title: decodeURIComponent(query.title),
       share_logo: decodeURIComponent(query.share_logo)
     })
 
