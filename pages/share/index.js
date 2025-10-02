@@ -3,8 +3,11 @@ const appid = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
   onLoad(query) {
-    const url = decodeURIComponent(query.url)
-    this.setData({ url: url })
+    this.setData({
+      url: decodeURIComponent(query.url),
+      title: query.title,
+      share_logo: decodeURIComponent(query.share_logo)
+    })
 
     wx.request({
       url: HOST + `/wechat/apps/${appid}/configs`,
@@ -19,7 +22,7 @@ Page({
 
   onShareAppMessage() {
     return {
-      title: '官方门店',
+      title: this.data.title,
       webViewUrl: this.data.share_logo,
       path: `/pages/index/index?url=${encodeURIComponent(this.data.url)}`
     }
