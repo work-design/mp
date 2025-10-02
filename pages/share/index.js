@@ -3,7 +3,7 @@ const appid = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
   onLoad(query) {
-    console.debug('share:', query)
+    console.debug('Share Onload:', query)
     this.setData({
       url: decodeURIComponent(query.url),
       title: decodeURIComponent(query.title),
