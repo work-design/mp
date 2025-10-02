@@ -31,7 +31,7 @@ Page({
   onShareAppMessage() {
     return {
       title: this.data.title,
-      webViewUrl: this.data.share_logo,
+      imageUrl: this.data.share_logo,
       path: `/pages/index/index?url=${encodeURIComponent(this.data.url)}`
     }
   },
