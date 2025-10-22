@@ -15,12 +15,12 @@ Page({
             ...res.data,
             success: () => {
               wx.redirectTo({
-                url: `/pages/index/index?path=${query.path}`
+                url: `/pages/index/index?url=${query.path}`
               })
             },
             fail: () => {
               wx.redirectTo({
-                url: `/pages/index/index?path=${query.path_fail}`
+                url: `/pages/index/index?url=${query.path_fail}`
               })
             }
           })
