@@ -13,7 +13,7 @@ Page({
           data: res,
           success: (response) => {
             wx.redirectTo({
-              url: `/pages/index/index?path=/profiled/my/addresses/${response.data.id}/edit`
+              url: `/pages/index/index?url=${encodeURIComponent(response.data.url)}`
             })
           },
           fail: (res) => {
