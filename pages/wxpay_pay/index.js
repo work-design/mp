@@ -13,16 +13,15 @@ Page({
         if (res.statusCode >= 200 && res.statusCode < 300) {
           wx.requestPayment({
             ...res.data,
-            success(res) {
+            success: () => {
               wx.redirectTo({
                 url: `/pages/index/index?path=${query.path}`
               })
             },
-            fail(res) {
+            fail: () => {
               wx.redirectTo({
-                url: `/pages/index/index?path=${query.path}`
+                url: `/pages/index/index?path=${query.path_fail}`
               })
-              console.debug(res)
             }
           })
         } else {
