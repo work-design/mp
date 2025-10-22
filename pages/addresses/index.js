@@ -1,12 +1,13 @@
 Page({
   onLoad(query) {
     wx.chooseAddress({
-      success: (res) => {
+      success: res => {
         console.debug('choss', res)
         wx.request({
           url: decodeURIComponent(query.url),
           method: 'POST',
           header: {
+            Accept: 'application/json',
             Authorization: wx.getStorageSync('authToken')
           },
           data: res,
