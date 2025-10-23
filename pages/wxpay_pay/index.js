@@ -14,11 +14,13 @@ Page({
           wx.requestPayment({
             ...res.data,
             success: () => {
-              wx.redirectTo({
-                url: `/pages/index/index?url=${query.path}`
-              })
+              //wx.redirectTo({ url: `/pages/index/index?url=${query.path}` })
             },
-            fail: (payRes) => {
+            complete: (payRes) => {
+              wx.showModal({
+                title: 'status code fails',
+                content: JSON.stringify(payRes)
+              })
               wx.request({
                 url: query.path_fail,
                 header: {
@@ -27,9 +29,7 @@ Page({
                 },
                 data: payRes
               })
-              wx.redirectTo({
-                url: `/pages/index/index?url=${query.path_fail}`
-              })
+              //wx.redirectTo({ url: `/pages/index/index?url=${query.path_fail}` })
             }
           })
         } else {
