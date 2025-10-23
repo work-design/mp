@@ -19,9 +19,6 @@ Page({
               })
             },
             fail: (payRes) => {
-              wx.redirectTo({
-                url: `/pages/index/index?url=${query.path_fail}`
-              })
               wx.request({
                 url: query.path_fail,
                 header: {
@@ -29,6 +26,9 @@ Page({
                   'Authorization': wx.getStorageSync('authToken')
                 },
                 data: payRes
+              })
+              wx.redirectTo({
+                url: `/pages/index/index?url=${query.path_fail}`
               })
             }
           })
