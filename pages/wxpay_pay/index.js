@@ -19,12 +19,16 @@ Page({
               })
             },
             fail: (payRes) => {
-              wx.showModal({
-                title: '支付失败',
-                content: JSON.stringify(payRes)
-              })
               wx.redirectTo({
-                url: `/pages/index/index?url=${query.path_fail}?err=${payRes}`
+                url: `/pages/index/index?url=${query.path_fail}`
+              })
+              wx.request({
+                url: query.path_fail,
+                header: {
+                  'Accept': 'application/json',
+                  'Authorization': wx.getStorageSync('authToken')
+                },
+                data: payRes
               })
             }
           })
