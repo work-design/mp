@@ -18,9 +18,9 @@ Page({
                 url: `/pages/index/index?url=${query.path}`
               })
             },
-            fail: () => {
+            fail: (payRes) => {
               wx.redirectTo({
-                url: `/pages/index/index?url=${query.path_fail}`
+                url: `/pages/index/index?url=${query.path_fail}?err=${payRes}`
               })
             }
           })
