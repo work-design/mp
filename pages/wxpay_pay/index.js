@@ -19,6 +19,10 @@ Page({
               })
             },
             fail: (payRes) => {
+              wx.showModal({
+                title: '支付失败',
+                content: JSON.stringify(payRes)
+              })
               wx.redirectTo({
                 url: `/pages/index/index?url=${query.path_fail}?err=${payRes}`
               })
