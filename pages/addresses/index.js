@@ -11,18 +11,24 @@ Page({
             Authorization: wx.getStorageSync('authToken')
           },
           data: res,
-          success: (response) => {
+          success: response => {
             wx.redirectTo({
               url: `/pages/index/index?url=${encodeURIComponent(response.data.url)}`
             })
           },
-          fail: (res) => {
-            console.debug(res)
+          fail: response => {
+            wx.showModal({
+              title: 'post to address fail',
+              content: JSON.stringify(response.detail.data)
+            })
           }
         })
       },
-      fail: (res) => {
-        console.debug(res)
+      fail: res => {
+        wx.showModal({
+          title: 'chooseAddress fail',
+          content: JSON.stringify(res.detail.data)
+        })
       }
     })
   }
