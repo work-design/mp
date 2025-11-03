@@ -14,11 +14,12 @@ Page({
     this.printer = new plugin.BluetoothPrinter(wx)
     this.printer.registeredDevices = devices
     this.printer.getState({
-      success: () => {
+      success: (res) => {
+        console.debug('print state', res)
         this.setData({
           state: '打印机已连接，即将打印'
         })
-       this.doPrint(url)
+        this.doPrint(url)
       },
       complete: res => {
         this.setData({
