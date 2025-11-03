@@ -1,61 +1,46 @@
-const HOST = wx.getExtConfigSync().host
 const plugin = requirePlugin('bluetooth')
 
 Page({
   data: {
-    state: '正在连接打印机...',
-    host: HOST
+    state: '正在连接打印机...'
   },
 
   onLoad(options) {
     console.debug('print onload', options)
-    this.printer = new plugin.BluetoothPrinter(wx)
     const url = decodeURIComponent(options.url)
+    const devices = [options.device]
+    this.setData({ registeredDevices: devices })
 
-    wx.request({
-      url: HOST + '/bluetooth/devices',
-      header: {
-        Accept: 'application/json'
+    this.printer = new plugin.BluetoothPrinter(wx)
+    this.printer.registeredDevices = devices
+    this.printer.getState({
+      success: () => {
+        this.setData({
+          state: '打印机已连接，即将打印'
+        })
+       this.doPrint(url)
       },
-      success: res => {
-        this.printer.registeredDevices = res.data.devices
-        this.setData({ registeredDevices: res.data.devices })
-        this.printer.getState({
-          success: (res) => {
-            this.setData({
-              state: '打印机已连接，即将打印'
-            })
-           this.doPrint(url)
-          },
-          complete: (res) => {
-            this.setData({
-              devices: res
-            })
-          },
-          fail: res => {
-            wx.getSetting({
-              success: settingRes => {
-                wx.request({
-                  url: HOST + '/bluetooth/devices/err',
-                  method: 'POST',
-                  header: {
-                    Accept: 'application/json'
-                  },
-                  data: {
-                    api: 'openBluetoothAdapter',
-                    message: res,
-                    set: settingRes
-                  }
-                })
-              }
-            })
-          }
+      complete: res => {
+        this.setData({
+          devices: res
         })
       },
       fail: res => {
-        wx.showModal({
-          title: 'request fail',
-          content: JSON.stringify(res)
+        wx.getSetting({
+          success: settingRes => {
+            wx.request({
+              url: HOST + '/bluetooth/devices/err',
+              method: 'POST',
+              header: {
+                Accept: 'application/json'
+              },
+              data: {
+                api: 'openBluetoothAdapter',
+                message: res,
+                set: settingRes
+              }
+            })
+          }
         })
       }
     })
