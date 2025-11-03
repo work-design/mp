@@ -1,5 +1,6 @@
 Page({
   onLoad(query) {
+    console.debug('address index', query)
     wx.chooseAddress({
       success: res => {
         console.debug('choss', res)
@@ -17,17 +18,19 @@ Page({
             })
           },
           fail: response => {
+            console.log(response)
             wx.showModal({
               title: 'post to address fail',
-              content: JSON.stringify(response.detail.data)
+              content: JSON.stringify(response.errMsg)
             })
           }
         })
       },
       fail: res => {
+        console.log(res)
         wx.showModal({
           title: 'chooseAddress fail',
-          content: JSON.stringify(res.detail.data)
+          content: JSON.stringify(res.errMsg)
         })
       }
     })
