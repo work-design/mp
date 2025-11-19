@@ -44,9 +44,13 @@ App({
             }
           },
           fail: res => {
+            let content = JSON.stringify(res)
+            if (res.errno === 600002) {
+              content = AUTH_HOST
+            }
             wx.showModal({
-              title: `App login request fail: ${AUTH_HOST}`,
-              content: JSON.stringify(res)
+              title: `App login request fail`,
+              content: content
             })
           }
         })
