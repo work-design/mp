@@ -32,7 +32,7 @@ Page({
           },
           fail: res => {
             wx.showModal({
-              title: 'wx.login request fail',
+              title: `wx.login request fail: ${AUTH_HOST}`,
               content: JSON.stringify(res)
             })
           }

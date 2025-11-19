@@ -42,6 +42,12 @@ App({
                 })
               }
             }
+          },
+          fail: res => {
+            wx.showModal({
+              title: `App login request fail: ${AUTH_HOST}`,
+              content: JSON.stringify(res)
+            })
           }
         })
       },
