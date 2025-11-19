@@ -32,5 +32,4 @@
       </button>
     </form>
   </view>
-  <navigator open-type="navigateBack">返回</navigator>
 </view>
