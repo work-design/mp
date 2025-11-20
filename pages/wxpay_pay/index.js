@@ -1,7 +1,8 @@
 Page({
   onLoad(query) {
+    const url = decodeURIComponent(query.url)
     wx.request({
-      url: decodeURIComponent(query.url),
+      url: url,
       header: {
         'Accept': 'application/json',
         'Authorization': wx.getStorageSync('authToken')
@@ -37,9 +38,14 @@ Page({
         }
       },
       fail: res => {
+        let content = JSON.stringify(res)
+        if (res.errno === 600002) {
+          content = url
+        }
+
         wx.showModal({
           title: 'request fail',
-          content: JSON.stringify(res)
+          content: content
         })
       }
     })
