@@ -5,7 +5,7 @@ Page({
     console.debug('login onLoad query:', query)
     let appid
     if (wx.getDeviceInfo().brand === 'devtools') {
-      appid = 'wx1ec82e7c529f99a0'
+      appid = 'wx225bbbd2fe117181'
     } else {
       appid = wx.getAccountInfoSync().miniProgram.appId
     }

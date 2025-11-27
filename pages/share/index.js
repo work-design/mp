@@ -7,7 +7,7 @@ Page({
     this.setData({
       url: decodeURIComponent(query.url),
       title: decodeURIComponent(query.title),
-      debug: query.debug
+      debug: JSON.parse(query.debug)
     })
 
     wx.downloadFile({
