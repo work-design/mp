@@ -7,14 +7,8 @@ Page({
     this.setData({
       url: decodeURIComponent(query.url),
       title: decodeURIComponent(query.title),
-      debug: JSON.parse(query.debug)
-    })
-
-    wx.downloadFile({
-      url: decodeURIComponent(query.share_logo),
-      success: res => {
-        this.setData({ share_logo: res.tempFilePath })
-      }
+      debug: JSON.parse(query.debug),
+      share_logo: decodeURIComponent(query.share_logo)
     })
 
     wx.request({
