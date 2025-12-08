@@ -3,7 +3,7 @@
   "pages": [
     "pages/index/index",
     "pages/addresses/index",
-    "pages/download/index",
+    "pages/download_image/index",
     "pages/login/index",
     "pages/mobile/index",
     "pages/print/index",
