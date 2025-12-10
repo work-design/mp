@@ -8,8 +8,7 @@ Page({
           url: decodeURIComponent(query.url),
           method: 'POST',
           header: {
-            Accept: 'application/json',
-            Authorization: wx.getStorageSync('authToken')
+            Accept: 'application/json'
           },
           data: res,
           success: response => {

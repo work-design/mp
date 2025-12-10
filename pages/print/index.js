@@ -52,8 +52,7 @@ Page({
     wx.request({
       url: url,
       header: {
-        Accept: 'application/json',
-        Authorization: wx.getStorageSync('authToken')
+        Accept: 'application/json'
       },
       success: res => {
         if (Array.isArray(res.data[0])) {
