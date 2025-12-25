@@ -1,0 +1,11 @@
+button {
+  margin-top: 1rem;
+}
+
+.container {
+  justify-content: center;
+}
+
+.mt-8 {
+  margin-top: 4rem;
+}

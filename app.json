@@ -4,6 +4,7 @@
     "pages/index/index",
     "pages/addresses/index",
     "pages/download_image/index",
+    "pages/embed/index",
     "pages/login/index",
     "pages/mobile/index",
     "pages/print/index",
