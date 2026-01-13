@@ -33,7 +33,7 @@ App({
             const page = getCurrentPages()[0]
             console.debug('launch:', page)
 
-            if (page) {
+            if (page && res.data.url) {
               page.setData({
                 url: res.data.url
               })
@@ -67,7 +67,7 @@ App({
         url = HOST + path
         page.setData({ url: url })
       }
-    } else {
+    } else if (page) {
       page.setData({ url: HOST })
     }
   }
