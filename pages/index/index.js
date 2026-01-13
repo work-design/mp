@@ -29,6 +29,11 @@ Page({
         url: WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : ('/' + PATH))
       })
     }
+
+    wx.showModal({
+      title: 'Index On load: Data',
+      content: JSON.stringify(this.data)
+    })
   },
 
   onWebMessage(e) {

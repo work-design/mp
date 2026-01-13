@@ -6,4 +6,4 @@
   <view>正进入应用...</view>
   <view>url:{{ url }}</view>
 </view>
-<web-view wx:if="{{ url }}" src="{{ url }}#wechat_redirect" bindmessage="onWebMessage"></web-view>
+<web-view src="{{ url }}#wechat_redirect" bindmessage="onWebMessage"></web-view>
