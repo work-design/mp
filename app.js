@@ -29,18 +29,13 @@ App({
           success: res => {
             wx.setStorageSync('authToken', res.data.auth_token)
             wx.setStorageSync('user', res.data.user)
-            let url
             const page = getCurrentPages()[0]
             console.debug('launch:', page)
 
-            if (options.scene && page) {
-              const path = decodeURIComponent(options.scene)
-              if (path.startsWith('/')) {
-                url = HOST + path
-                page.setData({
-                  url: `${url}${url.includes('?') ? '&' : '?'}auth_token=${res.data.auth_token}`
-                })
-              }
+            if (page) {
+              page.setData({
+                url: res.data.url
+              })
             }
           },
           fail: res => {
