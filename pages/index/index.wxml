@@ -2,6 +2,8 @@
   <navigation-bar background-color="#fff" front-color="#000"></navigation-bar>
 </page-meta>
 
-<view class="center">正进入应用...</view>
-<view>{{url}}</view>
+<view class="center">
+  <view>正进入应用...</view>
+  <view>{{ url }}</view>
+</view>
 <web-view wx:if="{{ url }}" src="{{ url }}#wechat_redirect" bindmessage="onWebMessage"></web-view>
