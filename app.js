@@ -67,9 +67,17 @@ App({
           url: WEBVIEW_HOST + path 
         })
       }
+      wx.showModal({
+        title: `App On show page in scene`,
+        content: JSON.stringify(page)
+      })
     } else if (page) {
       page.setData({
         url: WEBVIEW_HOST
+      })
+      wx.showModal({
+        title: `App On show page in setdata`,
+        content: JSON.stringify(page)
       })
     }
     wx.showModal({
