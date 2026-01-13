@@ -1,6 +1,6 @@
 const WEBVIEW_HOST = wx.getExtConfigSync().webview_host
 const PATH = wx.getExtConfigSync().path
-const URL = WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : `/${PATH}`)
+const URL = WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : '/' + PATH)
 
 Page({
   data: {
@@ -9,6 +9,10 @@ Page({
 
   onLoad(query) {
     console.debug('index onLoad:', query)
+    wx.showModal({
+      title: `App On Launch`,
+      content: JSON.stringify(URL)
+    })
     if (query.url) {
       this.setData({
         url: decodeURIComponent(query.url)

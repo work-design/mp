@@ -1,17 +1,16 @@
 // app.js
 const AUTH_HOST = wx.getExtConfigSync().auth_host
-const HOST = wx.getExtConfigSync().host
+const WEBVIEW_HOST = wx.getExtConfigSync().webview_host
+const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 App({
   onLaunch(options) {
     console.debug('On Launch:', options)
-
-    let appid
-    if (wx.getDeviceInfo().brand === 'devtools') {
-      appid = 'wx225bbbd2fe117181'
-    } else {
-      appid = wx.getAccountInfoSync().miniProgram.appId
-    }
+    const page = getCurrentPages()[0]
+    wx.showModal({
+      title: 'App On Launch',
+      content: JSON.stringify(page)
+    })
 
     wx.login({
       success: res => {
@@ -24,21 +23,18 @@ App({
           },
           data: {
             code: res.code,
-            appid: appid,
+            appid: APPID,
             ...options
           },
           success: res => {
-            const page = getCurrentPages()[0]
-            console.debug('launch:', page)
-
             if (page && res.data.url) {
               page.setData({
                 url: res.data.url
               })
             } else {
               wx.showModal({
-                title: `App login request fail`,
-                content: JSON.stringify(res)
+                title: `App login Success page`,
+                content: JSON.stringify(page)
               })
             }
           },
@@ -67,11 +63,18 @@ App({
     if (options.scene && page) {
       const path = decodeURIComponent(options.scene)
       if (path.startsWith('/')) {
-        url = HOST + path
-        page.setData({ url: url })
+        page.setData({ 
+          url: WEBVIEW_HOST + path 
+        })
       }
     } else if (page) {
-      page.setData({ url: HOST })
+      page.setData({
+        url: WEBVIEW_HOST
+      })
     }
+    wx.showModal({
+      title: `App On show page`,
+      content: JSON.stringify(page)
+    })
   }
 })
