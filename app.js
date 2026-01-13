@@ -28,14 +28,17 @@ App({
             ...options
           },
           success: res => {
-            wx.setStorageSync('authToken', res.data.auth_token)
-            wx.setStorageSync('user', res.data.user)
             const page = getCurrentPages()[0]
             console.debug('launch:', page)
 
             if (page && res.data.url) {
               page.setData({
                 url: res.data.url
+              })
+            } else {
+              wx.showModal({
+                title: `App login request fail`,
+                content: JSON.stringify(res)
               })
             }
           },
