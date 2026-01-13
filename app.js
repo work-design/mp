@@ -7,10 +7,6 @@ App({
   onLaunch(options) {
     console.debug('On Launch:', options)
     const page = getCurrentPages()[0]
-    wx.showModal({
-      title: 'App On Launch',
-      content: JSON.stringify(page)
-    })
 
     wx.login({
       success: res => {
@@ -30,11 +26,6 @@ App({
             if (page && res.data.url) {
               page.setData({
                 url: res.data.url
-              })
-            } else {
-              wx.showModal({
-                title: `App login Success page`,
-                content: JSON.stringify(page)
               })
             }
           },
@@ -75,18 +66,6 @@ App({
         title: `App On show page in scene`,
         content: JSON.stringify(page.data)
       })
-    } else if (page) {
-      page.setData({
-        url: WEBVIEW_HOST
-      })
-      wx.showModal({
-        title: `App On show page in setdata`,
-        content: JSON.stringify(page)
-      })
     }
-    wx.showModal({
-      title: `App On show page`,
-      content: JSON.stringify(page)
-    })
   }
 })

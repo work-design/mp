@@ -1,30 +1,24 @@
 const WEBVIEW_HOST = wx.getExtConfigSync().webview_host
 const PATH = wx.getExtConfigSync().path
-const URL = WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : ('/' + PATH))
 
 Page({
   onLoad(query) {
     console.debug('index onLoad:', query)
-    wx.showModal({
-      title: 'Index On load',
-      content: JSON.stringify(query)
-    })
+    let url
+    if (PATH) {
+      url = WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : `/${PATH}`)
+    } else {
+      url = WEBVIEW_HOST
+    }
+
     if (query.url) {
       this.setData({
         url: decodeURIComponent(query.url)
-      })
-      wx.showModal({
-        title: 'Index On url',
-        content: JSON.stringify(this.data)
       })
     } else if (Object.keys(query).includes('path')) {
       const path = decodeURIComponent(query.path)
       this.setData({
         url: WEBVIEW_HOST + (path.startsWith('/') ? path : `/${path}`)
-      })
-      wx.showModal({
-        title: 'Index On load: path',
-        content: JSON.stringify(this.data)
       })
     } else if (query.scene) {
       const path = decodeURIComponent(query.scene)
@@ -34,27 +28,14 @@ Page({
         })
       } else {
         this.setData({
-          url: URL
+          url: url
         })
       }
-      wx.showModal({
-        title: 'Index On load: scene',
-        content: JSON.stringify(this.data)
-      })
     } else {
       this.setData({
-        url: URL
-      })
-      wx.showModal({
-        title: 'Index On load: else',
-        content: JSON.stringify(this.data)
+        url: url
       })
     }
-
-    wx.showModal({
-      title: 'Index On load: Data',
-      content: JSON.stringify(this.data)
-    })
   },
 
   onWebMessage(e) {
