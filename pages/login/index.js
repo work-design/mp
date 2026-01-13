@@ -1,14 +1,9 @@
 const AUTH_HOST = wx.getExtConfigSync().auth_host
+const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
   onLoad(query) {
     console.debug('login onLoad query:', query)
-    let appid
-    if (wx.getDeviceInfo().brand === 'devtools') {
-      appid = 'wx225bbbd2fe117181'
-    } else {
-      appid = wx.getAccountInfoSync().miniProgram.appId
-    }
 
     wx.login({
       success: res => {
@@ -20,12 +15,10 @@ Page({
           },
           data: {
             code: res.code,
-            appid: appid,
+            appid: APPID,
             ...query
           },
           success: res => {
-            wx.setStorageSync('authToken', res.data.auth_token)
-            wx.setStorageSync('user', res.data.user)
             wx.redirectTo({
               url: `/pages/index/index?url=${encodeURIComponent(res.data.url)}`
             })

@@ -1,17 +1,17 @@
 const WEBVIEW_HOST = wx.getExtConfigSync().webview_host
-//const PATH = wx.getExtConfigSync().path
-//const URL = WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : '/' + PATH)
+const PATH = wx.getExtConfigSync().path
+const URL = WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : ('/' + PATH))
 
 Page({
   data: {
-    url: WEBVIEW_HOST
+    url: URL
   },
 
   onLoad(query) {
     console.debug('index onLoad:', query)
     wx.showModal({
       title: 'Index On load',
-      content: JSON.stringify(URL)
+      content: JSON.stringify(query)
     })
     if (query.url) {
       this.setData({
