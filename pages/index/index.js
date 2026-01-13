@@ -1,23 +1,31 @@
 const WEBVIEW_HOST = wx.getExtConfigSync().webview_host
 const PATH = wx.getExtConfigSync().path
+const URL = WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : `/${PATH}`)
 
 Page({
+  data: {
+    url: URL
+  },
+
   onLoad(query) {
     console.debug('index onLoad:', query)
-    let url = WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : `/${PATH}`)
     if (query.url) {
-      url = decodeURIComponent(query.url)
+      this.setData({
+        url: decodeURIComponent(query.url)
+      })
     } else if (Object.keys(query).includes('path')) {
       const path = decodeURIComponent(query.path)
-      url = WEBVIEW_HOST + (path.startsWith('/') ? path : `/${path}`)
+      this.setData({
+        url: WEBVIEW_HOST + (path.startsWith('/') ? path : `/${path}`)
+      })
     } else if (query.scene) {
       const path = decodeURIComponent(query.scene)
       if (path.startsWith('/')) {
-        url = WEBVIEW_HOST + path
+        this.setData({
+          url: WEBVIEW_HOST + path
+        })
       }
     }
-
-    this.setData({ url: url })
   },
 
   onWebMessage(e) {
