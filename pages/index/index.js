@@ -1,5 +1,6 @@
 const WEBVIEW_HOST = wx.getExtConfigSync().webview_host
 const PATH = wx.getExtConfigSync().path
+const URL = WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : ('/' + PATH))
 
 Page({
   onLoad(query) {
@@ -12,10 +13,18 @@ Page({
       this.setData({
         url: decodeURIComponent(query.url)
       })
+      wx.showModal({
+        title: 'Index On url',
+        content: JSON.stringify(this.data)
+      })
     } else if (Object.keys(query).includes('path')) {
       const path = decodeURIComponent(query.path)
       this.setData({
         url: WEBVIEW_HOST + (path.startsWith('/') ? path : `/${path}`)
+      })
+      wx.showModal({
+        title: 'Index On load: path',
+        content: JSON.stringify(this.data)
       })
     } else if (query.scene) {
       const path = decodeURIComponent(query.scene)
@@ -23,10 +32,22 @@ Page({
         this.setData({
           url: WEBVIEW_HOST + path
         })
+      } else {
+        this.setData({
+          url: URL
+        })
       }
+      wx.showModal({
+        title: 'Index On load: scene',
+        content: JSON.stringify(this.data)
+      })
     } else {
       this.setData({
-        url: WEBVIEW_HOST + (PATH.startsWith('/') ? PATH : ('/' + PATH))
+        url: URL
+      })
+      wx.showModal({
+        title: 'Index On load: else',
+        content: JSON.stringify(this.data)
       })
     }
 
