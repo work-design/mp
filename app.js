@@ -1,5 +1,6 @@
 // app.js
 const AUTH_HOST = wx.getExtConfigSync().auth_host
+const HOST = wx.getExtConfigSync().host
 
 App({
   onLaunch(options) {
@@ -66,6 +67,8 @@ App({
         url = HOST + path
         page.setData({ url: url })
       }
+    } else {
+      page.setData({ url: HOST })
     }
   }
 })
