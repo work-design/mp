@@ -3,8 +3,8 @@ const HOST = wx.getExtConfigSync().host
 
 Page({
   data: {
-    avatarUrl: wx.getStorageSync('user').avatar_url || defaultAvatarUrl,
-    name: wx.getStorageSync('user').name
+    avatarUrl: defaultAvatarUrl,
+    name: ''
   },
   onLoad(query) {
     console.debug('profile query:', query)

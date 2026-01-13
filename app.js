@@ -33,8 +33,8 @@ App({
             const page = getCurrentPages()[0]
             console.debug('launch:', page)
 
-            if (options.query.scene && page) {
-              const path = decodeURIComponent(options.query.scene)
+            if (options.scene && page) {
+              const path = decodeURIComponent(options.scene)
               if (path.startsWith('/')) {
                 url = HOST + path
                 page.setData({
@@ -65,11 +65,11 @@ App({
     console.debug('On Show:', options)
     const page = getCurrentPages()[0]
 
-    if (options.query.scene && page) {
-      const path = decodeURIComponent(options.query.scene)
+    if (options.scene && page) {
+      const path = decodeURIComponent(options.scene)
       if (path.startsWith('/')) {
         url = HOST + path
-        page.setData({url: url})
+        page.setData({ url: url })
       }
     }
   }
