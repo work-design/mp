@@ -1,5 +1,5 @@
 const HOST = wx.getExtConfigSync().host
-const appid = wx.getAccountInfoSync().miniProgram.appId
+const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
   onLoad(query) {
@@ -12,7 +12,7 @@ Page({
     })
 
     wx.request({
-      url: HOST + `/wechat/apps/${appid}/configs`,
+      url: HOST + `/wechat/apps/${APPID}/configs`,
       success: (res) => {
         this.setData(res.data)
       },

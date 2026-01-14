@@ -1,6 +1,5 @@
 // app.js
 const AUTH_HOST = wx.getExtConfigSync().auth_host
-const WEBVIEW_HOST = wx.getExtConfigSync().webview_host
 const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 App({
@@ -45,27 +44,6 @@ App({
         console.debug('wx.login fail:', res)
       }
     })
-  },
-
-  onShow(options) {
-    console.debug('On Show:', options)
-    const page = getCurrentPages()[0]
-
-    if (options.scene && page) {
-      const path = decodeURIComponent(options.scene)
-      if (path.startsWith('/')) {
-        page.setData({ 
-          url: WEBVIEW_HOST + path 
-        })
-      } else {
-        page.setData({
-          url: WEBVIEW_HOST
-        })
-      }
-      wx.showModal({
-        title: `App On show page in scene`,
-        content: JSON.stringify(page.data)
-      })
-    }
   }
+
 })
