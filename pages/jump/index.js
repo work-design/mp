@@ -7,7 +7,7 @@ Page({
   },
 
   openEmbedded() {
-    wx.openEmbeddedMiniProgram({
+    wx.navigateToMiniProgram({
       appId: 'wxe44dc002dd0d29b0',
       path: `/pages/share/index?${this.data.query}`,
       fail: (res) => {
