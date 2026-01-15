@@ -9,7 +9,8 @@ Page({
   openEmbedded() {
     wx.navigateToMiniProgram({
       appId: 'wxe44dc002dd0d29b0',
-      path: `/pages/share/index?${this.data.query}`,
+      path: '/pages/share/index',
+      extraData: this.data.query,
       fail: (res) => {
         wx.showModal({
           title: `Open Embedded Fail fail`,

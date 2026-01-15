@@ -4,21 +4,17 @@ const APPID = wx.getAccountInfoSync().miniProgram.appId
 Page({
   onLoad(query) {
     console.debug('Share Onload:', query)
-    this.setData({
-      url: decodeURIComponent(query.url),
-      title: decodeURIComponent(query.title),
-      debug: JSON.parse(query.debug),
-      share_logo: decodeURIComponent(query.share_logo)
-    })
+    const launchOptions = wx.getLaunchOptionsSync()
+    let options = query
+    if (launchOptions.scene === 1037) {
+      options = launchOptions.referrerInfo.extraData
+    }
 
-    wx.request({
-      url: HOST + `/wechat/apps/${APPID}/configs`,
-      success: (res) => {
-        this.setData(res.data)
-      },
-      complete: (res) => {
-        console.debug(res)
-      }
+    this.setData({
+      url: decodeURIComponent(options.url),
+      title: decodeURIComponent(options.title),
+      debug: JSON.parse(options.debug),
+      share_logo: decodeURIComponent(options.share_logo)
     })
   },
 
