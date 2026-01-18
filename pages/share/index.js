@@ -29,6 +29,7 @@ Page({
   closeSelf() {
     wx.showModal({
       title: '分享成功',
+      showCancel: false,
       success: (res) => {
         if (res.confirm) {
           wx.exitMiniProgram()
