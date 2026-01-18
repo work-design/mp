@@ -19,7 +19,6 @@ Page({
   },
 
   onShareAppMessage() {
-    wx.exitMiniProgram()
     return {
       title: this.data.title,
       imageUrl: this.data.share_logo,
