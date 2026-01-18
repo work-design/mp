@@ -27,7 +27,14 @@ Page({
   },
 
   closeSelf() {
-    wx.exitMiniProgram()
+    wx.showModal({
+      title: '分享成功',
+      success: (res) => {
+        if (res.confirm) {
+          wx.exitMiniProgram()
+        }
+      }
+    })
   },
 
   handleContact(e) {
