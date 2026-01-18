@@ -26,6 +26,10 @@ Page({
     }
   },
 
+  closeSelf() {
+    wx.exitMiniProgram()
+  },
+
   handleContact(e) {
     wx.openCustomerServiceChat({
       extInfo: { url: this.data.service_url },
