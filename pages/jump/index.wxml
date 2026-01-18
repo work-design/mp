@@ -1,5 +1,5 @@
 <view class="container">
   <view class="center">
-    <button bindtap="openEmbedded">分享</button>
+    <button bindtap="openOther">进入门店小程序并分享</button>
   </view>
 </view>

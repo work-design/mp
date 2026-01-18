@@ -6,7 +6,7 @@ Page({
     })
   },
 
-  openEmbedded() {
+  openOther() {
     wx.navigateToMiniProgram({
       appId: 'wxe44dc002dd0d29b0',
       path: '/pages/share/index',
@@ -16,6 +16,9 @@ Page({
           title: `Open Embedded Fail fail`,
           content: JSON.stringify(res)
         })
+      },
+      success: (res) => {
+        wx.navigateBack()
       }
     })
   }
