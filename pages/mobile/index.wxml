@@ -1,4 +1,3 @@
 <view class="container">
-  <view>快速授权手机号。</view>
-  <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">手机号登录</button>
+  <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">授权并绑定手机号</button>
 </view>

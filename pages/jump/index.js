@@ -14,7 +14,6 @@ Page({
   openOther() {
     wx.navigateToMiniProgram({
       appId: this.data.appId,
-      envVersion: 'trial',
       path: '/pages/share/index',
       extraData: this.data.extra,
       fail: (res) => {
