@@ -31,6 +31,7 @@ Page({
     this.setData({ avatarUrl: e.detail.avatarUrl })
     wx.uploadFile({
       url: this.data.url,
+      method: 'PATCH',
       filePath: e.detail.avatarUrl,
       name: 'user[avatar]',
       header: {
@@ -57,7 +58,7 @@ Page({
     if (e.detail.value) {
       wx.request({
         url: this.data.url,
-        method: 'POST',
+        method: 'PATCH',
         header: {
           Accept: 'application/json',
         },
