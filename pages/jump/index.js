@@ -1,13 +1,21 @@
 Page({
+  data: {
+    title: '进入门店小程序并分享'
+  },
+
   onLoad(query) {
     console.debug('Share Onload:', query)
-    const { appId, ...extra } = query
+    const { appId, title, ...extra } = query
+
+    if (title) {
+      this.setData({ title: title })
+    }
+
     const extraArray = Object.entries(extra)
     this.setData({
       appId: appId,
       extra: extra,
-      extraArray: extraArray,
-      title: '进入门店小程序并分享'
+      extraArray: extraArray
     })
   },
 
