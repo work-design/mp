@@ -1,7 +1,9 @@
 <view class="container">
   <view class="text-centered mt-1 mx-3">
     <view>认证信息</view>
-    <view>{{ extra }}</view>
+    <view wx:for="{{ extraArray }}" class="text">
+      {{ item[0] }}: {{ item[1] }}
+    </view>
   </view>
   <view class="center">
     <button bindtap="openOther">{{ title }}</button>

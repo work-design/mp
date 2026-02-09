@@ -6,6 +6,12 @@ button {
   justify-content: center;
 }
 
+.text {
+  overflow-wrap: break-word;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
 .mt-8 {
   margin-top: 4rem;
 }
