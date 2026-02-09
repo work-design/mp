@@ -1,16 +1,18 @@
 Page({
   onLoad(query) {
     console.debug('Share Onload:', query)
+    const { appId, ...extra } = query
     this.setData({
-      query: query
+      appId: appId,
+      extra: extra
     })
   },
 
   openOther() {
     wx.navigateToMiniProgram({
-      appId: 'wxe44dc002dd0d29b0',
+      appId: this.data.appId,
       path: '/pages/share/index',
-      extraData: this.data.query,
+      extraData: this.data.extra,
       fail: (res) => {
         wx.showModal({
           title: `Open Embedded Fail fail`,
