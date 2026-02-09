@@ -4,8 +4,7 @@ Page({
     wx.request({
       url: url,
       header: {
-        'Accept': 'application/json',
-        'Authorization': wx.getStorageSync('authToken')
+        'Accept': 'application/json'
       },
       data: {
         appid: wx.getAccountInfoSync().miniProgram.appId

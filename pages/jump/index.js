@@ -4,7 +4,8 @@ Page({
     const { appId, ...extra } = query
     this.setData({
       appId: appId,
-      extra: extra
+      extra: extra,
+      title: '进入门店小程序并分享'
     })
   },
 

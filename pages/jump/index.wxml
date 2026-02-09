@@ -1,5 +1,9 @@
 <view class="container">
+  <view class="text-centered mt-1 mx-3">
+    <view>认证信息</view>
+    <view>{{ extra }}</view>
+  </view>
   <view class="center">
-    <button bindtap="openOther">进入门店小程序并分享</button>
+    <button bindtap="openOther">{{ title }}</button>
   </view>
 </view>
