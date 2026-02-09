@@ -8,7 +8,7 @@ Page({
   onLoad(query) {
     console.debug('profile query:', query)
     this.setData({
-      url: query.url
+      url: decodeURIComponent(query.url)
     })
     wx.request({
       url: this.data.url,
