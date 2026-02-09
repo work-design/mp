@@ -26,7 +26,7 @@ Page({
           fail: res => {
             let content = JSON.stringify(res)
             if (res.errno === 600002) {
-              content = AUTH_HOST
+              content = `${res.errMsg}：${AUTH_HOST}`
             }
             wx.showModal({
               title: `Login page login request fail`,
