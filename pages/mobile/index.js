@@ -1,7 +1,8 @@
 const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
-  onload(query) {
+  onLoad(query) {
+    console.debug('Mobile query:', query)
     this.setData({
       url: decodeURIComponent(query.url)
     })
