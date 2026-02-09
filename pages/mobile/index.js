@@ -1,17 +1,18 @@
-const AUTH_HOST = wx.getExtConfigSync().auth_host
 const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
-  onload() {
+  onload(query) {
+    this.setData({
+      url: decodeURIComponent(query.url)
+    })
   },
 
   getPhoneNumber(e) {
     wx.request({
-      url: AUTH_HOST + '/wechat/program_users/mobile',
+      url: this.data.url,
       method: 'POST',
       header: {
-        Accept: 'application/json',
-        Authorization: wx.getStorageSync('authToken')
+        Accept: 'application/json'
       },
       data: {
         appid: APPID,
