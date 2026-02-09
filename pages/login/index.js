@@ -1,4 +1,4 @@
-const AUTH_HOST = wx.getExtConfigSync().auth_host
+const AUTH_HOST = 'https://zl.one.work'
 const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 Page({

@@ -1,5 +1,5 @@
-const WEBVIEW_HOST = wx.getExtConfigSync().webview_host
-const PATH = wx.getExtConfigSync().path
+const WEBVIEW_HOST = 'https://zl.one.work'
+const PATH = 'eventual/events'
 
 Page({
   onLoad(query) {

@@ -1,5 +1,5 @@
 // app.js
-const AUTH_HOST = wx.getExtConfigSync().auth_host
+const AUTH_HOST = 'https://zl.one.work'
 const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 App({
@@ -31,7 +31,7 @@ App({
           fail: res => {
             let content = JSON.stringify(res)
             if (res.errno === 600002) {
-              content = AUTH_HOST
+              content = `${res.errMsg}：${AUTH_HOST}`
             }
             wx.showModal({
               title: `App login request fail`,
