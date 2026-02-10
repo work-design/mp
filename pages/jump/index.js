@@ -8,7 +8,7 @@ Page({
     const { appId, title, debug, ...extra } = query
 
     if (title) {
-      this.setData({ title: encodeURIComponent(title) })
+      this.setData({ title: decodeURIComponent(title) })
     }
     if (debug) {
       this.setData({ debug: debug })
