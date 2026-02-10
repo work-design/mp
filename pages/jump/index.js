@@ -5,10 +5,13 @@ Page({
 
   onLoad(query) {
     console.debug('Share Onload:', query)
-    const { appId, title, ...extra } = query
+    const { appId, title, debug, ...extra } = query
 
     if (title) {
       this.setData({ title: title })
+    }
+    if (debug) {
+      this.setData({ debug: debug })
     }
 
     const extraArray = Object.entries(extra)
