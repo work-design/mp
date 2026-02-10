@@ -1,0 +1,2 @@
+<view class="center">正进入应用...</view>
+<web-view src="{{ url }}#wechat_redirect"></web-view>

@@ -8,6 +8,7 @@
     "pages/jump/index",
     "pages/login/index",
     "pages/mobile/index",
+    "pages/orders/index",
     "pages/print/index",
     "pages/profile/index",
     "pages/service/index",
