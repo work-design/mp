@@ -11,7 +11,7 @@ Page({
       this.setData({ title: decodeURIComponent(extra.title) })
     }
     if (extra.debug) {
-      this.setData({ debug: extra.debug })
+      this.setData({ debug: extra.debug !== 'false' })
     }
 
     let extraArray = []
@@ -35,7 +35,7 @@ Page({
       extraData: this.data.extra,
       fail: res => {
         let content = ''
-        if (this.data.debug !== 'false') {
+        if (this.data.debug) {
           content = JSON.stringify(res)
         }
 
