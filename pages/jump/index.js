@@ -34,10 +34,16 @@ Page({
       appId: this.data.appId,
       extraData: this.data.extra,
       fail: res => {
+        let content = ''
+        if (this.data.debug !== 'false') {
+          content = JSON.stringify(res)
+        }
+
         wx.showModal({
-          title: `Open Embedded Fail fail`,
-          content: JSON.stringify(res)
+          title: '取消分享转发',
+          content: content
         })
+        wx.navigateBack()
       },
       success: () => {
         wx.navigateBack()
