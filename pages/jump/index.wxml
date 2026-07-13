@@ -1,11 +1,12 @@
 <view class="container">
-  <view wx:if="{{ debug }}" class="mt-1 mx-3">
+  <view wx:if="{{ debug !== 'false' }}" class="mt-1 mx-3">
     <view class="text-centered">认证信息</view>
     <view wx:for="{{ extraArray }}" wx:key="key" class="text">
       {{ item.key }}: {{ item.value }}
     </view>
   </view>
   <view class="center">
-    <button bind:tap="openOther">{{ title }}</button>
+    <view>{{ title }}</view>
+    <button bind:tap="openOther">分享转发</button>
   </view>
 </view>

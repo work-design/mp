@@ -3,6 +3,10 @@ button {
   font-size: 1em;
 }
 
+.center {
+  flex-direction: column;
+}
+
 .container {
   justify-content: center;
 }
