@@ -1,14 +1,14 @@
-const AUTH_HOST = wx.getExtConfigSync().auth_host
 const APPID = wx.getAccountInfoSync().miniProgram.appId
 
 Page({
   onLoad(query) {
     console.debug('login onLoad query:', query)
+    const url = decodeURIComponent(query.url)
 
     wx.login({
       success: res => {
         wx.request({
-          url: AUTH_HOST + '/wechat/program_users',
+          url: url,
           method: 'POST',
           header: {
             Accept: 'application/json'
@@ -26,10 +26,10 @@ Page({
           fail: res => {
             let content = JSON.stringify(res)
             if (res.errno === 600002) {
-              content = `${res.errMsg}：${AUTH_HOST}`
+              content = `${res.errMsg}：${url}`
             }
             wx.showModal({
-              title: `Login page login request fail`,
+              title: `登录请求失败！`,
               content: content
             })
           }
@@ -37,7 +37,7 @@ Page({
       },
       fail: res => {
         wx.showModal({
-          title: 'wx.login fail',
+          title: '登录(wx.login)失败',
           content: JSON.stringify(res)
         })
       }
