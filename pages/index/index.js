@@ -39,6 +39,11 @@ Page({
     console.debug('url is:', url)
   },
 
+  onShow(e) {
+    const url = wx.getStorageSync('url')
+    console.debug('页面再次显示', url)
+  },
+
   onWebMessage(e) {
     console.debug('onWebMessage', e)
 

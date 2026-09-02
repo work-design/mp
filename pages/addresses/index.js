@@ -13,11 +13,11 @@ Page({
           data: res,
           success: response => {
             wx.navigateBack({
+              fail: res => {
+                console.debug('fails', res)
+              },
               success: res => {
-                res.eventChannel.emit(
-                  'dd',
-                  `${encodeURIComponent(response.data.url)}`
-                )
+                wx.setStorageSync('url', `${encodeURIComponent(response.data.url)}`)
               }
             })
           },
