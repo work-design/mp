@@ -15,7 +15,7 @@ Page({
             wx.navigateBack({
               success: res => {
                 res.eventChannel.emit(
-                  'dd', 
+                  'dd',
                   `${encodeURIComponent(response.data.url)}`
                 )
               }
