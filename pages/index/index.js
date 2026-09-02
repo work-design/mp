@@ -36,6 +36,7 @@ Page({
         url: url
       })
     }
+    console.debug('url is:', url)
   },
 
   onWebMessage(e) {
