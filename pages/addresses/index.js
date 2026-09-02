@@ -12,8 +12,13 @@ Page({
           },
           data: res,
           success: response => {
-            wx.redirectTo({
-              url: `/pages/index/index?url=${encodeURIComponent(response.data.url)}`
+            wx.navigateBack({
+              success: res => {
+                res.eventChannel.emit(
+                  'dd', 
+                  `${encodeURIComponent(response.data.url)}`
+                )
+              }
             })
           },
           fail: response => {
