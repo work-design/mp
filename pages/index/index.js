@@ -41,7 +41,11 @@ Page({
 
   onShow(e) {
     const url = wx.getStorageSync('url')
+    wx.removeStorageSync('url')
     console.debug('页面再次显示', url)
+    this.setData({
+      url: url
+    })
   },
 
   onWebMessage(e) {

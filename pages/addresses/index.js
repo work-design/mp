@@ -17,7 +17,7 @@ Page({
                 console.debug('fails', res)
               },
               success: res => {
-                wx.setStorageSync('url', `${encodeURIComponent(response.data.url)}`)
+                wx.setStorageSync('url', response.data.url)
               }
             })
           },
