@@ -14,7 +14,14 @@ Page({
           wx.requestPayment({
             ...res.data,
             success: () => {
-              wx.redirectTo({ url: `/pages/index/index?url=${query.path}` })
+              wx.navigateBack({
+                fail: res => {
+                  console.debug('fails', res)
+                },
+                success: res => {
+                  wx.setStorageSync('url', query.path)
+                }
+              })
             },
             fail: (payRes) => {
               wx.request({
@@ -26,7 +33,14 @@ Page({
                 },
                 data: payRes
               })
-              wx.redirectTo({ url: `/pages/index/index?url=${query.path_fail}` })
+              wx.navigateBack({
+                fail: res => {
+                  console.debug('fails', res)
+                },
+                success: res => {
+                  wx.setStorageSync('url', query.path_fail)
+                }
+              })
             }
           })
         } else {
