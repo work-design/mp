@@ -19,7 +19,7 @@ Page({
                   console.debug('fails', res)
                 },
                 success: res => {
-                  wx.setStorageSync('url', query.path)
+                  wx.setStorageSync('url', decodeURIComponent(query.path))
                 }
               })
             },
@@ -38,7 +38,7 @@ Page({
                   console.debug('fails', res)
                 },
                 success: res => {
-                  wx.setStorageSync('url', query.path_fail)
+                  wx.setStorageSync('url', decodeURIComponent(query.path_fail))
                 }
               })
             }
