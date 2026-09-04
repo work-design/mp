@@ -29,16 +29,7 @@ Page({
                   data: payRes
                 })
               }
-              wx.setStorageSync('url', decodeURIComponent(query.path_fail))
-              wx.navigateBack({
-                fail: res => {
-                  wx.removeStorageSync('url')
-                  console.debug('navigate back fail', res)
-                },
-                success: res => {
-                  console.debug('navigate back success', res)
-                }
-              })
+              wx.navigateBack()
             }
           })
         } else {
