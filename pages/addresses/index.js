@@ -12,12 +12,14 @@ Page({
           },
           data: res,
           success: response => {
+            wx.setStorageSync('url', response.data.url)
             wx.navigateBack({
               fail: res => {
-                console.debug('fails', res)
+                wx.removeStorageSync('url')
+                console.debug('nav back fail', res)
               },
               success: res => {
-                wx.setStorageSync('url', response.data.url)
+                console.debug('nav back success', res)
               }
             })
           },

@@ -14,31 +14,38 @@ Page({
           wx.requestPayment({
             ...res.data,
             success: () => {
+              wx.setStorageSync('url', decodeURIComponent(query.path))
               wx.navigateBack({
                 fail: res => {
-                  console.debug('fails', res)
+                  wx.removeStorageSync('url')
+                  console.debug('fail', res)
                 },
                 success: res => {
-                  wx.setStorageSync('url', decodeURIComponent(query.path))
+                  console.debug('success', res)
                 }
               })
             },
             fail: (payRes) => {
-              wx.request({
-                url: decodeURIComponent(query.report_fail),
-                method: 'POST',
-                header: {
-                  'Accept': 'application/json',
-                  'Authorization': wx.getStorageSync('authToken')
-                },
-                data: payRes
-              })
+              console.debug('request payment fail:', payRes)
+              if (query.report_fail) {
+                wx.request({
+                  url: decodeURIComponent(query.report_fail),
+                  method: 'POST',
+                  header: {
+                    'Accept': 'application/json',
+                    'Authorization': wx.getStorageSync('authToken')
+                  },
+                  data: payRes
+                })
+              }
+              wx.setStorageSync('url', decodeURIComponent(query.path_fail))
               wx.navigateBack({
                 fail: res => {
-                  console.debug('fails', res)
+                  wx.removeStorageSync('url')
+                  console.debug('navigate back fail', res)
                 },
                 success: res => {
-                  wx.setStorageSync('url', decodeURIComponent(query.path_fail))
+                  console.debug('navigate back success', res)
                 }
               })
             }
