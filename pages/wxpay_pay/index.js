@@ -14,16 +14,7 @@ Page({
           wx.requestPayment({
             ...res.data,
             success: () => {
-              wx.setStorageSync('url', decodeURIComponent(query.path))
-              wx.navigateBack({
-                fail: res => {
-                  wx.removeStorageSync('url')
-                  console.debug('fail', res)
-                },
-                success: res => {
-                  console.debug('success', res)
-                }
-              })
+              wx.navigateBack()
             },
             fail: (payRes) => {
               console.debug('request payment fail:', payRes)
