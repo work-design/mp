@@ -5,6 +5,7 @@ Page({
     avatarUrl: defaultAvatarUrl,
     name: ''
   },
+
   onLoad(query) {
     console.debug('profile query:', query)
     this.setData({
@@ -24,35 +25,43 @@ Page({
       }
     })
   },
+
   onPullDownRefresh() {
     wx.startPullDownRefresh()
   },
+
   onChooseAvatar(e) {
     this.setData({ avatarUrl: e.detail.avatarUrl })
     wx.uploadFile({
       url: this.data.url,
-      method: 'PATCH',
       filePath: e.detail.avatarUrl,
       name: 'user[avatar]',
+      formData: {
+        _method: 'patch'
+      },
       header: {
         Accept: 'application/json'
       }
     })
   },
+
   clearInput(e) {
     console.debug('clearInput:', e)
     e.currentTarget.value = ''
     this.setData({ name: '' })
   },
+
   revertInput(e) {
     console.debug('rever:', e)
     if (e.detail.value.length === 0) {
       this.setData({name: this.data.initName})
     }
   },
+
   onChangeName(e) {
 
   },
+
   formSubmit(e) {
     console.debug('formSubmit:', e)
     if (e.detail.value) {

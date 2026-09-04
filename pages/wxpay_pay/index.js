@@ -29,7 +29,13 @@ Page({
                   data: payRes
                 })
               }
-              wx.navigateBack()
+              wx.showModal({
+                title: '支付未成功',
+                content: '支付失败，请重新发起支付！',
+                success: res => {
+                  wx.navigateBack()
+                }
+              })
             }
           })
         } else {
