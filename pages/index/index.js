@@ -11,7 +11,7 @@ Page({
       url = WEBVIEW_HOST
     }
 
-    if (query.url) {
+    if (query.url && query.url !== 'undefined') {
       this.setData({
         url: decodeURIComponent(query.url)
       })
