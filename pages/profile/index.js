@@ -8,10 +8,10 @@ Page({
 
   onLoad(query) {
     console.debug('profile query:', query)
-    const url = decodeURIComponent(query.url)
+    this.url = decodeURIComponent(query.url)
 
     wx.request({
-      url: url,
+      url: this.url,
       header: {
         Accept: 'application/json'
       },
@@ -31,7 +31,7 @@ Page({
 
   onChooseAvatar(e) {
     wx.uploadFile({
-      url: this.data.url,
+      url: this.url,
       filePath: e.detail.avatarUrl,
       name: 'user[avatar]',
       formData: {
@@ -73,7 +73,7 @@ Page({
     console.debug('formSubmit:', e)
     if (e.detail.value) {
       wx.request({
-        url: this.data.url,
+        url: this.url,
         method: 'PATCH',
         header: {
           Accept: 'application/json',
