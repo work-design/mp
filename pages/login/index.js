@@ -26,7 +26,7 @@ Page({
                 console.debug('nav back fail', res)
               },
               success: res => {
-                console.debug('nav back success', res)
+                console.debug('nav back success', response.data)
               }
             })
           },
