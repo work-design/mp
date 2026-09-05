@@ -18,9 +18,16 @@ Page({
             appid: APPID,
             ...query
           },
-          success: res => {
-            wx.redirectTo({
-              url: `/pages/index/index?url=${encodeURIComponent(res.data.url)}`
+          success: response => {
+            wx.setStorageSync('url', response.data.url)
+            wx.navigateBack({
+              fail: res => {
+                wx.removeStorageSync('url')
+                console.debug('nav back fail', res)
+              },
+              success: res => {
+                console.debug('nav back success', res)
+              }
             })
           },
           fail: res => {
