@@ -8,11 +8,10 @@ Page({
 
   onLoad(query) {
     console.debug('profile query:', query)
-    this.setData({
-      url: decodeURIComponent(query.url)
-    })
+    const url = decodeURIComponent(query.url)
+
     wx.request({
-      url: this.data.url,
+      url: url,
       header: {
         Accept: 'application/json'
       },
@@ -31,7 +30,6 @@ Page({
   },
 
   onChooseAvatar(e) {
-    this.setData({ avatarUrl: e.detail.avatarUrl })
     wx.uploadFile({
       url: this.data.url,
       filePath: e.detail.avatarUrl,
@@ -41,6 +39,15 @@ Page({
       },
       header: {
         Accept: 'application/json'
+      },
+      success: res => {
+        this.setData({ avatarUrl: e.detail.avatarUrl })
+      },
+      fail: res => {
+        wx.showModal({
+          title: '失败',
+          content: JSON.stringify(res)
+        })
       }
     })
   },
