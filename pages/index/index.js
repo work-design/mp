@@ -50,6 +50,16 @@ Page({
     }
   },
 
+  handleErr(e) {
+    this.setData({ loadError: true })
+  },
+
+  retry() {
+    this.setData({ 
+      loadError: false
+    })
+  },
+
   onWebMessage(e) {
     console.debug('onWebMessage', e)
 
